@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hvitfeldska Spetsutbildning - Matematikhandbok 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #333;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5490;
+            border-bottom: 3px solid #1a5490;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            page-break-before: always;
+        }
+        
+        h1:first-of-type {
+            page-break-before: avoid;
+        }
+        
+        h2 {
+            color: #2d7dd2;
+            border-bottom: 1px solid #ddd;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: #3d9970;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f4f8;
+            font-weight: bold;
+            color: #1a5490;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 10pt;
+        }
+        
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4px solid #1a5490;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            font-style: italic;
+        }
+        
+        .important {
+            background-color: #fff3cd;
+            border-left-color: #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14pt;
+            text-align: center;
+        }
+        
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px 20px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 10px 20px;
+            margin: 15px 0;
+        }
+        
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #1a5490;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        @media print {
+            body {
+                font-size: 10pt;
+                padding: 20px;
+            }
+            
+            h1 {
+                page-break-before: always;
+            }
+            
+            h1:first-of-type {
+                page-break-before: avoid;
+            }
+            
+            table, pre, blockquote, .formula-box {
+                page-break-inside: avoid;
+            }
+            
+            a {
+                color: #333;
+                text-decoration: none;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center; margin: 40px 0;">
+    <h1 style="border-bottom: none; page-break-before: avoid; font-size: 28pt;">HVITFELDTSKAS SPETSUTBILDNING</h1>
+    <h2 style="border-bottom: none; color: #1a5490;">KOMPLETT MATEMATIKHANDBOK 2026</h2>
+    <p><strong>Skapad för:</strong> Yvonna</p>
+    <p><strong>Provdatum:</strong> 24 februari 2026</p>
+    <p><strong>Baserad på:</strong> Intagningsprov 2010-2025</p>
+</div>
+
+<div class="toc">
+    <h2>Innehållsförteckning</h2>
+    <ul>
+        <li><a href="#del1">DEL 1: Talteori</a></li>
+        <li><a href="#del2">DEL 2: Algebra</a></li>
+        <li><a href="#del3">DEL 3: Geometri</a></li>
+        <li><a href="#del4">DEL 4: Kombinatorik & Sannolikhet</a></li>
+        <li><a href="#del5">DEL 5: Ordproblem</a></li>
+        <li><a href="#formelsamling">Formelsamling</a></li>
+        <li><a href="#ovningsprov">Övningsprov</a></li>
+    </ul>
+</div>
+
+<h1 id="del1">DEL 1: TALTEORI</h1>
+
+<h2>1.1 Delbarhetsregler</h2>
+<table>
+    <tr><th>Delbar med</th><th>Regel</th><th>Exempel</th></tr>
+    <tr><td><strong>2</strong></td><td>Sista siffran är jämn (0, 2, 4, 6, 8)</td><td>1234 [OK]</td></tr>
+    <tr><td><strong>3</strong></td><td>Siffersumman är delbar med 3</td><td>156: 1+5+6=12 [OK]</td></tr>
+    <tr><td><strong>4</strong></td><td>Sista två siffrorna delbara med 4</td><td>1324: 24÷4=6 [OK]</td></tr>
+    <tr><td><strong>5</strong></td><td>Slutar på 0 eller 5</td><td>1235 [OK]</td></tr>
+    <tr><td><strong>6</strong></td><td>Delbar med både 2 och 3</td><td>1254 [OK]</td></tr>
+    <tr><td><strong>8</strong></td><td>Sista tre siffrorna delbara med 8</td><td>5016: 016÷8=2 [OK]</td></tr>
+    <tr><td><strong>9</strong></td><td>Siffersumman är delbar med 9</td><td>2286: 2+2+8+6=18 [OK]</td></tr>
+    <tr><td><strong>10</strong></td><td>Slutar på 0</td><td>1230 [OK]</td></tr>
+</table>
+
+<h2>1.2 Primtal</h2>
+<p><strong>Definition:</strong> Ett primtal är ett heltal > 1 som endast är delbart med 1 och sig själv.</p>
+
+<div class="important">
+    <strong>Primtal under 100:</strong><br>
+    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+</div>
+
+<h2>1.3 Primtalsfaktorisering</h2>
+<p><strong>Aritmetikens fundamentalsats:</strong> Varje heltal > 1 kan skrivas som en unik produkt av primtal.</p>
+
+<table>
+    <tr><th>Tal</th><th>Faktorisering</th></tr>
+    <tr><td>36</td><td>2² × 3²</td></tr>
+    <tr><td>60</td><td>2² × 3 × 5</td></tr>
+    <tr><td>100</td><td>2² × 5²</td></tr>
+    <tr><td>180</td><td>2² × 3² × 5</td></tr>
+    <tr><td>350</td><td>2 × 5² × 7</td></tr>
+</table>
+
+<h2>1.4 SGD och MGM</h2>
+
+<h3>SGD (Största Gemensamma Delare)</h3>
+<p>Ta gemensamma primfaktorer med <strong>LÄGSTA</strong> exponent.</p>
+
+<h3>MGM (Minsta Gemensamma Multipel)</h3>
+<p>Ta alla primfaktorer med <strong>HÖGSTA</strong> exponent.</p>
+
+<div class="formula-box">
+    SGD(a,b) × MGM(a,b) = a × b
+</div>
+
+<h2>1.5 TYPUPPGIFT: Heltalsekvationer</h2>
+
+<blockquote>
+    <strong>Problem:</strong> x, y, z är heltal > 1. xy = 350, yz = 180, xz är delbar med 8. Bestäm xz.
+</blockquote>
+
+<h3>Lösningsmetod:</h3>
+<ol>
+    <li><strong>Primtalsfaktorisera:</strong> 350 = 2 × 5² × 7, 180 = 2² × 3² × 5</li>
+    <li><strong>Hitta möjliga y:</strong> Divisorer till SGD(350, 180) = 10: {2, 5, 10}</li>
+    <li><strong>Testa systematiskt:</strong></li>
+</ol>
+
+<table>
+    <tr><th>y</th><th>x = 350/y</th><th>z = 180/y</th><th>xz</th><th>Delbar med 8?</th></tr>
+    <tr><td>2</td><td>175</td><td>90</td><td>15750</td><td>Nej</td></tr>
+    <tr style="background-color: #d4edda;"><td>5</td><td>70</td><td>36</td><td>2520</td><td><strong>Ja!</strong></td></tr>
+    <tr><td>10</td><td>35</td><td>18</td><td>630</td><td>Nej</td></tr>
+</table>
+
+<div class="formula-box">
+    SVAR: xz = 2520
+</div>
+
+<h1 id="del2">DEL 2: ALGEBRA</h1>
+
+<h2>2.1 Konjugat- och Kvadreringsregler</h2>
+<table>
+    <tr><th>Regel</th><th>Formel</th></tr>
+    <tr><td>Konjugatregeln</td><td>\(a^2 - b^2 = (a+b)(a-b)\)</td></tr>
+    <tr><td>Första kvadreringsregeln</td><td>\((a+b)^2 = a^2 + 2ab + b^2\)</td></tr>
+    <tr><td>Andra kvadreringsregeln</td><td>\((a-b)^2 = a^2 - 2ab + b^2\)</td></tr>
+</table>
+
+<h2>2.2 Potensregler</h2>
+<table>
+    <tr><th>Regel</th><th>Formel</th></tr>
+    <tr><td>Multiplikation</td><td>\(a^m \cdot a^n = a^{m+n}\)</td></tr>
+    <tr><td>Division</td><td>\(a^m / a^n = a^{m-n}\)</td></tr>
+    <tr><td>Potens av potens</td><td>\((a^m)^n = a^{mn}\)</td></tr>
+    <tr><td>Negativ exponent</td><td>\(a^{-n} = 1/a^n\)</td></tr>
+    <tr><td>Nollexponent</td><td>\(a^0 = 1\) (a ≠ 0)</td></tr>
+</table>
+
+<h2>2.3 Andragradsekvationer</h2>
+
+<div class="formula-box">
+    <strong>PQ-formeln:</strong> \(x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}\)
+</div>
+
+<div class="formula-box">
+    <strong>ABC-formeln:</strong> \(x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\)
+</div>
+
+<h2>2.4 Talföljder</h2>
+
+<h3>Aritmetisk talföljd</h3>
+<table>
+    <tr><th>Formel</th><th>Uttryck</th></tr>
+    <tr><td>n:te termen</td><td>\(a_n = a_1 + (n-1)d\)</td></tr>
+    <tr><td>Summa</td><td>\(S_n = \frac{n(a_1 + a_n)}{2}\)</td></tr>
+</table>
+
+<h3>Geometrisk talföljd</h3>
+<table>
+    <tr><th>Formel</th><th>Uttryck</th></tr>
+    <tr><td>n:te termen</td><td>\(a_n = a_1 \cdot k^{n-1}\)</td></tr>
+    <tr><td>Summa</td><td>\(S_n = a_1 \cdot \frac{k^n - 1}{k - 1}\)</td></tr>
+</table>
+
+<h1 id="del3">DEL 3: GEOMETRI</h1>
+
+<h2>3.1 Trianglar</h2>
+<p><strong>Vinkelsumma:</strong> Summan av vinklarna i en triangel = 180°</p>
+
+<div class="formula-box">
+    <strong>Pythagoras sats:</strong> \(a^2 + b^2 = c^2\)
+</div>
+
+<h3>Pythagoriska tripplar</h3>
+<table>
+    <tr><th>Grundform</th><th>Multiplar</th></tr>
+    <tr><td>3, 4, 5</td><td>6, 8, 10 och 9, 12, 15</td></tr>
+    <tr><td>5, 12, 13</td><td>10, 24, 26</td></tr>
+    <tr><td>8, 15, 17</td><td>16, 30, 34</td></tr>
+</table>
+
+<h3>Triangelns area</h3>
+<div class="formula-box">
+    \(A = \frac{bh}{2}\)
+</div>
+
+<h2>3.2 Cirkeln</h2>
+<table>
+    <tr><th>Storhet</th><th>Formel</th></tr>
+    <tr><td>Omkrets</td><td>\(O = 2\pi r = \pi d\)</td></tr>
+    <tr><td>Area</td><td>\(A = \pi r^2\)</td></tr>
+    <tr><td>Båglängd</td><td>\(b = \frac{v°}{360°} \cdot 2\pi r\)</td></tr>
+</table>
+
+<div class="tip">
+    <strong>Viktigt:</strong> Tangenten är vinkelrät mot radien vid beröringspunkten!
+</div>
+
+<h2>3.3 Fyrhörningar</h2>
+<table>
+    <tr><th>Figur</th><th>Area</th></tr>
+    <tr><td>Rektangel</td><td>\(A = ab\)</td></tr>
+    <tr><td>Parallellogram</td><td>\(A = bh\)</td></tr>
+    <tr><td>Trapets</td><td>\(A = \frac{(a+b)h}{2}\)</td></tr>
+    <tr><td>Romb</td><td>\(A = \frac{d_1 \cdot d_2}{2}\)</td></tr>
+</table>
+
+<h2>3.4 Koordinatgeometri</h2>
+<table>
+    <tr><th>Formel</th><th>Uttryck</th></tr>
+    <tr><td>Avstånd</td><td>\(d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\)</td></tr>
+    <tr><td>Mittpunkt</td><td>\(M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right)\)</td></tr>
+    <tr><td>Lutning</td><td>\(k = \frac{y_2 - y_1}{x_2 - x_1}\)</td></tr>
+</table>
+
+<h1 id="del4">DEL 4: KOMBINATORIK & SANNOLIKHET</h1>
+
+<h2>4.1 Grundprinciper</h2>
+<ul>
+    <li><strong>Multiplikationsprincipen:</strong> \(n_1 \times n_2 \times ... \times n_k\) sätt</li>
+    <li><strong>Additionsprincipen:</strong> \(n + m\) sätt (om ej samtidiga)</li>
+    <li><strong>Komplementprincipen:</strong> Gynnsamma = Totalt - Ogynnsamma</li>
+</ul>
+
+<h2>4.2 Permutationer och Kombinationer</h2>
+<table>
+    <tr><th>Typ</th><th>Formel</th><th>Användning</th></tr>
+    <tr><td>Fakultet</td><td>\(n! = n \times (n-1) \times ... \times 1\)</td><td>Ordna n objekt</td></tr>
+    <tr><td>Permutation</td><td>\(P(n,r) = \frac{n!}{(n-r)!}\)</td><td>Ordnat urval</td></tr>
+    <tr><td>Kombination</td><td>\(C(n,r) = \frac{n!}{r!(n-r)!}\)</td><td>Oordnat urval</td></tr>
+</table>
+
+<h2>4.3 TYPUPPGIFT: Vägräkning i rutnät</h2>
+
+<blockquote>
+    <strong>Problem:</strong> Gå från S till M i rutnät. Endast uppåt eller höger.
+</blockquote>
+
+<div class="formula-box">
+    Antal vägar = \(\binom{m+n}{m}\) där m = steg höger, n = steg uppåt
+</div>
+
+<div class="tip">
+    <strong>Minnesregel:</strong> "Vägräkning = Kombination!"<br>
+    <strong>Undvik punkt:</strong> Totalt - (Vägar via punkten)
+</div>
+
+<h2>4.4 Sannolikhet</h2>
+
+<div class="formula-box">
+    \(P(A) = \frac{\text{Antal gynnsamma utfall}}{\text{Antal möjliga utfall}}\)
+</div>
+
+<table>
+    <tr><th>Regel</th><th>Formel</th></tr>
+    <tr><td>Komplement</td><td>\(P(A') = 1 - P(A)\)</td></tr>
+    <tr><td>Addition</td><td>\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</td></tr>
+    <tr><td>Multiplikation (oberoende)</td><td>\(P(A \cap B) = P(A) \times P(B)\)</td></tr>
+</table>
+
+<div class="tip">
+    <strong>Minnesregel:</strong> P(minst en) = 1 - P(ingen)
+</div>
+
+<h1 id="del5">DEL 5: ORDPROBLEM</h1>
+
+<h2>5.1 Samarbetsproblem</h2>
+
+<div class="formula-box">
+    <strong>Två arbetare:</strong> \(t = \frac{ab}{a+b}\)
+</div>
+
+<h2>5.2 Rörelseproblem</h2>
+<table>
+    <tr><th>Typ</th><th>Formel</th></tr>
+    <tr><td>Mötas</td><td>\(t = \frac{\text{sträcka}}{v_1 + v_2}\)</td></tr>
+    <tr><td>Ikapp</td><td>\(t = \frac{\text{försprång}}{v_{\text{snabb}} - v_{\text{långsam}}}\)</td></tr>
+</table>
+
+<h1 id="formelsamling">FORMELSAMLING</h1>
+
+<h2>Algebra</h2>
+<ul>
+    <li>\((a+b)^2 = a^2 + 2ab + b^2\)</li>
+    <li>\((a-b)^2 = a^2 - 2ab + b^2\)</li>
+    <li>\(a^2 - b^2 = (a+b)(a-b)\)</li>
+    <li>PQ-formeln: \(x = -\frac{p}{2} \pm \sqrt{\frac{p^2}{4} - q}\)</li>
+</ul>
+
+<h2>Geometri</h2>
+<ul>
+    <li>Pythagoras: \(a^2 + b^2 = c^2\)</li>
+    <li>Triangelarea: \(A = \frac{bh}{2}\)</li>
+    <li>Cirkelomkrets: \(O = 2\pi r\)</li>
+    <li>Cirkelarea: \(A = \pi r^2\)</li>
+    <li>Avstånd: \(d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\)</li>
+</ul>
+
+<h2>Kombinatorik</h2>
+<ul>
+    <li>Kombination: \(C(n,r) = \frac{n!}{r!(n-r)!}\)</li>
+    <li>Vägräkning: \(\binom{m+n}{m}\)</li>
+</ul>
+
+<h1 id="ovningsprov">ÖVNINGSPROV</h1>
+
+<h3>Uppgift 1 (Talteori)</h3>
+<blockquote>
+    x, y, z är heltal > 1. xy = 280, yz = 210, xz delbar med 6. Bestäm xz.
+</blockquote>
+
+<h3>Uppgift 2 (Vägräkning)</h3>
+<blockquote>
+    I ett 5×4 rutnät:<br>
+    a) Hur många vägar totalt?<br>
+    b) Hur många via (3,2)?<br>
+    c) Hur många INTE via (3,2)?
+</blockquote>
+
+<h3>Uppgift 3 (Geometri)</h3>
+<blockquote>
+    Rätvinklig triangel ABC, rät vinkel vid C. AC = 6, BC = 8.<br>
+    a) AB?<br>
+    b) Höjd från C till AB?<br>
+    c) Inkretsradie?
+</blockquote>
+
+<h3>Uppgift 4 (Ordproblem)</h3>
+<blockquote>
+    A fyller pool på 8h, B på 12h, C tömmer på 24h. Tid med alla öppna?
+</blockquote>
+
+<h2>Facit</h2>
+<table>
+    <tr><th>Uppgift</th><th>Svar</th></tr>
+    <tr><td>1</td><td>xz = 12 (minsta)</td></tr>
+    <tr><td>2a</td><td>126 vägar</td></tr>
+    <tr><td>2b</td><td>60 vägar</td></tr>
+    <tr><td>2c</td><td>66 vägar</td></tr>
+    <tr><td>3a</td><td>10 cm</td></tr>
+    <tr><td>3b</td><td>4.8 cm</td></tr>
+    <tr><td>3c</td><td>2 cm</td></tr>
+    <tr><td>4</td><td>6 timmar</td></tr>
+</table>
+
+<hr>
+
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
+    <h2 style="color: white; border-bottom: none;">Lycka till på provet, Yvonna!</h2>
+    <p>Version 1.0 - December 2024</p>
+</div>
+
+</body>
+</html>

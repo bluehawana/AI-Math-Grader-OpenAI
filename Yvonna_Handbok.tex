@@ -1,0 +1,309 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Hvitfeldska Spetsutbildning}
+\fancyhead[R]{Matematikhandbok 2026}
+\fancyfoot[C]{\thepage}
+
+\definecolor{mainblue}{RGB}{26,84,144}
+\definecolor{lightblue}{RGB}{240,244,248}
+
+\tcbset{
+    colback=lightblue,
+    colframe=mainblue,
+    boxrule=1pt,
+    arc=3mm
+}
+
+\title{\Huge\textbf{HVITFELDTSKAS SPETSUTBILDNING}\\[0.5cm]
+\Large Komplett Matematikhandbok 2026}
+\author{Skapad for Yvonna}
+\date{Provdatum: 24 februari 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{TALTEORI}
+
+\subsection{Delbarhetsregler}
+
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Tal} & \textbf{Regel} & \textbf{Exempel} \\
+\hline
+2 & Sista siffran ar jamn & 1234 \\
+3 & Siffersumman delbar med 3 & 156: 1+5+6=12 \\
+4 & Sista tva siffrorna delbara med 4 & 1324: 24/4=6 \\
+5 & Slutar pa 0 eller 5 & 1235 \\
+6 & Delbar med bade 2 och 3 & 1254 \\
+8 & Sista tre siffrorna delbara med 8 & 5016 \\
+9 & Siffersumman delbar med 9 & 2286: 2+2+8+6=18 \\
+10 & Slutar pa 0 & 1230 \\
+\hline
+\end{tabular}
+
+\subsection{Primtal}
+
+\textbf{Definition:} Ett primtal ar ett heltal $> 1$ som endast ar delbart med 1 och sig sjalv.
+
+\begin{tcolorbox}[title=Primtal under 100]
+2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+\end{tcolorbox}
+
+\subsection{SGD och MGM}
+
+\textbf{SGD} (Storsta Gemensamma Delare): Ta gemensamma primfaktorer med \textbf{lagsta} exponent.
+
+\textbf{MGM} (Minsta Gemensamma Multipel): Ta alla primfaktorer med \textbf{hogsta} exponent.
+
+\begin{tcolorbox}[title=Viktig formel]
+\[ \text{SGD}(a,b) \times \text{MGM}(a,b) = a \times b \]
+\end{tcolorbox}
+
+\subsection{TYPUPPGIFT: Heltalsekvationer}
+
+\textbf{Problem:} $x, y, z$ ar heltal $> 1$. $xy = 350$, $yz = 180$, $xz$ ar delbar med 8. Bestam $xz$.
+
+\textbf{Losning:}
+\begin{enumerate}
+\item Primtalsfaktorisera: $350 = 2 \times 5^2 \times 7$, $180 = 2^2 \times 3^2 \times 5$
+\item SGD$(350, 180) = 2 \times 5 = 10$. Mojliga $y$: 2, 5, 10
+\item Testa $y = 5$: $x = 70$, $z = 36$, $xz = 2520$
+\item Kontroll: $2520 / 8 = 315$ (heltal!)
+\end{enumerate}
+
+\begin{tcolorbox}[colback=green!10, colframe=green!50!black]
+\textbf{SVAR:} $xz = 2520$
+\end{tcolorbox}
+
+\section{ALGEBRA}
+
+\subsection{Konjugat- och Kvadreringsregler}
+
+\begin{align}
+a^2 - b^2 &= (a+b)(a-b) \\
+(a+b)^2 &= a^2 + 2ab + b^2 \\
+(a-b)^2 &= a^2 - 2ab + b^2
+\end{align}
+
+\subsection{Potensregler}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Regel} & \textbf{Formel} \\
+\hline
+Multiplikation & $a^m \cdot a^n = a^{m+n}$ \\
+Division & $a^m / a^n = a^{m-n}$ \\
+Potens av potens & $(a^m)^n = a^{mn}$ \\
+Negativ exponent & $a^{-n} = 1/a^n$ \\
+Nollexponent & $a^0 = 1$ \\
+\hline
+\end{tabular}
+
+\subsection{Andragradsekvationer}
+
+\begin{tcolorbox}[title=PQ-formeln]
+For $x^2 + px + q = 0$:
+\[ x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q} \]
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=ABC-formeln]
+For $ax^2 + bx + c = 0$:
+\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+\end{tcolorbox}
+
+\subsection{Talföljder}
+
+\textbf{Aritmetisk talföljd:}
+\begin{align}
+a_n &= a_1 + (n-1)d \\
+S_n &= \frac{n(a_1 + a_n)}{2}
+\end{align}
+
+\textbf{Geometrisk talföljd:}
+\begin{align}
+a_n &= a_1 \cdot k^{n-1} \\
+S_n &= a_1 \cdot \frac{k^n - 1}{k - 1}
+\end{align}
+
+\section{GEOMETRI}
+
+\subsection{Trianglar}
+
+\textbf{Vinkelsumma:} Summan av vinklarna = $180°$
+
+\begin{tcolorbox}[title=Pythagoras sats]
+I en ratvinklig triangel med kateter $a$, $b$ och hypotenusa $c$:
+\[ a^2 + b^2 = c^2 \]
+\end{tcolorbox}
+
+\textbf{Pythagoriska tripplar:} 3-4-5, 5-12-13, 8-15-17, 7-24-25
+
+\textbf{Triangelns area:}
+\[ A = \frac{bh}{2} \]
+
+\subsection{Speciella trianglar}
+
+\textbf{Liksidig triangel} (sida $a$):
+\begin{itemize}
+\item Hojd: $h = \frac{a\sqrt{3}}{2}$
+\item Area: $A = \frac{a^2\sqrt{3}}{4}$
+\end{itemize}
+
+\textbf{30-60-90 triangel:} Sidor i forhallande $1 : \sqrt{3} : 2$
+
+\textbf{45-45-90 triangel:} Sidor i forhallande $1 : 1 : \sqrt{2}$
+
+\subsection{Cirkeln}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Storhet} & \textbf{Formel} \\
+\hline
+Omkrets & $O = 2\pi r = \pi d$ \\
+Area & $A = \pi r^2$ \\
+Baglangd & $b = \frac{v}{360} \cdot 2\pi r$ \\
+Sektorarea & $A = \frac{v}{360} \cdot \pi r^2$ \\
+\hline
+\end{tabular}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=orange]
+\textbf{Viktigt:} Tangenten ar vinkelrat mot radien vid beroringspunkten!
+\end{tcolorbox}
+
+\subsection{Koordinatgeometri}
+
+\textbf{Avstand mellan tva punkter:}
+\[ d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2} \]
+
+\textbf{Mittpunkt:}
+\[ M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right) \]
+
+\textbf{Lutning:}
+\[ k = \frac{y_2 - y_1}{x_2 - x_1} \]
+
+\textbf{Vinkelrata linjer:} $k_1 \cdot k_2 = -1$
+
+\section{KOMBINATORIK}
+
+\subsection{Grundprinciper}
+
+\textbf{Multiplikationsprincipen:} $n_1 \times n_2 \times \ldots \times n_k$ satt
+
+\textbf{Additionsprincipen:} $n + m$ satt (om ej samtidiga)
+
+\textbf{Komplementprincipen:} Gynnsamma = Totalt $-$ Ogynnsamma
+
+\subsection{Permutationer och Kombinationer}
+
+\textbf{Fakultet:}
+\[ n! = n \times (n-1) \times \ldots \times 2 \times 1 \]
+
+\textbf{Permutation} (ordnat urval):
+\[ P(n,r) = \frac{n!}{(n-r)!} \]
+
+\textbf{Kombination} (oordnat urval):
+\[ C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!} \]
+
+\subsection{TYPUPPGIFT: Vagrakning i rutnat}
+
+\textbf{Problem:} Ga fran S till M i rutnat. Endast uppat eller hoger.
+
+\begin{tcolorbox}[title=Losning]
+Om du gar $m$ steg hoger och $n$ steg uppat:
+\[ \text{Antal vagar} = \binom{m+n}{m} = \binom{m+n}{n} \]
+\end{tcolorbox}
+
+\textbf{Undvik punkt P:} Antal = Totalt $-$ (Vagar via P)
+
+\section{SANNOLIKHET}
+
+\begin{tcolorbox}[title=Grundformel]
+\[ P(A) = \frac{\text{Antal gynnsamma utfall}}{\text{Antal mojliga utfall}} \]
+\end{tcolorbox}
+
+\textbf{Rakneregler:}
+\begin{itemize}
+\item Komplement: $P(A') = 1 - P(A)$
+\item Addition: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+\item Multiplikation (oberoende): $P(A \cap B) = P(A) \times P(B)$
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!10, colframe=green!50!black]
+\textbf{Minnesregel:} P(minst en) = 1 $-$ P(ingen)
+\end{tcolorbox}
+
+\section{ORDPROBLEM}
+
+\subsection{Samarbetsproblem}
+
+\begin{tcolorbox}[title=Formel: Tva arbetare]
+Om A gor arbetet pa $a$ timmar och B pa $b$ timmar:
+\[ t = \frac{ab}{a+b} \]
+\end{tcolorbox}
+
+\subsection{Rorelseproblem}
+
+\textbf{Grundformel:} $s = v \cdot t$
+
+\textbf{Motas:} $t = \frac{\text{stracka}}{v_1 + v_2}$
+
+\textbf{Ikapp:} $t = \frac{\text{forsprang}}{v_{\text{snabb}} - v_{\text{langsam}}}$
+
+\section{FORMELSAMLING}
+
+\subsection{Algebra}
+\begin{align*}
+(a+b)^2 &= a^2 + 2ab + b^2 \\
+(a-b)^2 &= a^2 - 2ab + b^2 \\
+a^2 - b^2 &= (a+b)(a-b)
+\end{align*}
+
+\subsection{Geometri}
+\begin{align*}
+\text{Pythagoras:} \quad & a^2 + b^2 = c^2 \\
+\text{Triangelarea:} \quad & A = \frac{bh}{2} \\
+\text{Cirkelomkrets:} \quad & O = 2\pi r \\
+\text{Cirkelarea:} \quad & A = \pi r^2
+\end{align*}
+
+\subsection{Kombinatorik}
+\begin{align*}
+\text{Kombination:} \quad & \binom{n}{r} = \frac{n!}{r!(n-r)!} \\
+\text{Vagrakning:} \quad & \binom{m+n}{m}
+\end{align*}
+
+\section{MINNESREGLER}
+
+\begin{itemize}
+\item \textbf{Talteori:} "3 och 9: Siffersumma!"
+\item \textbf{SGD/MGM:} "SGD = Minsta exponenter, MGM = Storsta"
+\item \textbf{Kombinatorik:} "Ordning spelar roll? Permutation. Annars Kombination."
+\item \textbf{Vagrakning:} "Hoger + Uppat = Kombination!"
+\item \textbf{Geometri:} "Tangent vinkelrat mot radie"
+\end{itemize}
+
+\vfill
+\begin{center}
+\textbf{\Large Lycka till pa provet, Yvonna!}
+
+Version 1.0 -- December 2024
+\end{center}
+
+\end{document}

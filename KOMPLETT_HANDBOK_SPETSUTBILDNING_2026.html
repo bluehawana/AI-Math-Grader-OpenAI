@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Hvitfeldska Spetsutbildning Matematikhandbok 2026</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Hvitfeldska Spetsutbildning Matematikhandbok 2026</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#hvitfeldtskas-spetsutbildning"
+id="toc-hvitfeldtskas-spetsutbildning">📚 HVITFELDTSKAS
+SPETSUTBILDNING</a></li>
+<li><a href="#komplett-matematikhandbok-2026"
+id="toc-komplett-matematikhandbok-2026">KOMPLETT MATEMATIKHANDBOK
+2026</a></li>
+<li><a href="#innehållsförteckning"
+id="toc-innehållsförteckning">INNEHÅLLSFÖRTECKNING</a></li>
+<li><a href="#introduktion" id="toc-introduktion">INTRODUKTION</a>
+<ul>
+<li><a href="#om-provet" id="toc-om-provet">Om provet</a></li>
+<li><a href="#hur-du-använder-denna-handbok"
+id="toc-hur-du-använder-denna-handbok">Hur du använder denna
+handbok</a></li>
+</ul></li>
+<li><a href="#del-1-talteori" id="toc-del-1-talteori">DEL 1:
+TALTEORI</a>
+<ul>
+<li><a href="#delbarhetsregler" id="toc-delbarhetsregler">1.1
+Delbarhetsregler</a></li>
+<li><a href="#primtal" id="toc-primtal">1.2 Primtal</a>
+<ul>
+<li><a href="#definition" id="toc-definition">Definition</a></li>
+<li><a href="#primtal-under-100" id="toc-primtal-under-100">Primtal
+under 100</a></li>
+<li><a href="#primtalstest" id="toc-primtalstest">Primtalstest</a></li>
+</ul></li>
+<li><a href="#primtalsfaktorisering" id="toc-primtalsfaktorisering">1.3
+Primtalsfaktorisering</a>
+<ul>
+<li><a href="#aritmetikens-fundamentalsats"
+id="toc-aritmetikens-fundamentalsats">Aritmetikens
+fundamentalsats</a></li>
+<li><a href="#metod-faktorträd" id="toc-metod-faktorträd">Metod:
+Faktorträd</a></li>
+<li><a href="#viktiga-faktoriseringar"
+id="toc-viktiga-faktoriseringar">Viktiga faktoriseringar</a></li>
+</ul></li>
+<li><a href="#divisorer" id="toc-divisorer">1.4 Divisorer</a>
+<ul>
+<li><a href="#antal-divisorer" id="toc-antal-divisorer">Antal
+divisorer</a></li>
+<li><a href="#alla-divisorer-till-350"
+id="toc-alla-divisorer-till-350">Alla divisorer till 350</a></li>
+</ul></li>
+<li><a href="#sgd-och-mgm" id="toc-sgd-och-mgm">1.5 SGD och MGM</a>
+<ul>
+<li><a href="#sgd-största-gemensamma-delare"
+id="toc-sgd-största-gemensamma-delare">SGD (Största Gemensamma
+Delare)</a></li>
+<li><a href="#mgm-minsta-gemensamma-multipel"
+id="toc-mgm-minsta-gemensamma-multipel">MGM (Minsta Gemensamma
+Multipel)</a></li>
+<li><a href="#formel" id="toc-formel">Formel</a></li>
+</ul></li>
+<li><a href="#typuppgift-heltalsekvationer"
+id="toc-typuppgift-heltalsekvationer">⭐ 1.6 TYPUPPGIFT:
+Heltalsekvationer</a>
+<ul>
+<li><a href="#problem-liknande-prov-2015"
+id="toc-problem-liknande-prov-2015">Problem (Liknande Prov
+2015)</a></li>
+<li><a href="#lösningsmetod"
+id="toc-lösningsmetod">LÖSNINGSMETOD</a></li>
+<li><a href="#svar-xz-2520" id="toc-svar-xz-2520"><strong>SVAR: xz =
+2520</strong></a></li>
+<li><a href="#minnesregel" id="toc-minnesregel">📝 MINNESREGEL</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#del-2-algebra" id="toc-del-2-algebra">DEL 2: ALGEBRA</a>
+<ul>
+<li><a href="#polynom-och-faktorisering"
+id="toc-polynom-och-faktorisering">2.1 Polynom och Faktorisering</a>
+<ul>
+<li><a href="#konjugatregeln"
+id="toc-konjugatregeln">Konjugatregeln</a></li>
+<li><a href="#kvadreringsreglerna"
+id="toc-kvadreringsreglerna">Kvadreringsreglerna</a></li>
+<li><a href="#kubformler" id="toc-kubformler">Kubformler</a></li>
+</ul></li>
+<li><a href="#potensregler" id="toc-potensregler">2.2
+Potensregler</a></li>
+<li><a href="#rotregler" id="toc-rotregler">2.3 Rotregler</a>
+<ul>
+<li><a href="#viktiga-värden" id="toc-viktiga-värden">Viktiga
+värden</a></li>
+</ul></li>
+<li><a href="#ekvationer" id="toc-ekvationer">2.4 Ekvationer</a>
+<ul>
+<li><a href="#linjära-ekvationer" id="toc-linjära-ekvationer">Linjära
+ekvationer</a></li>
+<li><a href="#andragradsekvationer"
+id="toc-andragradsekvationer">Andragradsekvationer</a></li>
+<li><a href="#diskriminanten"
+id="toc-diskriminanten">Diskriminanten</a></li>
+<li><a href="#vietas-formler" id="toc-vietas-formler">Vietas
+formler</a></li>
+</ul></li>
+<li><a href="#ekvationssystem" id="toc-ekvationssystem">2.5
+Ekvationssystem</a>
+<ul>
+<li><a href="#substitutionsmetoden"
+id="toc-substitutionsmetoden">Substitutionsmetoden</a></li>
+<li><a href="#additionsmetoden"
+id="toc-additionsmetoden">Additionsmetoden</a></li>
+</ul></li>
+<li><a href="#olikheter" id="toc-olikheter">2.6 Olikheter</a>
+<ul>
+<li><a href="#grundregler" id="toc-grundregler">Grundregler</a></li>
+<li><a href="#absolutbelopp"
+id="toc-absolutbelopp">Absolutbelopp</a></li>
+</ul></li>
+<li><a href="#talföljder" id="toc-talföljder">2.7 Talföljder</a>
+<ul>
+<li><a href="#aritmetisk-talföljd"
+id="toc-aritmetisk-talföljd">Aritmetisk talföljd</a></li>
+<li><a href="#geometrisk-talföljd"
+id="toc-geometrisk-talföljd">Geometrisk talföljd</a></li>
+<li><a href="#specialsumma" id="toc-specialsumma">Specialsumma</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#del-3-geometri" id="toc-del-3-geometri">DEL 3:
+GEOMETRI</a>
+<ul>
+<li><a href="#trianglar" id="toc-trianglar">3.1 Trianglar</a>
+<ul>
+<li><a href="#vinkelsumma" id="toc-vinkelsumma">Vinkelsumma</a></li>
+<li><a href="#triangeltyper"
+id="toc-triangeltyper">Triangeltyper</a></li>
+<li><a href="#pythagoras-sats" id="toc-pythagoras-sats">Pythagoras
+sats</a></li>
+<li><a href="#pythagoriska-tripplar"
+id="toc-pythagoriska-tripplar">Pythagoriska tripplar</a></li>
+<li><a href="#triangelns-area" id="toc-triangelns-area">Triangelns
+area</a></li>
+</ul></li>
+<li><a href="#speciella-trianglar" id="toc-speciella-trianglar">3.2
+Speciella trianglar</a>
+<ul>
+<li><a href="#liksidig-triangel-sida-a"
+id="toc-liksidig-triangel-sida-a">Liksidig triangel (sida a)</a></li>
+<li><a href="#triangel" id="toc-triangel">30°-60°-90° triangel</a></li>
+<li><a href="#triangel-1" id="toc-triangel-1">45°-45°-90°
+triangel</a></li>
+</ul></li>
+<li><a href="#likformighet-och-kongruens"
+id="toc-likformighet-och-kongruens">3.3 Likformighet och Kongruens</a>
+<ul>
+<li><a href="#kongruens" id="toc-kongruens">Kongruens (≅)</a></li>
+<li><a href="#likformighet" id="toc-likformighet">Likformighet
+(~)</a></li>
+<li><a href="#skalförhållanden"
+id="toc-skalförhållanden">Skalförhållanden</a></li>
+</ul></li>
+<li><a href="#cirkeln" id="toc-cirkeln">3.4 Cirkeln</a>
+<ul>
+<li><a href="#grundbegrepp" id="toc-grundbegrepp">Grundbegrepp</a></li>
+<li><a href="#formler" id="toc-formler">Formler</a></li>
+<li><a href="#viktiga-satser" id="toc-viktiga-satser">Viktiga
+satser</a></li>
+<li><a href="#kordans-längd" id="toc-kordans-längd">Kordans
+längd</a></li>
+</ul></li>
+<li><a href="#fyrhörningar" id="toc-fyrhörningar">3.5 Fyrhörningar</a>
+<ul>
+<li><a href="#vinkelsumma-1" id="toc-vinkelsumma-1">Vinkelsumma</a></li>
+<li><a href="#formler-1" id="toc-formler-1">Formler</a></li>
+</ul></li>
+<li><a href="#polygoner" id="toc-polygoner">3.6 Polygoner</a>
+<ul>
+<li><a href="#vinkelsumma-n-hörning"
+id="toc-vinkelsumma-n-hörning">Vinkelsumma (n-hörning)</a></li>
+<li><a href="#inre-vinkel-reguljär-polygon"
+id="toc-inre-vinkel-reguljär-polygon">Inre vinkel (reguljär
+polygon)</a></li>
+<li><a href="#antal-diagonaler" id="toc-antal-diagonaler">Antal
+diagonaler</a></li>
+<li><a href="#vanliga-polygoner" id="toc-vanliga-polygoner">Vanliga
+polygoner</a></li>
+</ul></li>
+<li><a href="#koordinatgeometri" id="toc-koordinatgeometri">3.7
+Koordinatgeometri</a>
+<ul>
+<li><a href="#avstånd-mellan-två-punkter"
+id="toc-avstånd-mellan-två-punkter">Avstånd mellan två punkter</a></li>
+<li><a href="#mittpunkt" id="toc-mittpunkt">Mittpunkt</a></li>
+<li><a href="#linjens-ekvation" id="toc-linjens-ekvation">Linjens
+ekvation</a></li>
+<li><a href="#lutning" id="toc-lutning">Lutning</a></li>
+<li><a href="#parallella-och-vinkelräta-linjer"
+id="toc-parallella-och-vinkelräta-linjer">Parallella och vinkelräta
+linjer</a></li>
+<li><a href="#avstånd-punkt-till-linje"
+id="toc-avstånd-punkt-till-linje">Avstånd punkt till linje</a></li>
+<li><a href="#cirkelns-ekvation" id="toc-cirkelns-ekvation">Cirkelns
+ekvation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#del-4-kombinatorik-sannolikhet"
+id="toc-del-4-kombinatorik-sannolikhet">DEL 4: KOMBINATORIK &amp;
+SANNOLIKHET</a>
+<ul>
+<li><a href="#grundprinciper" id="toc-grundprinciper">4.1
+Grundprinciper</a>
+<ul>
+<li><a href="#multiplikationsprincipen"
+id="toc-multiplikationsprincipen">Multiplikationsprincipen</a></li>
+<li><a href="#additionsprincipen"
+id="toc-additionsprincipen">Additionsprincipen</a></li>
+<li><a href="#komplementprincipen"
+id="toc-komplementprincipen">Komplementprincipen</a></li>
+</ul></li>
+<li><a href="#fakultet" id="toc-fakultet">4.2 Fakultet</a></li>
+<li><a href="#permutationer" id="toc-permutationer">4.3
+Permutationer</a>
+<ul>
+<li><a href="#definition-1" id="toc-definition-1">Definition</a></li>
+<li><a href="#formler-2" id="toc-formler-2">Formler</a></li>
+</ul></li>
+<li><a href="#kombinationer" id="toc-kombinationer">4.4
+Kombinationer</a>
+<ul>
+<li><a href="#definition-2" id="toc-definition-2">Definition</a></li>
+<li><a href="#formel-1" id="toc-formel-1">Formel</a></li>
+<li><a href="#viktiga-egenskaper" id="toc-viktiga-egenskaper">Viktiga
+egenskaper</a></li>
+<li><a href="#pascals-triangel" id="toc-pascals-triangel">Pascals
+triangel</a></li>
+<li><a href="#vanliga-värden" id="toc-vanliga-värden">Vanliga
+värden</a></li>
+</ul></li>
+<li><a href="#typuppgift-vägräkning-i-rutnät-prov-2012-uppgift-2"
+id="toc-typuppgift-vägräkning-i-rutnät-prov-2012-uppgift-2">⭐ 4.5
+TYPUPPGIFT: Vägräkning i rutnät (Prov 2012, Uppgift 2)</a>
+<ul>
+<li><a href="#grundproblem" id="toc-grundproblem">Grundproblem</a></li>
+<li><a href="#metod" id="toc-metod">Metod</a></li>
+<li><a href="#exempel-1-grundläggande"
+id="toc-exempel-1-grundläggande">Exempel 1: Grundläggande</a></li>
+<li><a href="#exempel-2-med-förbjuden-punkt"
+id="toc-exempel-2-med-förbjuden-punkt">Exempel 2: Med förbjuden
+punkt</a></li>
+<li><a href="#lösning-prov-2012" id="toc-lösning-prov-2012">Lösning Prov
+2012</a></li>
+<li><a href="#minnesregel-1" id="toc-minnesregel-1">📝
+MINNESREGEL</a></li>
+</ul></li>
+<li><a href="#sannolikhet" id="toc-sannolikhet">4.6 Sannolikhet</a>
+<ul>
+<li><a href="#grundläggande-definition"
+id="toc-grundläggande-definition">Grundläggande definition</a></li>
+<li><a href="#egenskaper" id="toc-egenskaper">Egenskaper</a></li>
+<li><a href="#räkneregler" id="toc-räkneregler">Räkneregler</a></li>
+<li><a href="#minst-en-problem" id="toc-minst-en-problem">“Minst
+en”-problem</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#del-5-ordproblem" id="toc-del-5-ordproblem">DEL 5:
+ORDPROBLEM</a>
+<ul>
+<li><a href="#samarbetsproblem-fylla-pool"
+id="toc-samarbetsproblem-fylla-pool">5.1 Samarbetsproblem (“Fylla
+pool”)</a>
+<ul>
+<li><a href="#standardproblem"
+id="toc-standardproblem">Standardproblem</a></li>
+<li><a href="#lösning" id="toc-lösning">Lösning</a></li>
+<li><a href="#med-tre-arbetare" id="toc-med-tre-arbetare">Med tre
+arbetare</a></li>
+<li><a href="#fyllning-och-tömning"
+id="toc-fyllning-och-tömning">Fyllning och tömning</a></li>
+</ul></li>
+<li><a href="#rörelseproblem" id="toc-rörelseproblem">5.2
+Rörelseproblem</a>
+<ul>
+<li><a href="#grundformel" id="toc-grundformel">Grundformel</a></li>
+<li><a href="#typ-1-mötas-motriktade"
+id="toc-typ-1-mötas-motriktade">Typ 1: Mötas (motriktade)</a></li>
+<li><a href="#typ-2-ikapp-samma-riktning"
+id="toc-typ-2-ikapp-samma-riktning">Typ 2: Ikapp (samma
+riktning)</a></li>
+<li><a href="#typ-3-rundbanor" id="toc-typ-3-rundbanor">Typ 3:
+Rundbanor</a></li>
+<li><a href="#typ-4-strömvind" id="toc-typ-4-strömvind">Typ 4:
+Ström/Vind</a></li>
+<li><a href="#genomsnittshastighet"
+id="toc-genomsnittshastighet">Genomsnittshastighet</a></li>
+</ul></li>
+<li><a href="#blandningsproblem" id="toc-blandningsproblem">5.3
+Blandningsproblem</a>
+<ul>
+<li><a href="#grundprincip-massbalans"
+id="toc-grundprincip-massbalans">Grundprincip: Massbalans</a></li>
+<li><a href="#koncentration"
+id="toc-koncentration">Koncentration</a></li>
+<li><a href="#blandning" id="toc-blandning">Blandning</a></li>
+</ul></li>
+<li><a href="#åldersproblem" id="toc-åldersproblem">5.4
+Åldersproblem</a>
+<ul>
+<li><a href="#strategi" id="toc-strategi">Strategi</a></li>
+</ul></li>
+<li><a href="#procentproblem" id="toc-procentproblem">5.5
+Procentproblem</a>
+<ul>
+<li><a href="#formler-3" id="toc-formler-3">Formler</a></li>
+<li><a href="#successiva-ändringar"
+id="toc-successiva-ändringar">Successiva ändringar</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#del-6-problemlösningsstrategier"
+id="toc-del-6-problemlösningsstrategier">DEL 6:
+PROBLEMLÖSNINGSSTRATEGIER</a>
+<ul>
+<li><a href="#pólyas-4-stegsmetod" id="toc-pólyas-4-stegsmetod">6.1
+Pólyas 4-stegsmetod</a>
+<ul>
+<li><a href="#förstå-problemet" id="toc-förstå-problemet">1. Förstå
+problemet</a></li>
+<li><a href="#gör-en-plan" id="toc-gör-en-plan">2. Gör en plan</a></li>
+<li><a href="#genomför-planen" id="toc-genomför-planen">3. Genomför
+planen</a></li>
+<li><a href="#kontrollera" id="toc-kontrollera">4. Kontrollera</a></li>
+</ul></li>
+<li><a href="#specifika-strategier" id="toc-specifika-strategier">6.2
+Specifika strategier</a></li>
+<li><a href="#vanliga-algebraiska-tekniker"
+id="toc-vanliga-algebraiska-tekniker">6.3 Vanliga algebraiska
+tekniker</a></li>
+</ul></li>
+<li><a href="#formelsamling" id="toc-formelsamling">FORMELSAMLING</a>
+<ul>
+<li><a href="#aritmetik-talteori" id="toc-aritmetik-talteori">Aritmetik
+&amp; Talteori</a></li>
+<li><a href="#algebra" id="toc-algebra">Algebra</a></li>
+<li><a href="#geometri" id="toc-geometri">Geometri</a></li>
+<li><a href="#kombinatorik" id="toc-kombinatorik">Kombinatorik</a></li>
+<li><a href="#sannolikhet-1" id="toc-sannolikhet-1">Sannolikhet</a></li>
+<li><a href="#ordproblem" id="toc-ordproblem">Ordproblem</a></li>
+</ul></li>
+<li><a href="#övningsprov" id="toc-övningsprov">ÖVNINGSPROV</a>
+<ul>
+<li><a href="#övningsprov-1" id="toc-övningsprov-1">ÖVNINGSPROV 1</a>
+<ul>
+<li><a href="#uppgift-1-talteori" id="toc-uppgift-1-talteori">Uppgift 1
+(Talteori)</a></li>
+<li><a href="#uppgift-2-vägräkning"
+id="toc-uppgift-2-vägräkning">Uppgift 2 (Vägräkning)</a></li>
+<li><a href="#uppgift-3-geometri" id="toc-uppgift-3-geometri">Uppgift 3
+(Geometri)</a></li>
+<li><a href="#uppgift-4-ordproblem"
+id="toc-uppgift-4-ordproblem">Uppgift 4 (Ordproblem)</a></li>
+<li><a href="#uppgift-5-sannolikhet"
+id="toc-uppgift-5-sannolikhet">Uppgift 5 (Sannolikhet)</a></li>
+</ul></li>
+<li><a href="#övningsprov-2" id="toc-övningsprov-2">ÖVNINGSPROV 2</a>
+<ul>
+<li><a href="#uppgift-1-algebra" id="toc-uppgift-1-algebra">Uppgift 1
+(Algebra)</a></li>
+<li><a href="#uppgift-2-kombinatorik"
+id="toc-uppgift-2-kombinatorik">Uppgift 2 (Kombinatorik)</a></li>
+<li><a href="#uppgift-3-geometri-1"
+id="toc-uppgift-3-geometri-1">Uppgift 3 (Geometri)</a></li>
+<li><a href="#uppgift-4-talföljd" id="toc-uppgift-4-talföljd">Uppgift 4
+(Talföljd)</a></li>
+<li><a href="#uppgift-5-ordproblem"
+id="toc-uppgift-5-ordproblem">Uppgift 5 (Ordproblem)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#facit" id="toc-facit">FACIT</a>
+<ul>
+<li><a href="#övningsprov-1-1" id="toc-övningsprov-1-1">Övningsprov
+1</a></li>
+<li><a href="#övningsprov-2-1" id="toc-övningsprov-2-1">Övningsprov
+2</a></li>
+</ul></li>
+<li><a href="#checklistor" id="toc-checklistor">CHECKLISTOR</a>
+<ul>
+<li><a href="#innan-provet" id="toc-innan-provet">✅ Innan
+provet</a></li>
+<li><a href="#under-provet" id="toc-under-provet">✅ Under
+provet</a></li>
+<li><a href="#vanliga-fel-att-undvika"
+id="toc-vanliga-fel-att-undvika">❌ Vanliga fel att undvika</a></li>
+</ul></li>
+<li><a href="#minnesregler" id="toc-minnesregler">📝 MINNESREGLER</a>
+<ul>
+<li><a href="#talteori" id="toc-talteori">Talteori</a></li>
+<li><a href="#algebra-1" id="toc-algebra-1">Algebra</a></li>
+<li><a href="#kombinatorik-1"
+id="toc-kombinatorik-1">Kombinatorik</a></li>
+<li><a href="#geometri-1" id="toc-geometri-1">Geometri</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="hvitfeldtskas-spetsutbildning">📚 HVITFELDTSKAS
+SPETSUTBILDNING</h1>
+<h1 id="komplett-matematikhandbok-2026">KOMPLETT MATEMATIKHANDBOK
+2026</h1>
+<hr />
+<p><strong>Skapad för:</strong> Yvonna<br />
+<strong>Provdatum:</strong> 24 februari 2026<br />
+<strong>Baserad på:</strong> Intagningsprov 2010-2025</p>
+<hr />
+<h1 id="innehållsförteckning">INNEHÅLLSFÖRTECKNING</h1>
+<ol type="1">
+<li><a href="#introduktion">INTRODUKTION</a></li>
+<li><a href="#del-1-talteori">DEL 1: TALTEORI</a></li>
+<li><a href="#del-2-algebra">DEL 2: ALGEBRA</a></li>
+<li><a href="#del-3-geometri">DEL 3: GEOMETRI</a></li>
+<li><a href="#del-4-kombinatorik--sannolikhet">DEL 4: KOMBINATORIK &amp;
+SANNOLIKHET</a></li>
+<li><a href="#del-5-ordproblem">DEL 5: ORDPROBLEM</a></li>
+<li><a href="#del-6-problemlösningsstrategier">DEL 6:
+PROBLEMLÖSNINGSSTRATEGIER</a></li>
+<li><a href="#formelsamling">FORMELSAMLING</a></li>
+<li><a href="#övningsprov">ÖVNINGSPROV</a></li>
+<li><a href="#facit">FACIT</a></li>
+</ol>
+<hr />
+<h1 id="introduktion">INTRODUKTION</h1>
+<h2 id="om-provet">Om provet</h2>
+<p>Inträdesprovet till Hvitfeldtskas spetsutbildning i matematik består
+av två delar: - <strong>Del 1:</strong> Basfärdigheter (75 min) -
+<strong>Del 2:</strong> Problemlösning (90 min)</p>
+<p>Varje del ger maximalt 160 poäng. Provresultatet adderas till
+meritvärdet.</p>
+<h2 id="hur-du-använder-denna-handbok">Hur du använder denna
+handbok</h2>
+<ol type="1">
+<li><strong>Läs igenom</strong> varje kapitel noggrant</li>
+<li><strong>Öva på</strong> typuppgifterna</li>
+<li><strong>Memorera</strong> formlerna i formelsamlingen</li>
+<li><strong>Gör</strong> övningsproven under tidspress</li>
+<li><strong>Repetera</strong> regelbundet innan provet</li>
+</ol>
+<hr />
+<h1 id="del-1-talteori">DEL 1: TALTEORI</h1>
+<h2 id="delbarhetsregler">1.1 Delbarhetsregler</h2>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 25%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th>Delbar med</th>
+<th>Regel</th>
+<th>Exempel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2</strong></td>
+<td>Sista siffran är jämn (0, 2, 4, 6, 8)</td>
+<td>1234 ✓</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Siffersumman är delbar med 3</td>
+<td>156: 1+5+6=12 ✓</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Sista två siffrorna delbara med 4</td>
+<td>1324: 24÷4=6 ✓</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Slutar på 0 eller 5</td>
+<td>1235 ✓</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>Delbar med både 2 och 3</td>
+<td>1254 ✓</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td>Sista tre siffrorna delbara med 8</td>
+<td>5016: 016÷8=2 ✓</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td>Siffersumman är delbar med 9</td>
+<td>2286: 2+2+8+6=18 ✓</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td>Slutar på 0</td>
+<td>1230 ✓</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td>Alternerande siffersumma delbar med 11</td>
+<td>2728: 2-7+2-8=-11 ✓</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="primtal">1.2 Primtal</h2>
+<h3 id="definition">Definition</h3>
+<p>Ett <strong>primtal</strong> är ett heltal &gt; 1 som endast är
+delbart med 1 och sig själv.</p>
+<h3 id="primtal-under-100">Primtal under 100</h3>
+<pre><code>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 
+53, 59, 61, 67, 71, 73, 79, 83, 89, 97</code></pre>
+<h3 id="primtalstest">Primtalstest</h3>
+<p>För att testa om n är primtal: - Dividera med alla primtal ≤ √n - Om
+ingen går jämnt ut → n är primtal</p>
+<hr />
+<h2 id="primtalsfaktorisering">1.3 Primtalsfaktorisering</h2>
+<h3 id="aritmetikens-fundamentalsats">Aritmetikens fundamentalsats</h3>
+<p>Varje heltal &gt; 1 kan skrivas som en <strong>unik</strong> produkt
+av primtal.</p>
+<h3 id="metod-faktorträd">Metod: Faktorträd</h3>
+<pre><code>    350
+   /   \
+  2    175
+      /   \
+     5     35
+          /  \
+         5    7
+
+350 = 2 × 5² × 7</code></pre>
+<h3 id="viktiga-faktoriseringar">Viktiga faktoriseringar</h3>
+<table>
+<thead>
+<tr>
+<th>Tal</th>
+<th>Faktorisering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>36</td>
+<td>2² × 3²</td>
+</tr>
+<tr>
+<td>48</td>
+<td>2⁴ × 3</td>
+</tr>
+<tr>
+<td>60</td>
+<td>2² × 3 × 5</td>
+</tr>
+<tr>
+<td>72</td>
+<td>2³ × 3²</td>
+</tr>
+<tr>
+<td>100</td>
+<td>2² × 5²</td>
+</tr>
+<tr>
+<td>120</td>
+<td>2³ × 3 × 5</td>
+</tr>
+<tr>
+<td>180</td>
+<td>2² × 3² × 5</td>
+</tr>
+<tr>
+<td>240</td>
+<td>2⁴ × 3 × 5</td>
+</tr>
+<tr>
+<td>350</td>
+<td>2 × 5² × 7</td>
+</tr>
+<tr>
+<td>360</td>
+<td>2³ × 3² × 5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="divisorer">1.4 Divisorer</h2>
+<h3 id="antal-divisorer">Antal divisorer</h3>
+<p>Om n = p₁^a₁ × p₂^a₂ × … × pₖ^aₖ</p>
+<p><strong>Antal divisorer = (a₁ + 1)(a₂ + 1)…(aₖ + 1)</strong></p>
+<p><strong>Exempel:</strong> 350 = 2¹ × 5² × 7¹<br />
+Antal divisorer = (1+1)(2+1)(1+1) = 2 × 3 × 2 = <strong>12</strong></p>
+<h3 id="alla-divisorer-till-350">Alla divisorer till 350</h3>
+<p>1, 2, 5, 7, 10, 14, 25, 35, 50, 70, 175, 350</p>
+<hr />
+<h2 id="sgd-och-mgm">1.5 SGD och MGM</h2>
+<h3 id="sgd-största-gemensamma-delare">SGD (Största Gemensamma
+Delare)</h3>
+<p><strong>Metod: Primtalsfaktorisering</strong> 1. Faktorisera båda
+talen 2. Ta gemensamma primfaktorer med <strong>LÄGSTA</strong>
+exponent</p>
+<p><strong>Exempel:</strong> SGD(350, 180) - 350 = 2 × 5² × 7 - 180 = 2²
+× 3² × 5 - SGD = 2¹ × 5¹ = <strong>10</strong></p>
+<h3 id="mgm-minsta-gemensamma-multipel">MGM (Minsta Gemensamma
+Multipel)</h3>
+<p><strong>Metod:</strong> Ta alla primfaktorer med
+<strong>HÖGSTA</strong> exponent</p>
+<p><strong>Exempel:</strong> MGM(350, 180) - MGM = 2² × 3² × 5² × 7 =
+<strong>6300</strong></p>
+<h3 id="formel">Formel</h3>
+<p><span
+class="math display">SGD(<em>a</em>, <em>b</em>) × MGM(<em>a</em>, <em>b</em>) = <em>a</em> × <em>b</em></span></p>
+<hr />
+<h2 id="typuppgift-heltalsekvationer">⭐ 1.6 TYPUPPGIFT:
+Heltalsekvationer</h2>
+<h3 id="problem-liknande-prov-2015">Problem (Liknande Prov 2015)</h3>
+<blockquote>
+<p>x, y, z är heltal &gt; 1<br />
+xy = 350, yz = 180<br />
+xz är delbar med 8<br />
+<strong>Bestäm xz.</strong></p>
+</blockquote>
+<h3 id="lösningsmetod">LÖSNINGSMETOD</h3>
+<p><strong>Steg 1: Primtalsfaktorisera</strong> - 350 = 2 × 5² × 7 - 180
+= 2² × 3² × 5</p>
+<p><strong>Steg 2: Hitta möjliga y</strong> y måste dela både 350 och
+180.<br />
+SGD(350, 180) = 2 × 5 = 10<br />
+Divisorer till 10 som är &gt; 1: <strong>2, 5, 10</strong></p>
+<p><strong>Steg 3: Testa varje y systematiskt</strong></p>
+<table>
+<thead>
+<tr>
+<th>y</th>
+<th>x = 350/y</th>
+<th>z = 180/y</th>
+<th>xz</th>
+<th>Delbar med 8?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>175</td>
+<td>90</td>
+<td>15750</td>
+<td>15750÷8 = 1968,75 ✗</td>
+</tr>
+<tr>
+<td>5</td>
+<td>70</td>
+<td>36</td>
+<td>2520</td>
+<td>2520÷8 = 315 ✓</td>
+</tr>
+<tr>
+<td>10</td>
+<td>35</td>
+<td>18</td>
+<td>630</td>
+<td>630÷8 = 78,75 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Steg 4: Verifiera</strong> - y = 5: x = 70, z = 36 - xy = 70
+× 5 = 350 ✓ - yz = 5 × 36 = 180 ✓ - xz = 70 × 36 = 2520, delbar med 8
+✓</p>
+<h3 id="svar-xz-2520"><strong>SVAR: xz = 2520</strong></h3>
+<h3 id="minnesregel">📝 MINNESREGEL</h3>
+<blockquote>
+<p><strong>“Faktorisera → Lista gemensamma divisorer → Testa
+systematiskt → Verifiera”</strong></p>
+</blockquote>
+<hr />
+<h1 id="del-2-algebra">DEL 2: ALGEBRA</h1>
+<h2 id="polynom-och-faktorisering">2.1 Polynom och Faktorisering</h2>
+<h3 id="konjugatregeln">Konjugatregeln</h3>
+<p><span
+class="math display"><em>a</em><sup>2</sup> − <em>b</em><sup>2</sup> = (<em>a</em> + <em>b</em>)(<em>a</em> − <em>b</em>)</span></p>
+<h3 id="kvadreringsreglerna">Kvadreringsreglerna</h3>
+<p><span
+class="math display">(<em>a</em> + <em>b</em>)<sup>2</sup> = <em>a</em><sup>2</sup> + 2<em>a</em><em>b</em> + <em>b</em><sup>2</sup></span>
+<span
+class="math display">(<em>a</em> − <em>b</em>)<sup>2</sup> = <em>a</em><sup>2</sup> − 2<em>a</em><em>b</em> + <em>b</em><sup>2</sup></span></p>
+<h3 id="kubformler">Kubformler</h3>
+<p><span
+class="math display"><em>a</em><sup>3</sup> + <em>b</em><sup>3</sup> = (<em>a</em> + <em>b</em>)(<em>a</em><sup>2</sup> − <em>a</em><em>b</em> + <em>b</em><sup>2</sup>)</span>
+<span
+class="math display"><em>a</em><sup>3</sup> − <em>b</em><sup>3</sup> = (<em>a</em> − <em>b</em>)(<em>a</em><sup>2</sup> + <em>a</em><em>b</em> + <em>b</em><sup>2</sup>)</span></p>
+<hr />
+<h2 id="potensregler">2.2 Potensregler</h2>
+<table>
+<thead>
+<tr>
+<th>Regel</th>
+<th>Formel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multiplikation</td>
+<td>aᵐ · aⁿ = aᵐ⁺ⁿ</td>
+</tr>
+<tr>
+<td>Division</td>
+<td>aᵐ / aⁿ = aᵐ⁻ⁿ</td>
+</tr>
+<tr>
+<td>Potens av potens</td>
+<td>(aᵐ)ⁿ = aᵐⁿ</td>
+</tr>
+<tr>
+<td>Produktpotens</td>
+<td>(ab)ⁿ = aⁿbⁿ</td>
+</tr>
+<tr>
+<td>Kvotpotens</td>
+<td>(a/b)ⁿ = aⁿ/bⁿ</td>
+</tr>
+<tr>
+<td>Negativ exponent</td>
+<td>a⁻ⁿ = 1/aⁿ</td>
+</tr>
+<tr>
+<td>Nollexponent</td>
+<td>a⁰ = 1 (a ≠ 0)</td>
+</tr>
+<tr>
+<td>Bråkexponent</td>
+<td>aᵐ/ⁿ = ⁿ√(aᵐ)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="rotregler">2.3 Rotregler</h2>
+<table>
+<thead>
+<tr>
+<th>Regel</th>
+<th>Formel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multiplikation</td>
+<td>√(ab) = √a · √b</td>
+</tr>
+<tr>
+<td>Division</td>
+<td>√(a/b) = √a / √b</td>
+</tr>
+<tr>
+<td>Potens</td>
+<td>√(a²) = |a|</td>
+</tr>
+</tbody>
+</table>
+<h3 id="viktiga-värden">Viktiga värden</h3>
+<ul>
+<li>√2 ≈ 1,414</li>
+<li>√3 ≈ 1,732</li>
+<li>√5 ≈ 2,236</li>
+</ul>
+<hr />
+<h2 id="ekvationer">2.4 Ekvationer</h2>
+<h3 id="linjära-ekvationer">Linjära ekvationer</h3>
+<p><strong>Form:</strong> ax + b = c<br />
+<strong>Lösning:</strong> x = (c - b) / a</p>
+<h3 id="andragradsekvationer">Andragradsekvationer</h3>
+<p><strong>Standardform:</strong> ax² + bx + c = 0</p>
+<h4 id="pq-formeln-när-a-1">PQ-formeln (när a = 1)</h4>
+<p><span
+class="math display"><em>x</em><sup>2</sup> + <em>p</em><em>x</em> + <em>q</em> = 0</span>
+<span class="math display">$$x = -\frac{p}{2} \pm
+\sqrt{\left(\frac{p}{2}\right)^2 - q}$$</span></p>
+<h4 id="abc-formeln-allmänt-fall">ABC-formeln (allmänt fall)</h4>
+<p><span class="math display">$$x = \frac{-b \pm \sqrt{b^2 -
+4ac}}{2a}$$</span></p>
+<h3 id="diskriminanten">Diskriminanten</h3>
+<p>D = b² - 4ac - D &gt; 0: Två reella lösningar - D = 0: En dubbelrot -
+D &lt; 0: Inga reella lösningar</p>
+<h3 id="vietas-formler">Vietas formler</h3>
+<p>För x² + px + q = 0 med rötter r och s: - r + s = -p - r × s = q</p>
+<hr />
+<h2 id="ekvationssystem">2.5 Ekvationssystem</h2>
+<h3 id="substitutionsmetoden">Substitutionsmetoden</h3>
+<ol type="1">
+<li>Lös ut en variabel från en ekvation</li>
+<li>Sätt in uttrycket i den andra ekvationen</li>
+<li>Lös den resulterande ekvationen</li>
+<li>Beräkna den andra variabeln</li>
+</ol>
+<h3 id="additionsmetoden">Additionsmetoden</h3>
+<ol type="1">
+<li>Multiplicera ekvationerna så att en variabel får samma
+koefficient</li>
+<li>Addera/subtrahera ekvationerna</li>
+<li>Lös den resulterande ekvationen</li>
+</ol>
+<p><strong>Exempel:</strong></p>
+<pre><code>2x + 3y = 12
+4x - 3y = 6
+-----------
+6x = 18 → x = 3
+Insättning: 6 + 3y = 12 → y = 2</code></pre>
+<hr />
+<h2 id="olikheter">2.6 Olikheter</h2>
+<h3 id="grundregler">Grundregler</h3>
+<ul>
+<li>Addera/subtrahera: olikheten bevaras</li>
+<li>Multiplicera/dividera med positivt tal: bevaras</li>
+<li><strong>Multiplicera/dividera med negativt tal: BYTER
+riktning!</strong></li>
+</ul>
+<h3 id="absolutbelopp">Absolutbelopp</h3>
+<p><span class="math display">$$|x| = \begin{cases} x &amp; \text{om } x
+\geq 0 \\ -x &amp; \text{om } x &lt; 0 \end{cases}$$</span></p>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Lösning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>|x| = a</td>
+<td>x = a eller x = -a</td>
+</tr>
+<tr>
+<td>|x| &lt; a</td>
+<td>-a &lt; x &lt; a</td>
+</tr>
+<tr>
+<td>|x| &gt; a</td>
+<td>x &gt; a eller x &lt; -a</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="talföljder">2.7 Talföljder</h2>
+<h3 id="aritmetisk-talföljd">Aritmetisk talföljd</h3>
+<p>Konstant differens d mellan varje term.</p>
+<table>
+<thead>
+<tr>
+<th>Formel</th>
+<th>Uttryck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n:te termen</td>
+<td>aₙ = a₁ + (n-1)d</td>
+</tr>
+<tr>
+<td>Summa</td>
+<td>Sₙ = n(a₁ + aₙ)/2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exempel:</strong> 2, 5, 8, 11, 14, … - a₁ = 2, d = 3 - a₁₀ =
+2 + 9×3 = 29 - S₁₀ = 10(2 + 29)/2 = 155</p>
+<h3 id="geometrisk-talföljd">Geometrisk talföljd</h3>
+<p>Konstant kvot k mellan varje term.</p>
+<table>
+<thead>
+<tr>
+<th>Formel</th>
+<th>Uttryck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n:te termen</td>
+<td>aₙ = a₁ · kⁿ⁻¹</td>
+</tr>
+<tr>
+<td>Summa</td>
+<td>Sₙ = a₁ · (kⁿ - 1)/(k - 1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exempel:</strong> 3, 6, 12, 24, … - a₁ = 3, k = 2 - a₆ = 3 ×
+2⁵ = 96</p>
+<h3 id="specialsumma">Specialsumma</h3>
+<p><span class="math display">$$1 + 2 + 3 + ... + n =
+\frac{n(n+1)}{2}$$</span></p>
+<hr />
+<h1 id="del-3-geometri">DEL 3: GEOMETRI</h1>
+<h2 id="trianglar">3.1 Trianglar</h2>
+<h3 id="vinkelsumma">Vinkelsumma</h3>
+<p><strong>Summan av vinklarna i en triangel = 180°</strong></p>
+<h3 id="triangeltyper">Triangeltyper</h3>
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Definition</th>
+<th>Egenskaper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Liksidig</strong></td>
+<td>Alla sidor lika</td>
+<td>Alla vinklar = 60°</td>
+</tr>
+<tr>
+<td><strong>Likbent</strong></td>
+<td>Två sidor lika</td>
+<td>Basvinklarna lika</td>
+</tr>
+<tr>
+<td><strong>Rätvinklig</strong></td>
+<td>En vinkel = 90°</td>
+<td>Pythagoras gäller</td>
+</tr>
+<tr>
+<td><strong>Spetsvinklig</strong></td>
+<td>Alla vinklar &lt; 90°</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Trubbvinklig</strong></td>
+<td>En vinkel &gt; 90°</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pythagoras-sats">Pythagoras sats</h3>
+<p>I en rätvinklig triangel med kateter a, b och hypotenusa c: <span
+class="math display"><em>a</em><sup>2</sup> + <em>b</em><sup>2</sup> = <em>c</em><sup>2</sup></span></p>
+<h3 id="pythagoriska-tripplar">Pythagoriska tripplar</h3>
+<table>
+<thead>
+<tr>
+<th>Grundform</th>
+<th>Multiplar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3, 4, 5</td>
+<td>6, 8, 10 och 9, 12, 15</td>
+</tr>
+<tr>
+<td>5, 12, 13</td>
+<td>10, 24, 26</td>
+</tr>
+<tr>
+<td>8, 15, 17</td>
+<td>16, 30, 34</td>
+</tr>
+<tr>
+<td>7, 24, 25</td>
+<td>14, 48, 50</td>
+</tr>
+</tbody>
+</table>
+<h3 id="triangelns-area">Triangelns area</h3>
+<table>
+<thead>
+<tr>
+<th>Metod</th>
+<th>Formel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bas × höjd</td>
+<td>A = bh/2</td>
+</tr>
+<tr>
+<td>Två sidor + vinkel</td>
+<td>A = ½ab·sin(C)</td>
+</tr>
+<tr>
+<td>Herons formel</td>
+<td>A = √[s(s-a)(s-b)(s-c)]</td>
+</tr>
+</tbody>
+</table>
+<p>där s = (a+b+c)/2 (halva omkretsen)</p>
+<hr />
+<h2 id="speciella-trianglar">3.2 Speciella trianglar</h2>
+<h3 id="liksidig-triangel-sida-a">Liksidig triangel (sida a)</h3>
+<ul>
+<li>Höjd: h = a√3/2</li>
+<li>Area: A = a²√3/4</li>
+</ul>
+<h3 id="triangel">30°-60°-90° triangel</h3>
+<p>Sidor i förhållande <strong>1 : √3 : 2</strong> - Kortaste sidan (mot
+30°) = a - Mellansidan (mot 60°) = a√3 - Hypotenusa (mot 90°) = 2a</p>
+<h3 id="triangel-1">45°-45°-90° triangel</h3>
+<p>Sidor i förhållande <strong>1 : 1 : √2</strong> - Kateter = a -
+Hypotenusa = a√2</p>
+<hr />
+<h2 id="likformighet-och-kongruens">3.3 Likformighet och Kongruens</h2>
+<h3 id="kongruens">Kongruens (≅)</h3>
+<p>Trianglar är kongruenta om de har exakt samma form och storlek.</p>
+<p><strong>Kongruensvillkor:</strong> - <strong>SSS</strong>
+(sida-sida-sida) - <strong>SAS</strong> (sida-vinkel-sida) -
+<strong>ASA</strong> (vinkel-sida-vinkel) - <strong>AAS</strong>
+(vinkel-vinkel-sida)</p>
+<h3 id="likformighet">Likformighet (~)</h3>
+<p>Trianglar är likformiga om de har samma form men olika storlek.</p>
+<p><strong>Likformighetsvillkor:</strong> - <strong>AA</strong>
+(vinkel-vinkel) - Alla sidor proportionella - Två sidor proportionella +
+mellanliggande vinkel lika</p>
+<h3 id="skalförhållanden">Skalförhållanden</h3>
+<p>Om sidorna har förhållandet k: - Motsvarande sidor: förhållande k -
+Motsvarande areor: förhållande k² - Motsvarande volymer: förhållande
+k³</p>
+<hr />
+<h2 id="cirkeln">3.4 Cirkeln</h2>
+<h3 id="grundbegrepp">Grundbegrepp</h3>
+<table>
+<thead>
+<tr>
+<th>Begrepp</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radie (r)</strong></td>
+<td>Avståndet från centrum till randen</td>
+</tr>
+<tr>
+<td><strong>Diameter (d)</strong></td>
+<td>d = 2r</td>
+</tr>
+<tr>
+<td><strong>Korda</strong></td>
+<td>Linje mellan två punkter på cirkeln</td>
+</tr>
+<tr>
+<td><strong>Tangent</strong></td>
+<td>Linje som vidrör cirkeln i en punkt</td>
+</tr>
+<tr>
+<td><strong>Sekant</strong></td>
+<td>Linje som skär cirkeln i två punkter</td>
+</tr>
+<tr>
+<td><strong>Båge</strong></td>
+<td>Del av cirkelns rand</td>
+</tr>
+<tr>
+<td><strong>Sektor</strong></td>
+<td>“Tårtbit” - område mellan två radier</td>
+</tr>
+</tbody>
+</table>
+<h3 id="formler">Formler</h3>
+<table>
+<thead>
+<tr>
+<th>Storhet</th>
+<th>Formel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Omkrets</td>
+<td>O = 2πr = πd</td>
+</tr>
+<tr>
+<td>Area</td>
+<td>A = πr²</td>
+</tr>
+<tr>
+<td>Båglängd</td>
+<td>b = (v°/360°) · 2πr</td>
+</tr>
+<tr>
+<td>Sektorarea</td>
+<td>A = (v°/360°) · πr²</td>
+</tr>
+</tbody>
+</table>
+<h3 id="viktiga-satser">Viktiga satser</h3>
+<h4 id="tangentegenskaper">Tangentegenskaper</h4>
+<ol type="1">
+<li><strong>Tangenten är vinkelrät mot radien</strong> vid
+beröringspunkten</li>
+<li><strong>Tangentsträckor från samma punkt är lika långa</strong></li>
+</ol>
+<h4 id="randvinkelsatsen">Randvinkelsatsen</h4>
+<p>Randvinkel = ½ × Medelpunktsvinkel (samma båge)</p>
+<h4 id="thales-sats">Thales sats</h4>
+<p>Om AB är diameter och C ligger på cirkeln, då är vinkel ACB = 90°</p>
+<h3 id="kordans-längd">Kordans längd</h3>
+<p>Om avståndet från centrum till kordan = d, och radien = r: <span
+class="math display">$$\text{Kordans längd} = 2\sqrt{r^2 -
+d^2}$$</span></p>
+<hr />
+<h2 id="fyrhörningar">3.5 Fyrhörningar</h2>
+<h3 id="vinkelsumma-1">Vinkelsumma</h3>
+<p><strong>Summan av vinklarna i en fyrhörning = 360°</strong></p>
+<h3 id="formler-1">Formler</h3>
+<table>
+<thead>
+<tr>
+<th>Fyrhörning</th>
+<th>Area</th>
+<th>Speciellt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rektangel</strong></td>
+<td>A = ab</td>
+<td>Diagonaler lika långa</td>
+</tr>
+<tr>
+<td><strong>Kvadrat</strong></td>
+<td>A = a²</td>
+<td>Diagonal = a√2</td>
+</tr>
+<tr>
+<td><strong>Parallellogram</strong></td>
+<td>A = bh</td>
+<td>Motstående sidor parallella</td>
+</tr>
+<tr>
+<td><strong>Romb</strong></td>
+<td>A = d₁d₂/2</td>
+<td>Diagonaler vinkelräta</td>
+</tr>
+<tr>
+<td><strong>Trapets</strong></td>
+<td>A = (a+b)h/2</td>
+<td>Ett par parallella sidor</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="polygoner">3.6 Polygoner</h2>
+<h3 id="vinkelsumma-n-hörning">Vinkelsumma (n-hörning)</h3>
+<p><span class="math display">(<em>n</em> − 2) × 180°</span></p>
+<h3 id="inre-vinkel-reguljär-polygon">Inre vinkel (reguljär
+polygon)</h3>
+<p><span class="math display">$$\frac{(n-2) \times 180°}{n}$$</span></p>
+<h3 id="antal-diagonaler">Antal diagonaler</h3>
+<p><span class="math display">$$\frac{n(n-3)}{2}$$</span></p>
+<h3 id="vanliga-polygoner">Vanliga polygoner</h3>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>Namn</th>
+<th>Inre vinkel (reguljär)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Triangel</td>
+<td>60°</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Kvadrat</td>
+<td>90°</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Pentagon</td>
+<td>108°</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Hexagon</td>
+<td>120°</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Oktogon</td>
+<td>135°</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="koordinatgeometri">3.7 Koordinatgeometri</h2>
+<h3 id="avstånd-mellan-två-punkter">Avstånd mellan två punkter</h3>
+<p><span class="math display">$$d = \sqrt{(x_2-x_1)^2 +
+(y_2-y_1)^2}$$</span></p>
+<h3 id="mittpunkt">Mittpunkt</h3>
+<p><span class="math display">$$M = \left(\frac{x_1+x_2}{2},
+\frac{y_1+y_2}{2}\right)$$</span></p>
+<h3 id="linjens-ekvation">Linjens ekvation</h3>
+<p><strong>k-form:</strong> y = kx + m - k = lutning
+(riktningskoefficient) - m = skärning med y-axeln</p>
+<h3 id="lutning">Lutning</h3>
+<p><span class="math display">$$k = \frac{y_2 - y_1}{x_2 -
+x_1}$$</span></p>
+<h3 id="parallella-och-vinkelräta-linjer">Parallella och vinkelräta
+linjer</h3>
+<ul>
+<li><strong>Parallella:</strong> k₁ = k₂</li>
+<li><strong>Vinkelräta:</strong> k₁ · k₂ = -1</li>
+</ul>
+<h3 id="avstånd-punkt-till-linje">Avstånd punkt till linje</h3>
+<p>Från punkt (x₀, y₀) till linjen ax + by + c = 0: <span
+class="math display">$$d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 +
+b^2}}$$</span></p>
+<h3 id="cirkelns-ekvation">Cirkelns ekvation</h3>
+<p>Med centrum (a, b) och radie r: <span
+class="math display">(<em>x</em> − <em>a</em>)<sup>2</sup> + (<em>y</em> − <em>b</em>)<sup>2</sup> = <em>r</em><sup>2</sup></span></p>
+<hr />
+<h1 id="del-4-kombinatorik-sannolikhet">DEL 4: KOMBINATORIK &amp;
+SANNOLIKHET</h1>
+<h2 id="grundprinciper">4.1 Grundprinciper</h2>
+<h3 id="multiplikationsprincipen">Multiplikationsprincipen</h3>
+<p>Om en process har steg med n₁, n₂, …, nₖ val vardera: <span
+class="math display">Totalt antal
+sätt = <em>n</em><sub>1</sub> × <em>n</em><sub>2</sub> × ... × <em>n</em><sub><em>k</em></sub></span></p>
+<h3 id="additionsprincipen">Additionsprincipen</h3>
+<p>Om uppgift kan lösas på n sätt ELLER m sätt (ej samtidigt): <span
+class="math display">Totalt = <em>n</em> + <em>m</em></span></p>
+<h3 id="komplementprincipen">Komplementprincipen</h3>
+<p><span class="math display">Gynnsamma = Totalt − Ogynnsamma</span></p>
+<hr />
+<h2 id="fakultet">4.2 Fakultet</h2>
+<p><span
+class="math display"><em>n</em>! = <em>n</em> × (<em>n</em> − 1) × (<em>n</em> − 2) × ... × 2 × 1</span></p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>n!</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24</td>
+</tr>
+<tr>
+<td>5</td>
+<td>120</td>
+</tr>
+<tr>
+<td>6</td>
+<td>720</td>
+</tr>
+<tr>
+<td>7</td>
+<td>5040</td>
+</tr>
+<tr>
+<td>8</td>
+<td>40320</td>
+</tr>
+<tr>
+<td>9</td>
+<td>362880</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3628800</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="permutationer">4.3 Permutationer</h2>
+<h3 id="definition-1">Definition</h3>
+<p>En <strong>permutation</strong> är ett <strong>ordnat</strong>
+arrangemang.</p>
+<h3 id="formler-2">Formler</h3>
+<ul>
+<li>Alla n objekt: <strong>n!</strong></li>
+<li>Välja och ordna r av n: <strong>P(n,r) = n!/(n-r)!</strong></li>
+<li>Med upprepningar: <strong>n!/(n₁! × n₂! × … × nₖ!)</strong></li>
+</ul>
+<hr />
+<h2 id="kombinationer">4.4 Kombinationer</h2>
+<h3 id="definition-2">Definition</h3>
+<p>En <strong>kombination</strong> är ett <strong>oordnat</strong>
+urval.</p>
+<h3 id="formel-1">Formel</h3>
+<p><span class="math display">$$C(n,r) = \binom{n}{r} =
+\frac{n!}{r!(n-r)!}$$</span></p>
+<h3 id="viktiga-egenskaper">Viktiga egenskaper</h3>
+<ul>
+<li>C(n,0) = C(n,n) = 1</li>
+<li>C(n,1) = C(n,n-1) = n</li>
+<li>C(n,r) = C(n,n-r) (symmetri)</li>
+</ul>
+<h3 id="pascals-triangel">Pascals triangel</h3>
+<pre><code>                1                     (n=0)
+              1   1                   (n=1)
+            1   2   1                 (n=2)
+          1   3   3   1               (n=3)
+        1   4   6   4   1             (n=4)
+      1   5  10  10   5   1           (n=5)
+    1   6  15  20  15   6   1         (n=6)
+  1   7  21  35  35  21   7   1       (n=7)
+1   8  28  56  70  56  28   8   1     (n=8)</code></pre>
+<h3 id="vanliga-värden">Vanliga värden</h3>
+<ul>
+<li>C(5,2) = 10</li>
+<li>C(6,3) = 20</li>
+<li>C(7,3) = 35</li>
+<li>C(8,4) = 70</li>
+<li>C(10,5) = 252</li>
+</ul>
+<hr />
+<h2 id="typuppgift-vägräkning-i-rutnät-prov-2012-uppgift-2">⭐ 4.5
+TYPUPPGIFT: Vägräkning i rutnät (Prov 2012, Uppgift 2)</h2>
+<h3 id="grundproblem">Grundproblem</h3>
+<blockquote>
+<p>I ett rutnät ska du gå från S (nedre vänstra) till M (övre
+högra).<br />
+Du får bara gå <strong>uppåt</strong> eller <strong>åt höger</strong>,
+ett steg i taget.</p>
+</blockquote>
+<h3 id="metod">Metod</h3>
+<p>Om du måste gå m steg höger och n steg uppåt: <span
+class="math display">$$\text{Antal vägar} = \binom{m+n}{m} =
+\binom{m+n}{n}$$</span></p>
+<h3 id="exempel-1-grundläggande">Exempel 1: Grundläggande</h3>
+<blockquote>
+<p>Hur många vägar i ett 5×5 rutnät?</p>
+</blockquote>
+<p>5 steg höger + 5 steg uppåt = 10 steg <span
+class="math display">$$\binom{10}{5} = \frac{10!}{5! \times 5!} = 252
+\text{ vägar}$$</span></p>
+<h3 id="exempel-2-med-förbjuden-punkt">Exempel 2: Med förbjuden
+punkt</h3>
+<blockquote>
+<p>Hur många vägar finns som INTE går via punkt P?</p>
+</blockquote>
+<p><strong>Metod: Komplementprincipen</strong> <span
+class="math display">Vägar utan P = Alla vägar − Vägar via P</span></p>
+<p><strong>Vägar via P = (Vägar S→P) × (Vägar P→M)</strong></p>
+<h3 id="lösning-prov-2012">Lösning Prov 2012</h3>
+<pre><code>M ←─────────────────────┐
+│                       │
+│     [SKUGGAT          │
+│      OMRÅDE]          │
+│          ★            │
+│                       │
+└───────────────────────S</code></pre>
+<ol type="1">
+<li>Totalt antal vägar: 252 (bekräftar 5×5 rutnät)</li>
+<li>Beräkna vägar VIA ★</li>
+<li>Subtrahera: Svar = 252 - (S→★) × (★→M)</li>
+</ol>
+<h3 id="minnesregel-1">📝 MINNESREGEL</h3>
+<blockquote>
+<p><strong>“Vägräkning i rutnät = Kombination!”</strong><br />
+<strong>“Undvik punkt = Totalt − Via punkten”</strong></p>
+</blockquote>
+<hr />
+<h2 id="sannolikhet">4.6 Sannolikhet</h2>
+<h3 id="grundläggande-definition">Grundläggande definition</h3>
+<p><span class="math display">$$P(A) = \frac{\text{Antal gynnsamma
+utfall}}{\text{Antal möjliga utfall}}$$</span></p>
+<h3 id="egenskaper">Egenskaper</h3>
+<ul>
+<li>0 ≤ P(A) ≤ 1</li>
+<li>P(säkert) = 1</li>
+<li>P(omöjligt) = 0</li>
+</ul>
+<h3 id="räkneregler">Räkneregler</h3>
+<table>
+<thead>
+<tr>
+<th>Regel</th>
+<th>Formel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Komplement</td>
+<td>P(A’) = 1 - P(A)</td>
+</tr>
+<tr>
+<td>Addition</td>
+<td>P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</td>
+</tr>
+<tr>
+<td>Addition (oförenliga)</td>
+<td>P(A ∪ B) = P(A) + P(B)</td>
+</tr>
+<tr>
+<td>Multiplikation (oberoende)</td>
+<td>P(A ∩ B) = P(A) × P(B)</td>
+</tr>
+<tr>
+<td>Villkorad</td>
+<td>P(A|B) = P(A ∩ B) / P(B)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="minst-en-problem">“Minst en”-problem</h3>
+<p><strong>Strategi:</strong> Använd komplement! <span
+class="math display"><em>P</em>(minst
+en) = 1 − <em>P</em>(ingen)</span></p>
+<p><strong>Exempel:</strong> P(minst en sexa på 3 kast) <span
+class="math display">$$P = 1 - \left(\frac{5}{6}\right)^3 = 1 -
+\frac{125}{216} = \frac{91}{216} \approx 0,42$$</span></p>
+<hr />
+<h1 id="del-5-ordproblem">DEL 5: ORDPROBLEM</h1>
+<h2 id="samarbetsproblem-fylla-pool">5.1 Samarbetsproblem (“Fylla
+pool”)</h2>
+<h3 id="standardproblem">Standardproblem</h3>
+<blockquote>
+<p>A gör arbetet på a timmar, B på b timmar. Tid tillsammans?</p>
+</blockquote>
+<h3 id="lösning">Lösning</h3>
+<p><span class="math display">$$t = \frac{ab}{a+b}$$</span></p>
+<p><strong>Exempel:</strong> A: 6 tim, B: 4 tim → t = (6×4)/(6+4) =
+24/10 = <strong>2,4 timmar</strong></p>
+<h3 id="med-tre-arbetare">Med tre arbetare</h3>
+<p><span class="math display">$$t = \frac{1}{\frac{1}{a} + \frac{1}{b} +
+\frac{1}{c}}$$</span></p>
+<h3 id="fyllning-och-tömning">Fyllning och tömning</h3>
+<p>Om A fyller och B tömmer: <span class="math display">$$t =
+\frac{1}{\frac{1}{a} - \frac{1}{b}}$$</span></p>
+<hr />
+<h2 id="rörelseproblem">5.2 Rörelseproblem</h2>
+<h3 id="grundformel">Grundformel</h3>
+<p><span class="math display">sträcka = hastighet × tid</span></p>
+<h3 id="typ-1-mötas-motriktade">Typ 1: Mötas (motriktade)</h3>
+<p><span class="math display">$$t = \frac{\text{total sträcka}}{v_1 +
+v_2}$$</span></p>
+<h3 id="typ-2-ikapp-samma-riktning">Typ 2: Ikapp (samma riktning)</h3>
+<p><span class="math display">$$t =
+\frac{\text{försprång}}{v_{\text{snabb}} -
+v_{\text{långsam}}}$$</span></p>
+<h3 id="typ-3-rundbanor">Typ 3: Rundbanor</h3>
+<ul>
+<li>Mötas: t = omkrets / (v₁ + v₂)</li>
+<li>Ikapp: t = omkrets / |v₁ - v₂|</li>
+</ul>
+<h3 id="typ-4-strömvind">Typ 4: Ström/Vind</h3>
+<ul>
+<li>Medströms: v_effektiv = v_båt + v_ström</li>
+<li>Motströms: v_effektiv = v_båt - v_ström</li>
+</ul>
+<h3 id="genomsnittshastighet">Genomsnittshastighet</h3>
+<p><span class="math display">$$v_{\text{medel}} = \frac{\text{total
+sträcka}}{\text{total tid}}$$</span></p>
+<p><strong>OBS:</strong> Inte aritmetiskt medelvärde!</p>
+<hr />
+<h2 id="blandningsproblem">5.3 Blandningsproblem</h2>
+<h3 id="grundprincip-massbalans">Grundprincip: Massbalans</h3>
+<p>Mängd ämne före = Mängd ämne efter</p>
+<h3 id="koncentration">Koncentration</h3>
+<p><span class="math display">$$\text{Koncentration} = \frac{\text{mängd
+ämne}}{\text{total volym}}$$</span></p>
+<h3 id="blandning">Blandning</h3>
+<p>Om du blandar V₁ liter med koncentration c₁ och V₂ liter med c₂:
+<span class="math display">$$c_{\text{ny}} = \frac{V_1 c_1 + V_2
+c_2}{V_1 + V_2}$$</span></p>
+<hr />
+<h2 id="åldersproblem">5.4 Åldersproblem</h2>
+<h3 id="strategi">Strategi</h3>
+<ol type="1">
+<li>Definiera nuvarande ålder som x</li>
+<li>Uttryck andra åldrar med x</li>
+<li>Ställ upp ekvation</li>
+<li>Lös och verifiera</li>
+</ol>
+<p><strong>Exempel:</strong> &gt; Lisa är dubbelt så gammal som Eva. Om
+5 år är Lisa 1,5 gånger så gammal. Ålder?</p>
+<p>Låt Eva = x, Lisa = 2x</p>
+<p>Om 5 år: 2x + 5 = 1,5(x + 5)<br />
+2x + 5 = 1,5x + 7,5<br />
+0,5x = 2,5<br />
+x = 5</p>
+<p><strong>Eva: 5 år, Lisa: 10 år</strong></p>
+<hr />
+<h2 id="procentproblem">5.5 Procentproblem</h2>
+<h3 id="formler-3">Formler</h3>
+<ul>
+<li>Höjning med p%: nytt = gammalt × (1 + p/100)</li>
+<li>Sänkning med p%: nytt = gammalt × (1 - p/100)</li>
+</ul>
+<h3 id="successiva-ändringar">Successiva ändringar</h3>
+<p><strong>Exempel:</strong> Först +20%, sedan -20% 1,20 × 0,80 = 0,96 =
+<strong>4% total minskning!</strong></p>
+<hr />
+<h1 id="del-6-problemlösningsstrategier">DEL 6:
+PROBLEMLÖSNINGSSTRATEGIER</h1>
+<h2 id="pólyas-4-stegsmetod">6.1 Pólyas 4-stegsmetod</h2>
+<h3 id="förstå-problemet">1. Förstå problemet</h3>
+<ul>
+<li>Vad är givet?</li>
+<li>Vad söks?</li>
+<li>Rita en bild!</li>
+</ul>
+<h3 id="gör-en-plan">2. Gör en plan</h3>
+<ul>
+<li>Finns liknande problem?</li>
+<li>Introducera variabler</li>
+<li>Kan problemet delas upp?</li>
+</ul>
+<h3 id="genomför-planen">3. Genomför planen</h3>
+<ul>
+<li>Räkna noggrant</li>
+<li>Håll ordning på steg</li>
+</ul>
+<h3 id="kontrollera">4. Kontrollera</h3>
+<ul>
+<li>Är svaret rimligt?</li>
+<li>Uppfylls alla villkor?</li>
+</ul>
+<hr />
+<h2 id="specifika-strategier">6.2 Specifika strategier</h2>
+<table>
+<thead>
+<tr>
+<th>Strategi</th>
+<th>När använda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rita en bild</strong></td>
+<td>Geometri, rörelse</td>
+</tr>
+<tr>
+<td><strong>Arbeta baklänges</strong></td>
+<td>Slutresultat givet</td>
+</tr>
+<tr>
+<td><strong>Testa systematiskt</strong></td>
+<td>Heltalsproblem</td>
+</tr>
+<tr>
+<td><strong>Förenkla</strong></td>
+<td>Hitta mönster</td>
+</tr>
+<tr>
+<td><strong>Använd extremfall</strong></td>
+<td>Optimering</td>
+</tr>
+<tr>
+<td><strong>Komplementprincipen</strong></td>
+<td>“Minst en”, “inte via”</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vanliga-algebraiska-tekniker">6.3 Vanliga algebraiska
+tekniker</h2>
+<ul>
+<li><strong>Substituera:</strong> Byt ut ett uttryck</li>
+<li><strong>Faktorisera:</strong> Bryt ut gemensamma faktorer</li>
+<li><strong>Addera/subtrahera ekvationer:</strong> Eliminera
+variabler</li>
+<li><strong>Multiplicera/dividera ekvationer:</strong> Kombinera
+information</li>
+</ul>
+<hr />
+<h1 id="formelsamling">FORMELSAMLING</h1>
+<h2 id="aritmetik-talteori">Aritmetik &amp; Talteori</h2>
+<ul>
+<li>SGD(a,b) × MGM(a,b) = a × b</li>
+<li>Antal divisorer: (a₁+1)(a₂+1)…(aₖ+1)</li>
+</ul>
+<h2 id="algebra">Algebra</h2>
+<ul>
+<li>(a+b)² = a² + 2ab + b²</li>
+<li>(a-b)² = a² - 2ab + b²</li>
+<li>a² - b² = (a+b)(a-b)</li>
+<li>PQ-formeln: x = -p/2 ± √(p²/4 - q)</li>
+<li>Aritmetisk summa: Sₙ = n(a₁ + aₙ)/2</li>
+<li>Geometrisk summa: Sₙ = a₁(kⁿ - 1)/(k - 1)</li>
+</ul>
+<h2 id="geometri">Geometri</h2>
+<ul>
+<li>Pythagoras: a² + b² = c²</li>
+<li>Triangelarea: A = bh/2</li>
+<li>Cirkelomkrets: O = 2πr</li>
+<li>Cirkelarea: A = πr²</li>
+<li>Vinkelsumma triangel: 180°</li>
+<li>Vinkelsumma n-hörning: (n-2)×180°</li>
+<li>Avstånd: d = √[(x₂-x₁)² + (y₂-y₁)²]</li>
+</ul>
+<h2 id="kombinatorik">Kombinatorik</h2>
+<ul>
+<li>Permutation: P(n,r) = n!/(n-r)!</li>
+<li>Kombination: C(n,r) = n!/[r!(n-r)!]</li>
+<li>Vägräkning: C(m+n, m)</li>
+</ul>
+<h2 id="sannolikhet-1">Sannolikhet</h2>
+<ul>
+<li>P(A) = gynnsamma/möjliga</li>
+<li>P(A’) = 1 - P(A)</li>
+<li>P(minst en) = 1 - P(ingen)</li>
+</ul>
+<h2 id="ordproblem">Ordproblem</h2>
+<ul>
+<li>Samarbete: t = ab/(a+b)</li>
+<li>Mötas: t = s/(v₁+v₂)</li>
+<li>Ikapp: t = försprång/(v_snabb - v_långsam)</li>
+</ul>
+<hr />
+<h1 id="övningsprov">ÖVNINGSPROV</h1>
+<h2 id="övningsprov-1">ÖVNINGSPROV 1</h2>
+<h3 id="uppgift-1-talteori">Uppgift 1 (Talteori)</h3>
+<blockquote>
+<p>x, y, z är heltal &gt; 1<br />
+xy = 280, yz = 210, xz delbar med 6<br />
+Bestäm xz.</p>
+</blockquote>
+<h3 id="uppgift-2-vägräkning">Uppgift 2 (Vägräkning)</h3>
+<blockquote>
+<p>I ett 5×4 rutnät: a) Hur många vägar totalt? b) Hur många via (3,2)?
+c) Hur många INTE via (3,2)?</p>
+</blockquote>
+<h3 id="uppgift-3-geometri">Uppgift 3 (Geometri)</h3>
+<blockquote>
+<p>Cirkel med radie 10, korda med längd 16. a) Avstånd centrum till
+korda? b) Medelpunktsvinkel?</p>
+</blockquote>
+<h3 id="uppgift-4-ordproblem">Uppgift 4 (Ordproblem)</h3>
+<blockquote>
+<p>A fyller pool på 8h, B på 12h, C tömmer på 24h. Tid med alla
+öppna?</p>
+</blockquote>
+<h3 id="uppgift-5-sannolikhet">Uppgift 5 (Sannolikhet)</h3>
+<blockquote>
+<p>Tärning kastas 5 gånger. P(minst en sexa)?</p>
+</blockquote>
+<hr />
+<h2 id="övningsprov-2">ÖVNINGSPROV 2</h2>
+<h3 id="uppgift-1-algebra">Uppgift 1 (Algebra)</h3>
+<blockquote>
+<p>xy = 100, x + y = 25, x &gt; y. Hitta x och y.</p>
+</blockquote>
+<h3 id="uppgift-2-kombinatorik">Uppgift 2 (Kombinatorik)</h3>
+<blockquote>
+<p>Hur många 5-siffriga tal med 1,2,3,4,5 (utan upprepning) är delbara
+med 4?</p>
+</blockquote>
+<h3 id="uppgift-3-geometri-1">Uppgift 3 (Geometri)</h3>
+<blockquote>
+<p>Rätvinklig triangel ABC, rät vinkel vid C. AC = 6, BC = 8. a) AB? b)
+Höjd från C till AB? c) Inkretsradie?</p>
+</blockquote>
+<h3 id="uppgift-4-talföljd">Uppgift 4 (Talföljd)</h3>
+<blockquote>
+<p>Geometrisk följd: a₂ = 6, a₅ = 162. Hitta a₁ och k.</p>
+</blockquote>
+<h3 id="uppgift-5-ordproblem">Uppgift 5 (Ordproblem)</h3>
+<blockquote>
+<p>Lisa cyklar 15 km/h. 10 min senare startar Erik med 45 km/h. När
+kommer Erik ikapp? Hur långt har de färdats?</p>
+</blockquote>
+<hr />
+<h1 id="facit">FACIT</h1>
+<h2 id="övningsprov-1-1">Övningsprov 1</h2>
+<ol type="1">
+<li>xz = 12 (eller annat värde beroende på y)</li>
+<li><ol type="a">
+<li>126 b) 60 c) 66</li>
+</ol></li>
+<li><ol type="a">
+<li>6 cm b) ≈ 106,3°</li>
+</ol></li>
+<li>6 timmar</li>
+<li>≈ 59,8%</li>
+</ol>
+<h2 id="övningsprov-2-1">Övningsprov 2</h2>
+<ol type="1">
+<li>x = 20, y = 5</li>
+<li>24 tal</li>
+<li><ol type="a">
+<li>10 cm b) 4,8 cm c) 2 cm</li>
+</ol></li>
+<li>a₁ = 2, k = 3</li>
+<li>5 minuter, 3,75 km</li>
+</ol>
+<hr />
+<h1 id="checklistor">CHECKLISTOR</h1>
+<h2 id="innan-provet">✅ Innan provet</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Repetera alla formler</label></li>
+<li><label><input type="checkbox" />Gör övningsprov under
+tidspress</label></li>
+<li><label><input type="checkbox" />Sov gott natten innan</label></li>
+<li><label><input type="checkbox" />Ta med tillåtna
+hjälpmedel</label></li>
+</ul>
+<h2 id="under-provet">✅ Under provet</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Läs ALLA uppgifter
+först</label></li>
+<li><label><input type="checkbox" />Börja med uppgifter du
+kan</label></li>
+<li><label><input type="checkbox" />Visa alla steg</label></li>
+<li><label><input type="checkbox" />Kontrollera svaren</label></li>
+<li><label><input type="checkbox" />Ge aldrig upp!</label></li>
+</ul>
+<h2 id="vanliga-fel-att-undvika">❌ Vanliga fel att undvika</h2>
+<ul>
+<li>Glömma ändra tecken vid multiplikation med negativt</li>
+<li>Förväxla permutation och kombination</li>
+<li>Glömma enheter</li>
+<li>Räknefel med negativa tal</li>
+<li>Inte kontrollera mot originalvillkor</li>
+</ul>
+<hr />
+<h1 id="minnesregler">📝 MINNESREGLER</h1>
+<h2 id="talteori">Talteori</h2>
+<blockquote>
+<p><strong>“3 och 9: Siffersumma!”</strong><br />
+<strong>“SGD = Minsta exponenter, MGM = Största”</strong></p>
+</blockquote>
+<h2 id="algebra-1">Algebra</h2>
+<blockquote>
+<p><strong>“Negativt tal → BYT tecken på olikheten!”</strong></p>
+</blockquote>
+<h2 id="kombinatorik-1">Kombinatorik</h2>
+<blockquote>
+<p><strong>“Ordning spelar roll? → Permutation”</strong><br />
+<strong>“Ordning spelar inte roll? → Kombination”</strong><br />
+<strong>“Vägräkning = Kombination!”</strong></p>
+</blockquote>
+<h2 id="geometri-1">Geometri</h2>
+<blockquote>
+<p><strong>“Tangent ⊥ Radie”</strong><br />
+<strong>“Randvinkel = ½ Medelpunktsvinkel”</strong></p>
+</blockquote>
+<hr />
+<p><strong>Lycka till på provet, Yvonna! 🍀</strong></p>
+<p><em>Version 1.0 - December 2024</em><br />
+<em>Baserad på Hvitfeldska intagningsprov 2010-2025</em></p>
+</body>
+</html>
