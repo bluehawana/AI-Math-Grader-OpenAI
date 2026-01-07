@@ -1,28 +1,72 @@
 /**
- * LangChain Grading Workflow (LCEL)
+ * LangChain Grading Workflow (LCEL) - Multi-Provider
  * 
  * This module implements the core grading logic using:
  * - LangChain: For structured chains and prompt management
- * - OpenAI: As the LLM provider (GPT-4o)
+ * - Multi-Provider: OpenAI, Anthropic, Google, Groq
  * - Zod: For output schema validation
+ * 
+ * Set LLM_PROVIDER in .env to switch providers
  * 
  * LCEL (LangChain Expression Language) allows us to compose
  * modular, reusable AI workflows.
  */
 
 import { ChatOpenAI } from '@langchain/openai';
+import { ChatAnthropic } from '@langchain/anthropic';
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { StructuredOutputParser } from 'langchain/output_parsers';
+import { BaseChatModel } from '@langchain/core/language_models/chat_models';
 import { GradingResultSchema, GradingResult } from './schema';
 import { SYSTEM_PROMPT_TEMPLATE } from './rubric';
 
-// Initialize OpenAI model via LangChain
-const model = new ChatOpenAI({
-    modelName: process.env.OPENAI_MODEL || 'gpt-4o',
-    temperature: 0.1, // Low temperature for consistent grading
-    openAIApiKey: process.env.OPENAI_API_KEY,
-});
+type LLMProvider = 'openai' | 'anthropic' | 'google' | 'groq';
+
+// Get the LangChain model based on provider
+function getLangChainModel(): BaseChatModel {
+    const provider = (process.env.LLM_PROVIDER || 'openai') as LLMProvider;
+
+    switch (provider) {
+        case 'anthropic':
+            console.log('LangChain using: Anthropic Claude');
+            return new ChatAnthropic({
+                modelName: process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022',
+                temperature: 0.1,
+                anthropicApiKey: process.env.ANTHROPIC_API_KEY,
+            });
+
+        case 'google':
+            console.log('LangChain using: Google Gemini');
+            return new ChatGoogleGenerativeAI({
+                modelName: process.env.GOOGLE_MODEL || 'gemini-1.5-pro',
+                temperature: 0.1,
+                apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+            });
+
+        case 'groq':
+            // Groq uses OpenAI-compatible API
+            console.log('LangChain using: Groq (OpenAI-compatible)');
+            return new ChatOpenAI({
+                modelName: process.env.GROQ_MODEL || 'llama-3.1-70b-versatile',
+                temperature: 0.1,
+                openAIApiKey: process.env.GROQ_API_KEY,
+                configuration: {
+                    baseURL: 'https://api.groq.com/openai/v1',
+                },
+            });
+
+        case 'openai':
+        default:
+            console.log('LangChain using: OpenAI GPT-4o');
+            return new ChatOpenAI({
+                modelName: process.env.OPENAI_MODEL || 'gpt-4o',
+                temperature: 0.1,
+                openAIApiKey: process.env.OPENAI_API_KEY,
+            });
+    }
+}
 
 // Create structured output parser from Zod schema
 const outputParser = StructuredOutputParser.fromZodSchema(GradingResultSchema);
@@ -57,19 +101,22 @@ const chatPrompt = ChatPromptTemplate.fromMessages([
 ]);
 
 /**
- * LangChain Grading Chain (LCEL)
+ * Create LangChain Grading Chain (LCEL)
  * 
  * This chain:
  * 1. Takes exam text and student answers as input
  * 2. Formats them into a structured prompt
- * 3. Sends to OpenAI GPT-4o
+ * 3. Sends to the configured LLM provider
  * 4. Parses the structured JSON output
  */
-export const gradingChain = RunnableSequence.from([
-    chatPrompt,
-    model,
-    outputParser,
-]);
+function createGradingChain() {
+    const model = getLangChainModel();
+    return RunnableSequence.from([
+        chatPrompt,
+        model,
+        outputParser,
+    ]);
+}
 
 /**
  * Grade an exam using the LangChain workflow
@@ -89,6 +136,7 @@ export async function gradeExamWithLangChain({
     year: string;
 }): Promise<GradingResult> {
     try {
+        const gradingChain = createGradingChain();
         const result = await gradingChain.invoke({
             examText,
             studentText,
@@ -116,6 +164,7 @@ export async function* streamGradeExam({
     studentText: string;
     year: string;
 }) {
+    const model = getLangChainModel();
     const prompt = await chatPrompt.format({
         examText,
         studentText,
@@ -128,3 +177,6 @@ export async function* streamGradeExam({
         yield chunk.content;
     }
 }
+
+// Export for use in other modules
+export { createGradingChain };

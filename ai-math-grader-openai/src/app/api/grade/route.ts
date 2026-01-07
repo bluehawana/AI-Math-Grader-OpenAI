@@ -1,20 +1,22 @@
 /**
- * Grading API Route - Vercel AI SDK Implementation
+ * Grading API Route - Multi-Provider Implementation
  * 
  * This endpoint uses:
  * - Vercel AI SDK: streamText() for streaming responses
- * - OpenAI: GPT-4o via @ai-sdk/openai
+ * - Multi-Provider: OpenAI, Anthropic, Google (Gemini), Groq
  * - pdfjs-dist: PDF text extraction
+ * 
+ * Set LLM_PROVIDER in .env to switch providers
  * 
  * Endpoint: POST /api/grade
  */
 
-import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
 import * as pdfjs from 'pdfjs-dist';
+import { getModel, getProviderInfo } from '@/lib/providers';
 
 // Set up PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = '';
@@ -198,10 +200,13 @@ Grade the student's answers. Provide detailed feedback in Swedish.`;
 
         // ============================================
         // VERCEL AI SDK: streamText()
-        // Streams the response from OpenAI GPT-4o
+        // Multi-Provider: OpenAI, Anthropic, Google, Groq
         // ============================================
+        const providerInfo = getProviderInfo();
+        console.log(`Grading with: ${providerInfo.name} (${providerInfo.model})`);
+
         const result = streamText({
-            model: openai(process.env.OPENAI_MODEL || 'gpt-4o'),
+            model: getModel(),
             system: GRADING_SYSTEM_PROMPT,
             prompt: userPrompt,
             temperature: 0.1,
