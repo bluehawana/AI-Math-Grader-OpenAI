@@ -10,7 +10,8 @@
  * Endpoint: POST /api/grade-image
  */
 
-import { openai } from '@ai-sdk/openai';
+import { anthropic } from '@ai-sdk/anthropic';
+import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { readFile } from 'fs/promises';
@@ -314,9 +315,16 @@ export async function POST(request: NextRequest) {
             },
         ];
 
-        // Use GPT-4o Vision to grade
+        // Use Claude 3.5 Sonnet Vision (best for handwriting)
+        const provider = process.env.LLM_PROVIDER || 'anthropic';
+        console.log(`Using provider: ${provider}`);
+
+        const model = provider === 'google'
+            ? google('models/gemini-2.0-flash-exp')
+            : anthropic('claude-3-5-sonnet-20241022');
+
         const result = streamText({
-            model: openai('gpt-4o'),
+            model,
             messages,
             temperature: 0.1,
         });

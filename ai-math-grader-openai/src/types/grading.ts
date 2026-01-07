@@ -12,7 +12,8 @@ export interface QuestionResult {
 }
 
 export interface ExamInfo {
-    year: string;
+    year?: string;
+    detected_year?: string;
     exam_type: string;
     total_questions: number;
 }

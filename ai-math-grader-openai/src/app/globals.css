@@ -1128,3 +1128,106 @@ body {
     border-color: var(--error);
     color: var(--error);
 }
+
+/* Results actions */
+.results-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+/* Export button */
+.export-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.export-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+}
+
+.export-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Printable results */
+.printable-results {
+    background: var(--bg-primary);
+}
+
+/* Study recommendations */
+.study-recommendations {
+    margin-top: 24px;
+    padding: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: var(--radius-lg);
+}
+
+.study-recommendations h4 {
+    margin-bottom: 12px;
+    color: var(--info);
+}
+
+.study-recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.study-recommendations li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.study-recommendations li::before {
+    content: "📖";
+    position: absolute;
+    left: 0;
+}
+
+/* PDF footer */
+.pdf-footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.pdf-footer p {
+    margin: 4px 0;
+}
+
+/* Print styles */
+@media print {
+    .results-actions {
+        display: none;
+    }
+
+    .printable-results {
+        background: white;
+        color: black;
+    }
+
+    .glass-card {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

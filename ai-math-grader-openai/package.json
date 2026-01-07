@@ -19,6 +19,8 @@
     "@langchain/openai": "^1.2.1",
     "ai": "^6.0.14",
     "heic-convert": "^2.1.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0",
     "langchain": "^1.2.6",
     "next": "16.1.1",
     "openai": "^6.15.0",
