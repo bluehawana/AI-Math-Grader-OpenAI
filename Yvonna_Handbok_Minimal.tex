@@ -1,0 +1,224 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Hvitfeldska Spetsutbildning}
+\fancyhead[R]{Matematikhandbok 2026}
+\fancyfoot[C]{\thepage}
+
+\definecolor{mainblue}{RGB}{26,84,144}
+
+\title{\Huge\textbf{HVITFELDTSKAS SPETSUTBILDNING}\\[0.5cm]
+\Large Komplett Matematikhandbok 2026}
+\author{Skapad for Yvonna}
+\date{Provdatum: 24 februari 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{TALTEORI}
+
+\subsection{Delbarhetsregler}
+
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Tal} & \textbf{Regel} & \textbf{Exempel} \\
+\hline
+2 & Sista siffran ar jamn & 1234 \\
+3 & Siffersumman delbar med 3 & 156: 1+5+6=12 \\
+4 & Sista tva siffrorna delbara med 4 & 1324: 24/4=6 \\
+5 & Slutar pa 0 eller 5 & 1235 \\
+6 & Delbar med bade 2 och 3 & 1254 \\
+8 & Sista tre siffrorna delbara med 8 & 5016 \\
+9 & Siffersumman delbar med 9 & 2286 \\
+10 & Slutar pa 0 & 1230 \\
+11 & Alternerande siffersumma delbar med 11 & 2728 \\
+\hline
+\end{tabular}
+
+\subsection{Primtal}
+
+\textbf{Definition:} Ett primtal ar ett heltal $> 1$ som endast ar delbart med 1 och sig sjalv.
+
+\fbox{\parbox{\textwidth}{
+\textbf{Primtal under 100:}\\
+2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+}}
+
+\subsection{Primtalsfaktorisering}
+
+\textbf{Viktiga faktoriseringar:}
+\begin{itemize}
+\item $36 = 2^2 \times 3^2$
+\item $60 = 2^2 \times 3 \times 5$
+\item $100 = 2^2 \times 5^2$
+\item $180 = 2^2 \times 3^2 \times 5$
+\item $350 = 2 \times 5^2 \times 7$
+\end{itemize}
+
+\subsection{SGD och MGM}
+
+\textbf{SGD:} Ta gemensamma primfaktorer med \textbf{lagsta} exponent.
+
+\textbf{MGM:} Ta alla primfaktorer med \textbf{hogsta} exponent.
+
+\fbox{$\text{SGD}(a,b) \times \text{MGM}(a,b) = a \times b$}
+
+\subsection{TYPUPPGIFT: Heltalsekvationer}
+
+\textbf{Problem:} $x, y, z$ ar heltal $> 1$. $xy = 350$, $yz = 180$, $xz$ delbar med 8.
+
+\textbf{Losning:}
+\begin{enumerate}
+\item Faktorisera: $350 = 2 \times 5^2 \times 7$, $180 = 2^2 \times 3^2 \times 5$
+\item SGD$(350, 180) = 10$. Mojliga $y$: 2, 5, 10
+\item $y = 5$: $x = 70$, $z = 36$, $xz = 2520$ (delbar med 8!)
+\end{enumerate}
+\textbf{SVAR:} $xz = 2520$
+
+\section{ALGEBRA}
+
+\subsection{Konjugat- och Kvadreringsregler}
+
+\begin{align}
+a^2 - b^2 &= (a+b)(a-b)\\
+(a+b)^2 &= a^2 + 2ab + b^2\\
+(a-b)^2 &= a^2 - 2ab + b^2
+\end{align}
+
+\subsection{Potensregler}
+
+\begin{tabular}{|l|l|}
+\hline
+Multiplikation & $a^m \cdot a^n = a^{m+n}$ \\
+Division & $a^m / a^n = a^{m-n}$ \\
+Potens av potens & $(a^m)^n = a^{mn}$ \\
+Negativ exponent & $a^{-n} = 1/a^n$ \\
+Nollexponent & $a^0 = 1$ \\
+\hline
+\end{tabular}
+
+\subsection{Andragradsekvationer}
+
+\textbf{PQ-formeln:} For $x^2 + px + q = 0$:
+\[ x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q} \]
+
+\textbf{ABC-formeln:} For $ax^2 + bx + c = 0$:
+\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+
+\subsection{Talföljder}
+
+\textbf{Aritmetisk:}
+$a_n = a_1 + (n-1)d$, \quad $S_n = \frac{n(a_1 + a_n)}{2}$
+
+\textbf{Geometrisk:}
+$a_n = a_1 \cdot k^{n-1}$, \quad $S_n = a_1 \cdot \frac{k^n - 1}{k - 1}$
+
+\section{GEOMETRI}
+
+\subsection{Trianglar}
+
+\textbf{Vinkelsumma:} $180°$
+
+\fbox{\textbf{Pythagoras:} $a^2 + b^2 = c^2$}
+
+\textbf{Pythagoriska tripplar:} 3-4-5, 5-12-13, 8-15-17, 7-24-25
+
+\textbf{Area:} $A = \frac{bh}{2}$
+
+\subsection{Speciella trianglar}
+
+\textbf{Liksidig} (sida $a$): Hojd $h = \frac{a\sqrt{3}}{2}$, Area $A = \frac{a^2\sqrt{3}}{4}$
+
+\textbf{30-60-90:} Sidor $1 : \sqrt{3} : 2$
+
+\textbf{45-45-90:} Sidor $1 : 1 : \sqrt{2}$
+
+\subsection{Cirkeln}
+
+Omkrets: $O = 2\pi r$, \quad Area: $A = \pi r^2$
+
+Baglangd: $b = \frac{v}{360} \cdot 2\pi r$, \quad Sektorarea: $A = \frac{v}{360} \cdot \pi r^2$
+
+\textbf{Viktigt:} Tangent ar vinkelrat mot radie!
+
+\subsection{Koordinatgeometri}
+
+Avstand: $d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+
+Mittpunkt: $M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right)$
+
+Lutning: $k = \frac{y_2 - y_1}{x_2 - x_1}$
+
+Vinkelrata linjer: $k_1 \cdot k_2 = -1$
+
+\section{KOMBINATORIK}
+
+\subsection{Grundprinciper}
+
+\textbf{Multiplikation:} $n_1 \times n_2 \times \ldots \times n_k$ satt
+
+\textbf{Komplement:} Gynnsamma = Totalt $-$ Ogynnsamma
+
+\subsection{Formler}
+
+Fakultet: $n! = n \times (n-1) \times \ldots \times 1$
+
+Permutation: $P(n,r) = \frac{n!}{(n-r)!}$
+
+Kombination: $\binom{n}{r} = \frac{n!}{r!(n-r)!}$
+
+\subsection{Vagrakning}
+
+$m$ steg hoger + $n$ steg uppat = $\binom{m+n}{m}$ vagar
+
+Exempel: $5 \times 5$ rutnat: $\binom{10}{5} = 252$ vagar
+
+\section{SANNOLIKHET}
+
+\[ P(A) = \frac{\text{gynnsamma}}{\text{mojliga}} \]
+
+Komplement: $P(A') = 1 - P(A)$
+
+\textbf{Minnesregel:} P(minst en) = 1 $-$ P(ingen)
+
+\section{ORDPROBLEM}
+
+\textbf{Samarbete:} $t = \frac{ab}{a+b}$
+
+\textbf{Motas:} $t = \frac{\text{stracka}}{v_1 + v_2}$
+
+\textbf{Ikapp:} $t = \frac{\text{forsprang}}{v_{\text{snabb}} - v_{\text{langsam}}}$
+
+\section{MINNESREGLER}
+
+\begin{itemize}
+\item \textbf{3 och 9:} Siffersumma!
+\item \textbf{SGD/MGM:} Minsta/Storsta exponenter
+\item \textbf{Kombinatorik:} Ordning = Permutation, Annars = Kombination
+\item \textbf{Vagrakning:} = Kombination!
+\item \textbf{Tangent:} Vinkelrat mot radie
+\end{itemize}
+
+\vfill
+\begin{center}
+\rule{10cm}{0.5pt}\\[0.5cm]
+{\Large\textbf{Lycka till, Yvonna!}}\\
+Version 1.0 -- December 2024
+\end{center}
+
+\end{document}

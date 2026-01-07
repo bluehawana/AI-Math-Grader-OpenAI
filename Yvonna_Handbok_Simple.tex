@@ -1,0 +1,484 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{framed}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Hvitfeldska Spetsutbildning}
+\fancyhead[R]{Matematikhandbok 2026}
+\fancyfoot[C]{\thepage}
+
+\definecolor{mainblue}{RGB}{26,84,144}
+\definecolor{highlight}{RGB}{255,243,205}
+
+\newenvironment{formelbox}{\begin{framed}\color{mainblue}}{\end{framed}}
+\newenvironment{viktigt}{\colorbox{highlight}\bgroup}{\egroup}
+
+\title{\Huge\textbf{HVITFELDTSKAS SPETSUTBILDNING}\\[0.5cm]
+\Large Komplett Matematikhandbok 2026}
+\author{Skapad for Yvonna}
+\date{Provdatum: 24 februari 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{TALTEORI}
+
+\subsection{Delbarhetsregler}
+
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Tal} & \textbf{Regel} & \textbf{Exempel} \\
+\hline
+2 & Sista siffran ar jamn & 1234 \\
+3 & Siffersumman delbar med 3 & 156: 1+5+6=12 \\
+4 & Sista tva siffrorna delbara med 4 & 1324: 24/4=6 \\
+5 & Slutar pa 0 eller 5 & 1235 \\
+6 & Delbar med bade 2 och 3 & 1254 \\
+8 & Sista tre siffrorna delbara med 8 & 5016 \\
+9 & Siffersumman delbar med 9 & 2286: 2+2+8+6=18 \\
+10 & Slutar pa 0 & 1230 \\
+11 & Alternerande siffersumma delbar med 11 & 2728 \\
+\hline
+\end{tabular}
+
+\subsection{Primtal}
+
+\textbf{Definition:} Ett primtal ar ett heltal $> 1$ som endast ar delbart med 1 och sig sjalv.
+
+\begin{formelbox}
+\textbf{Primtal under 100:}\\
+2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+\end{formelbox}
+
+\subsection{Primtalsfaktorisering}
+
+\textbf{Viktiga faktoriseringar:}
+\begin{itemize}
+\item $36 = 2^2 \times 3^2$
+\item $60 = 2^2 \times 3 \times 5$
+\item $100 = 2^2 \times 5^2$
+\item $180 = 2^2 \times 3^2 \times 5$
+\item $350 = 2 \times 5^2 \times 7$
+\item $360 = 2^3 \times 3^2 \times 5$
+\end{itemize}
+
+\subsection{SGD och MGM}
+
+\textbf{SGD} (Storsta Gemensamma Delare): Ta gemensamma primfaktorer med \textbf{lagsta} exponent.
+
+\textbf{MGM} (Minsta Gemensamma Multipel): Ta alla primfaktorer med \textbf{hogsta} exponent.
+
+\begin{formelbox}
+\textbf{Viktig formel:}
+\[ \text{SGD}(a,b) \times \text{MGM}(a,b) = a \times b \]
+\end{formelbox}
+
+\subsection{TYPUPPGIFT: Heltalsekvationer}
+
+\textbf{Problem:} $x, y, z$ ar heltal $> 1$. $xy = 350$, $yz = 180$, $xz$ ar delbar med 8. Bestam $xz$.
+
+\textbf{Losningsmetod:}
+\begin{enumerate}
+\item \textbf{Primtalsfaktorisera:} $350 = 2 \times 5^2 \times 7$, $180 = 2^2 \times 3^2 \times 5$
+\item \textbf{Hitta gemensamma divisorer:} SGD$(350, 180) = 10$. Mojliga $y$: 2, 5, 10
+\item \textbf{Testa systematiskt:}
+\begin{itemize}
+\item $y = 2$: $x = 175$, $z = 90$, $xz = 15750$ (ej delbar med 8)
+\item $y = 5$: $x = 70$, $z = 36$, $xz = 2520$ (delbar med 8!)
+\item $y = 10$: $x = 35$, $z = 18$, $xz = 630$ (ej delbar med 8)
+\end{itemize}
+\item \textbf{Verifiera:} $2520 / 8 = 315$ (heltal)
+\end{enumerate}
+
+\begin{formelbox}
+\textbf{SVAR:} $xz = 2520$
+\end{formelbox}
+
+\section{ALGEBRA}
+
+\subsection{Konjugat- och Kvadreringsregler}
+
+\begin{formelbox}
+\begin{align}
+a^2 - b^2 &= (a+b)(a-b) \quad \text{(Konjugatregeln)}\\
+(a+b)^2 &= a^2 + 2ab + b^2 \quad \text{(Forsta kvadreringsregeln)}\\
+(a-b)^2 &= a^2 - 2ab + b^2 \quad \text{(Andra kvadreringsregeln)}
+\end{align}
+\end{formelbox}
+
+\subsection{Potensregler}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Regel} & \textbf{Formel} \\
+\hline
+Multiplikation & $a^m \cdot a^n = a^{m+n}$ \\
+Division & $a^m / a^n = a^{m-n}$ \\
+Potens av potens & $(a^m)^n = a^{mn}$ \\
+Produktpotens & $(ab)^n = a^n b^n$ \\
+Negativ exponent & $a^{-n} = 1/a^n$ \\
+Nollexponent & $a^0 = 1$ (dar $a \neq 0$) \\
+Brakexponent & $a^{m/n} = \sqrt[n]{a^m}$ \\
+\hline
+\end{tabular}
+
+\subsection{Rotregler}
+
+\begin{tabular}{|l|l|}
+\hline
+Multiplikation & $\sqrt{ab} = \sqrt{a} \cdot \sqrt{b}$ \\
+Division & $\sqrt{a/b} = \sqrt{a} / \sqrt{b}$ \\
+Kvadratrot & $\sqrt{a^2} = |a|$ \\
+\hline
+\end{tabular}
+
+\textbf{Viktiga varden:} $\sqrt{2} \approx 1.414$, $\sqrt{3} \approx 1.732$, $\sqrt{5} \approx 2.236$
+
+\subsection{Andragradsekvationer}
+
+\begin{formelbox}
+\textbf{PQ-formeln:} For $x^2 + px + q = 0$:
+\[ x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q} \]
+\end{formelbox}
+
+\begin{formelbox}
+\textbf{ABC-formeln:} For $ax^2 + bx + c = 0$:
+\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+\end{formelbox}
+
+\textbf{Diskriminanten:} $D = b^2 - 4ac$
+\begin{itemize}
+\item $D > 0$: Tva reella losningar
+\item $D = 0$: En dubbelrot
+\item $D < 0$: Inga reella losningar
+\end{itemize}
+
+\subsection{Ekvationssystem}
+
+\textbf{Substitutionsmetoden:}
+\begin{enumerate}
+\item Los ut en variabel fran en ekvation
+\item Satt in uttrycket i den andra ekvationen
+\item Los och atersubstituera
+\end{enumerate}
+
+\textbf{Additionsmetoden:}
+\begin{enumerate}
+\item Multiplicera ekvationer sa att en variabel far samma koefficient
+\item Addera/subtrahera ekvationerna
+\item Los den resulterande ekvationen
+\end{enumerate}
+
+\subsection{Talföljder}
+
+\textbf{Aritmetisk talföljd} (konstant differens $d$):
+\begin{align}
+a_n &= a_1 + (n-1)d \\
+S_n &= \frac{n(a_1 + a_n)}{2}
+\end{align}
+
+\textbf{Geometrisk talföljd} (konstant kvot $k$):
+\begin{align}
+a_n &= a_1 \cdot k^{n-1} \\
+S_n &= a_1 \cdot \frac{k^n - 1}{k - 1} \quad (k \neq 1)
+\end{align}
+
+\textbf{Specialsumma:}
+\[ 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2} \]
+
+\section{GEOMETRI}
+
+\subsection{Trianglar}
+
+\textbf{Vinkelsumma:} Summan av vinklarna = $180°$
+
+\begin{formelbox}
+\textbf{Pythagoras sats:} I en ratvinklig triangel med kateter $a$, $b$ och hypotenusa $c$:
+\[ a^2 + b^2 = c^2 \]
+\end{formelbox}
+
+\textbf{Pythagoriska tripplar:}
+\begin{itemize}
+\item 3, 4, 5 (och multiplar: 6, 8, 10; 9, 12, 15)
+\item 5, 12, 13
+\item 8, 15, 17
+\item 7, 24, 25
+\end{itemize}
+
+\textbf{Triangelns area:}
+\[ A = \frac{bh}{2} \]
+
+\subsection{Speciella trianglar}
+
+\textbf{Liksidig triangel} (sida $a$):
+\begin{itemize}
+\item Alla vinklar = $60°$
+\item Hojd: $h = \frac{a\sqrt{3}}{2}$
+\item Area: $A = \frac{a^2\sqrt{3}}{4}$
+\end{itemize}
+
+\textbf{Likbent triangel:}
+\begin{itemize}
+\item Tva sidor lika langa
+\item Basvinklarna ar lika
+\end{itemize}
+
+\textbf{30-60-90 triangel:} Sidor i forhallande $1 : \sqrt{3} : 2$
+
+\textbf{45-45-90 triangel:} Sidor i forhallande $1 : 1 : \sqrt{2}$
+
+\subsection{Likformighet och Kongruens}
+
+\textbf{Kongruensvillkor:}
+\begin{itemize}
+\item SSS (sida-sida-sida)
+\item SAS (sida-vinkel-sida)
+\item ASA (vinkel-sida-vinkel)
+\item AAS (vinkel-vinkel-sida)
+\end{itemize}
+
+\textbf{Likformighet:} Om sidorna har skala $k$:
+\begin{itemize}
+\item Areor: forhallande $k^2$
+\item Volymer: forhallande $k^3$
+\end{itemize}
+
+\subsection{Cirkeln}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Storhet} & \textbf{Formel} \\
+\hline
+Omkrets & $O = 2\pi r = \pi d$ \\
+Area & $A = \pi r^2$ \\
+Baglangd & $b = \frac{v}{360} \cdot 2\pi r$ \\
+Sektorarea & $A = \frac{v}{360} \cdot \pi r^2$ \\
+\hline
+\end{tabular}
+
+\begin{formelbox}
+\textbf{Viktigt:} Tangenten ar \textbf{vinkelrat} mot radien vid beroringspunkten!
+\end{formelbox}
+
+\textbf{Randvinkelsatsen:} Randvinkel = $\frac{1}{2} \times$ Medelpunktsvinkel
+
+\textbf{Thales sats:} Om AB ar diameter och C ligger pa cirkeln, da ar vinkel ACB = $90°$
+
+\subsection{Fyrhörningar}
+
+\textbf{Vinkelsumma:} $360°$
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Figur} & \textbf{Area} & \textbf{Speciellt} \\
+\hline
+Rektangel & $A = ab$ & Diagonaler lika langa \\
+Kvadrat & $A = a^2$ & Diagonal = $a\sqrt{2}$ \\
+Parallellogram & $A = bh$ & Motstående sidor parallella \\
+Romb & $A = \frac{d_1 d_2}{2}$ & Diagonaler vinkelrata \\
+Trapets & $A = \frac{(a+b)h}{2}$ & Ett par parallella sidor \\
+\hline
+\end{tabular}
+
+\subsection{Polygoner}
+
+\textbf{Vinkelsumma} (n-horning): $(n-2) \times 180°$
+
+\textbf{Inre vinkel} (regular polygon): $\frac{(n-2) \times 180°}{n}$
+
+\textbf{Antal diagonaler:} $\frac{n(n-3)}{2}$
+
+\subsection{Koordinatgeometri}
+
+\begin{formelbox}
+\textbf{Avstand mellan tva punkter:}
+\[ d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2} \]
+\end{formelbox}
+
+\textbf{Mittpunkt:}
+\[ M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right) \]
+
+\textbf{Lutning:}
+\[ k = \frac{y_2 - y_1}{x_2 - x_1} \]
+
+\textbf{Linjens ekvation:} $y = kx + m$
+
+\textbf{Vinkelrata linjer:} $k_1 \cdot k_2 = -1$
+
+\textbf{Avstand punkt till linje:} Fran $(x_0, y_0)$ till $ax + by + c = 0$:
+\[ d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}} \]
+
+\section{KOMBINATORIK}
+
+\subsection{Grundprinciper}
+
+\textbf{Multiplikationsprincipen:} $n_1 \times n_2 \times \ldots \times n_k$ satt
+
+\textbf{Additionsprincipen:} $n + m$ satt (om ej samtidiga)
+
+\textbf{Komplementprincipen:} Gynnsamma = Totalt $-$ Ogynnsamma
+
+\subsection{Fakultet}
+
+\[ n! = n \times (n-1) \times (n-2) \times \ldots \times 2 \times 1 \]
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$n$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline
+$n!$ & 1 & 1 & 2 & 6 & 24 & 120 & 720 & 5040 & 40320 & 362880 & 3628800 \\
+\hline
+\end{tabular}
+
+\subsection{Permutationer och Kombinationer}
+
+\begin{formelbox}
+\textbf{Permutation} (ordnat urval):
+\[ P(n,r) = \frac{n!}{(n-r)!} \]
+
+\textbf{Kombination} (oordnat urval):
+\[ C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!} \]
+\end{formelbox}
+
+\textbf{Viktiga egenskaper:}
+\begin{itemize}
+\item $\binom{n}{0} = \binom{n}{n} = 1$
+\item $\binom{n}{1} = \binom{n}{n-1} = n$
+\item $\binom{n}{r} = \binom{n}{n-r}$ (symmetri)
+\end{itemize}
+
+\subsection{TYPUPPGIFT: Vagrakning i rutnat (Prov 2012)}
+
+\textbf{Problem:} Ga fran S till M i rutnat. Endast uppat eller hoger.
+
+\begin{formelbox}
+\textbf{Losning:} Om du gar $m$ steg hoger och $n$ steg uppat:
+\[ \text{Antal vagar} = \binom{m+n}{m} = \binom{m+n}{n} \]
+\end{formelbox}
+
+\textbf{Exempel:} I ett $5 \times 5$ rutnat: $\binom{10}{5} = 252$ vagar
+
+\textbf{Undvik punkt P:} Antal = Totalt $-$ (Vagar S till P) $\times$ (Vagar P till M)
+
+\section{SANNOLIKHET}
+
+\begin{formelbox}
+\textbf{Grundformel:}
+\[ P(A) = \frac{\text{Antal gynnsamma utfall}}{\text{Antal mojliga utfall}} \]
+\end{formelbox}
+
+\textbf{Rakneregler:}
+\begin{itemize}
+\item \textbf{Komplement:} $P(A') = 1 - P(A)$
+\item \textbf{Addition:} $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+\item \textbf{Multiplikation (oberoende):} $P(A \cap B) = P(A) \times P(B)$
+\end{itemize}
+
+\begin{formelbox}
+\textbf{Minnesregel:} P(minst en) = 1 $-$ P(ingen)
+\end{formelbox}
+
+\textbf{Exempel:} P(minst en sexa pa 3 kast) = $1 - (5/6)^3 = 1 - 125/216 = 91/216 \approx 0.42$
+
+\section{ORDPROBLEM}
+
+\subsection{Samarbetsproblem}
+
+\begin{formelbox}
+\textbf{Tva arbetare:} Om A gor arbetet pa $a$ timmar och B pa $b$ timmar:
+\[ t = \frac{ab}{a+b} \]
+\end{formelbox}
+
+\textbf{Tre arbetare:}
+\[ t = \frac{1}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}} \]
+
+\subsection{Rorelseproblem}
+
+\textbf{Grundformel:} $s = v \cdot t$ (stracka = hastighet $\times$ tid)
+
+\begin{formelbox}
+\textbf{Motas:} $t = \frac{\text{stracka}}{v_1 + v_2}$
+
+\textbf{Ikapp:} $t = \frac{\text{forsprang}}{v_{\text{snabb}} - v_{\text{langsam}}}$
+\end{formelbox}
+
+\subsection{Blandningsproblem}
+
+\textbf{Koncentration:}
+\[ c = \frac{\text{mangd amne}}{\text{total volym}} \]
+
+\textbf{Blandning:}
+\[ c_{\text{ny}} = \frac{V_1 c_1 + V_2 c_2}{V_1 + V_2} \]
+
+\subsection{Procent}
+
+\begin{itemize}
+\item Hojning med $p\%$: nytt = gammalt $\times (1 + p/100)$
+\item Sankning med $p\%$: nytt = gammalt $\times (1 - p/100)$
+\end{itemize}
+
+\textbf{Varning:} $+20\%$ sedan $-20\%$ ger $1.20 \times 0.80 = 0.96$ (4\% minskning!)
+
+\section{MINNESREGLER}
+
+\begin{itemize}
+\item \textbf{Talteori:} ``3 och 9: Siffersumma!''
+\item \textbf{SGD/MGM:} ``SGD = Minsta exponenter, MGM = Storsta''
+\item \textbf{Algebra:} ``Negativt tal: BYT tecken pa olikhet!''
+\item \textbf{Kombinatorik:} ``Ordning spelar roll? Permutation. Annars Kombination.''
+\item \textbf{Vagrakning:} ``Hoger + Uppat = Kombination!''
+\item \textbf{Geometri:} ``Tangent vinkelrat mot radie''
+\item \textbf{Sannolikhet:} ``Minst en = 1 minus ingen''
+\end{itemize}
+
+\section{OVNINGSPROV}
+
+\subsection{Uppgift 1 (Talteori)}
+$x, y, z$ ar heltal $> 1$. $xy = 280$, $yz = 210$, $xz$ delbar med 6. Bestam $xz$.
+
+\subsection{Uppgift 2 (Vagrakning)}
+I ett $5 \times 4$ rutnat: a) Hur manga vagar totalt? b) Hur manga via (3,2)? c) Hur manga INTE via (3,2)?
+
+\subsection{Uppgift 3 (Geometri)}
+Ratvinklig triangel ABC, rat vinkel vid C. AC = 6, BC = 8. a) AB? b) Hojd fran C till AB? c) Inkretsradie?
+
+\subsection{Uppgift 4 (Ordproblem)}
+A fyller pool pa 8h, B pa 12h, C tommer pa 24h. Tid med alla oppna?
+
+\subsection{Facit}
+\begin{tabular}{|l|l|}
+\hline
+1 & $xz = 12$ (minsta) \\
+2a & 126 vagar \\
+2b & 60 vagar \\
+2c & 66 vagar \\
+3a & 10 cm \\
+3b & 4.8 cm \\
+3c & 2 cm \\
+4 & 6 timmar \\
+\hline
+\end{tabular}
+
+\vfill
+\begin{center}
+\rule{10cm}{0.5pt}\\[0.5cm]
+{\Large\textbf{Lycka till pa provet, Yvonna!}}\\[0.3cm]
+Version 1.0 -- December 2024\\
+Baserad pa Hvitfeldska intagningsprov 2010-2025
+\end{center}
+
+\end{document}
