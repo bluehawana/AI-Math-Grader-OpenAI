@@ -4,7 +4,7 @@
  * This endpoint uses:
  * - Vercel AI SDK: streamText() for streaming responses
  * - Multi-Provider: OpenAI, Anthropic, Google (Gemini), Groq
- * - pdfjs-dist: PDF text extraction
+ * - System pdftotext for PDF extraction
  * 
  * Set LLM_PROVIDER in .env to switch providers
  * 
@@ -13,15 +13,13 @@
 
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
-import { readFile } from 'fs/promises';
+import { readFile, writeFile, unlink } from 'fs/promises';
 import path from 'path';
+import { spawn } from 'child_process';
 import { getModel, getProviderInfo } from '@/lib/providers';
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdfParse = require('pdf-parse');
+import { tmpdir } from 'os';
 
 // Map of exam years to their PDF filenames
-// Exams are now stored in: ../exams/intagningstest/
 const EXAM_FILES: Record<string, string> = {
     '2010': 'intagningstest2010.pdf',
     '2011': 'intagningstest2011.pdf',
@@ -40,16 +38,46 @@ const EXAM_FILES: Record<string, string> = {
     '2025': 'intagningstest-2025.pdf',
 };
 
-// Updated path: exams are now in ../exams/intagningstest/
 const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
-// Extract text from PDF buffer using pdf-parse
-async function extractPdfText(buffer: Buffer): Promise<string> {
-    const data = await pdfParse(buffer);
-    return data.text;
+// Extract text from PDF using system pdftotext
+async function extractPdfTextFromPath(pdfPath: string): Promise<string> {
+    return new Promise((resolve) => {
+        const pdftotext = spawn('pdftotext', [pdfPath, '-']);
+        let text = '';
+
+        pdftotext.stdout.on('data', (data) => {
+            text += data.toString();
+        });
+
+        pdftotext.on('close', (code) => {
+            if (code === 0 && text) {
+                resolve(text);
+            } else {
+                resolve('[PDF text extraction not available]');
+            }
+        });
+
+        pdftotext.on('error', () => {
+            resolve('[Please install poppler-utils for PDF text extraction]');
+        });
+    });
 }
 
-// Extract year from the answer sheet text
+// Extract text from buffer by saving to temp file
+async function extractPdfText(buffer: Buffer): Promise<string> {
+    const tempPath = path.join(tmpdir(), `temp-${Date.now()}.pdf`);
+    try {
+        await writeFile(tempPath, buffer);
+        const text = await extractPdfTextFromPath(tempPath);
+        await unlink(tempPath);
+        return text;
+    } catch {
+        return '[Failed to extract PDF text]';
+    }
+}
+
+// Detect exam year from text
 function detectExamYear(text: string): string | null {
     const yearPattern = /\b(201[0-9]|202[0-5])\b/;
     const match = text.match(yearPattern);
@@ -63,8 +91,8 @@ function detectExamYear(text: string): string | null {
     return null;
 }
 
-// System prompt for grading - Using OpenAI via Vercel AI SDK
-const GRADING_SYSTEM_PROMPT = `You are an expert mathematics exam grader for Swedish Hvitfeldska spetsutbildning (advanced mathematics program) entrance exams.
+// System prompt for grading
+const GRADING_SYSTEM_PROMPT = `You are an expert mathematics exam grader for Swedish Hvitfeldska spetsutbildning entrance exams.
 
 You will receive:
 1. The OFFICIAL EXAM with all questions (from the school's archive)
@@ -162,8 +190,8 @@ export async function POST(request: NextRequest) {
         let examText: string;
         try {
             const examPath = path.join(EXAMS_BASE_PATH, examFilename);
-            const examBuffer = await readFile(examPath);
-            examText = await extractPdfText(examBuffer);
+            await readFile(examPath); // Check if file exists
+            examText = await extractPdfTextFromPath(examPath);
         } catch {
             return new Response(
                 JSON.stringify({ error: `Failed to load exam for year ${detectedYear}` }),
@@ -185,10 +213,7 @@ ${answersText}
 
 Grade the student's answers. Provide detailed feedback in Swedish.`;
 
-        // ============================================
-        // VERCEL AI SDK: streamText()
-        // Multi-Provider: OpenAI, Anthropic, Google, Groq
-        // ============================================
+        // Multi-Provider grading
         const providerInfo = getProviderInfo();
         console.log(`Grading with: ${providerInfo.name} (${providerInfo.model})`);
 

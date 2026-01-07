@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdf = require('pdf-parse');
+import { spawn } from 'child_process';
 
 // Map of exam years to their PDF filenames
 const EXAM_FILES: Record<string, string> = {
@@ -24,8 +22,31 @@ const EXAM_FILES: Record<string, string> = {
     '2025': 'intagningstest-2025.pdf',
 };
 
-// Updated path: exams are now in ../exams/intagningstest/
 const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
+
+// Extract text from PDF using system pdftotext
+async function extractPdfText(pdfPath: string): Promise<string> {
+    return new Promise((resolve) => {
+        const pdftotext = spawn('pdftotext', [pdfPath, '-']);
+        let text = '';
+
+        pdftotext.stdout.on('data', (data) => {
+            text += data.toString();
+        });
+
+        pdftotext.on('close', (code) => {
+            if (code === 0 && text) {
+                resolve(text);
+            } else {
+                resolve('[PDF text extraction not available]');
+            }
+        });
+
+        pdftotext.on('error', () => {
+            resolve('[Please install poppler-utils for PDF text extraction]');
+        });
+    });
+}
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
@@ -48,14 +69,13 @@ export async function GET(request: NextRequest) {
 
     try {
         const filePath = path.join(EXAMS_BASE_PATH, filename);
-        const fileBuffer = await readFile(filePath);
-        const pdfData = await pdf(fileBuffer);
+        await readFile(filePath); // Check if file exists
+        const pdfText = await extractPdfText(filePath);
 
         return NextResponse.json({
             year,
             filename,
-            text: pdfData.text,
-            num_pages: pdfData.numpages,
+            text: pdfText,
         });
     } catch (error) {
         console.error(`Error loading exam for ${year}:`, error);
