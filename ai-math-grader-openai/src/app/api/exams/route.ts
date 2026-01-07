@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import pdf from 'pdf-parse';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const pdf = require('pdf-parse');
 
 // Map of exam years to their PDF filenames
 const EXAM_FILES: Record<string, string> = {
@@ -22,8 +24,8 @@ const EXAM_FILES: Record<string, string> = {
     '2025': 'intagningstest-2025.pdf',
 };
 
-// Base path where exam PDFs are stored (parent directory of the project)
-const EXAMS_BASE_PATH = path.join(process.cwd(), '..');
+// Updated path: exams are now in ../exams/intagningstest/
+const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;

@@ -1,11 +1,26 @@
+/**
+ * Grading API Route - Vercel AI SDK Implementation
+ * 
+ * This endpoint uses:
+ * - Vercel AI SDK: streamText() for streaming responses
+ * - OpenAI: GPT-4o via @ai-sdk/openai
+ * - pdfjs-dist: PDF text extraction
+ * 
+ * Endpoint: POST /api/grade
+ */
+
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
-import pdf from 'pdf-parse';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import * as pdfjs from 'pdfjs-dist';
+
+// Set up PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = '';
 
 // Map of exam years to their PDF filenames
+// Exams are now stored in: ../exams/intagningstest/
 const EXAM_FILES: Record<string, string> = {
     '2010': 'intagningstest2010.pdf',
     '2011': 'intagningstest2011.pdf',
@@ -24,9 +39,42 @@ const EXAM_FILES: Record<string, string> = {
     '2025': 'intagningstest-2025.pdf',
 };
 
-const EXAMS_BASE_PATH = path.join(process.cwd(), '..');
+// Updated path: exams are now in ../exams/intagningstest/
+const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
-// System prompt for the math grading assistant
+// Extract text from PDF buffer using pdfjs-dist
+async function extractPdfText(buffer: Buffer): Promise<string> {
+    const data = new Uint8Array(buffer);
+    const doc = await pdfjs.getDocument({ data, useSystemFonts: true }).promise;
+
+    let fullText = '';
+    for (let i = 1; i <= doc.numPages; i++) {
+        const page = await doc.getPage(i);
+        const content = await page.getTextContent();
+        const pageText = content.items
+            .map((item: unknown) => (item as { str: string }).str)
+            .join(' ');
+        fullText += pageText + '\n';
+    }
+
+    return fullText;
+}
+
+// Extract year from the answer sheet text
+function detectExamYear(text: string): string | null {
+    const yearPattern = /\b(201[0-9]|202[0-5])\b/;
+    const match = text.match(yearPattern);
+
+    if (match) {
+        const year = match[1];
+        if (EXAM_FILES[year]) {
+            return year;
+        }
+    }
+    return null;
+}
+
+// System prompt for grading - Using OpenAI via Vercel AI SDK
 const GRADING_SYSTEM_PROMPT = `You are an expert mathematics exam grader for Swedish Hvitfeldska spetsutbildning (advanced mathematics program) entrance exams.
 
 You will receive:
@@ -41,20 +89,13 @@ Your task is to grade the student's answers against the official exam questions.
 3. **Notation** (Tertiary): Is proper mathematical notation used?
 4. **Completeness** (Tertiary): Are all steps shown and all parts answered?
 
-## Scoring Guidelines for each question:
+## Scoring Guidelines:
 - Full marks: Correct answer with valid method and clear notation
-- Partial credit (50-80%): Correct approach but calculation errors, or incomplete solution
+- Partial credit (50-80%): Correct approach but calculation errors
 - Minimal credit (10-50%): Shows understanding but significant errors
 - Zero marks: Incorrect approach, wrong answer, or no attempt
 
-## IMPORTANT: 
-- Match each student answer to the corresponding question number
-- If a question has multiple parts (a, b, c), grade each part separately
-- Calculate the correct answer yourself to verify
-- Be fair but rigorous - this is an entrance exam for an elite program
-
-## Output Format:
-You MUST respond with valid JSON in this exact structure:
+## Output Format (JSON):
 {
   "exam_info": {
     "year": "YYYY",
@@ -66,61 +107,31 @@ You MUST respond with valid JSON in this exact structure:
   "percentage": number,
   "per_question": [
     {
-      "question_number": "1" or "1a" or "1b" etc,
-      "question_text": "Brief summary of the question",
-      "student_answer": "What the student wrote (or 'Inget svar' if blank)",
-      "correct_answer": "The correct answer with brief solution",
+      "question_number": "1",
+      "question_text": "Brief summary",
+      "student_answer": "What student wrote",
+      "correct_answer": "Correct answer",
       "score": number,
       "max_score": number,
       "is_correct": boolean,
-      "feedback": "Detailed feedback in Swedish explaining what was right/wrong"
+      "feedback": "Detailed feedback in Swedish"
     }
   ],
-  "overall_feedback": "Overall assessment in Swedish - be encouraging but honest",
-  "strengths": ["List of topics where student performed well"],
-  "areas_to_improve": ["List of topics needing more practice"],
-  "study_recommendations": ["Specific topics to study based on mistakes"]
+  "overall_feedback": "Overall assessment in Swedish",
+  "strengths": ["Areas of strength"],
+  "areas_to_improve": ["Areas needing work"],
+  "study_recommendations": ["Study tips"]
 }`;
 
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
-        const answersFile = formData.get('answers') as File;
-        const year = formData.get('year') as string;
-
-        if (!year) {
-            return new Response(
-                JSON.stringify({ error: 'Please select an exam year' }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
-            );
-        }
+        const answersFile = formData.get('pdf') as File;
 
         if (!answersFile) {
             return new Response(
-                JSON.stringify({ error: 'Please upload the student answers PDF/image' }),
+                JSON.stringify({ error: 'Please upload your answer sheet (PDF with year at top)' }),
                 { status: 400, headers: { 'Content-Type': 'application/json' } }
-            );
-        }
-
-        // Load the official exam for the selected year
-        const examFilename = EXAM_FILES[year];
-        if (!examFilename) {
-            return new Response(
-                JSON.stringify({ error: `No exam found for year ${year}` }),
-                { status: 404, headers: { 'Content-Type': 'application/json' } }
-            );
-        }
-
-        let examText: string;
-        try {
-            const examPath = path.join(EXAMS_BASE_PATH, examFilename);
-            const examBuffer = await readFile(examPath);
-            const examData = await pdf(examBuffer);
-            examText = examData.text;
-        } catch {
-            return new Response(
-                JSON.stringify({ error: `Failed to load exam for year ${year}` }),
-                { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
@@ -129,50 +140,78 @@ export async function POST(request: NextRequest) {
         try {
             const arrayBuffer = await answersFile.arrayBuffer();
             const buffer = Buffer.from(arrayBuffer);
-            const answersData = await pdf(buffer);
-            answersText = answersData.text;
-        } catch {
+            answersText = await extractPdfText(buffer);
+        } catch (err) {
+            console.error('PDF parse error:', err);
             return new Response(
-                JSON.stringify({ error: 'Failed to parse answers PDF. Please ensure it is a valid PDF file.' }),
+                JSON.stringify({ error: 'Failed to parse PDF.' }),
                 { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
         if (!answersText || answersText.trim().length === 0) {
             return new Response(
-                JSON.stringify({ error: 'No text could be extracted from the answers PDF. It may be an image-based PDF - please use a PDF with selectable text.' }),
+                JSON.stringify({ error: 'No text extracted from PDF.' }),
                 { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
-        // Construct the prompt with both exam and answers
+        // Detect exam year
+        const detectedYear = detectExamYear(answersText);
+
+        if (!detectedYear) {
+            return new Response(
+                JSON.stringify({
+                    error: 'Could not detect exam year. Write the year (e.g., "2011") at the top.'
+                }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
+
+        // Load official exam
+        const examFilename = EXAM_FILES[detectedYear];
+        let examText: string;
+        try {
+            const examPath = path.join(EXAMS_BASE_PATH, examFilename);
+            const examBuffer = await readFile(examPath);
+            examText = await extractPdfText(examBuffer);
+        } catch {
+            return new Response(
+                JSON.stringify({ error: `Failed to load exam for year ${detectedYear}` }),
+                { status: 500, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
+
+        // Construct prompt
         const userPrompt = `
-## OFFICIAL EXAM (Year ${year}):
+## OFFICIAL EXAM (Year ${detectedYear}):
 ${examText}
 
 ---
 
-## STUDENT'S ANSWERS:
+## STUDENT'S ANSWERS (detected year: ${detectedYear}):
 ${answersText}
 
 ---
 
-Please grade the student's answers against the official exam questions. Provide detailed feedback in Swedish.`;
+Grade the student's answers. Provide detailed feedback in Swedish.`;
 
-        // Use Vercel AI SDK to stream the grading response
+        // ============================================
+        // VERCEL AI SDK: streamText()
+        // Streams the response from OpenAI GPT-4o
+        // ============================================
         const result = streamText({
             model: openai(process.env.OPENAI_MODEL || 'gpt-4o'),
             system: GRADING_SYSTEM_PROMPT,
             prompt: userPrompt,
-            temperature: 0.1, // Very low temperature for consistent grading
+            temperature: 0.1,
         });
 
-        // Return streaming response
-        return result.toDataStreamResponse();
+        return result.toTextStreamResponse();
     } catch (error) {
         console.error('Grading error:', error);
         return new Response(
-            JSON.stringify({ error: 'Internal server error during grading' }),
+            JSON.stringify({ error: 'Internal server error' }),
             { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
     }

@@ -3,35 +3,24 @@
 import { useState, useCallback } from 'react';
 import FileUpload from '@/components/FileUpload';
 import GradingResults from '@/components/GradingResults';
-import YearSelector from '@/components/YearSelector';
 import { GradingResult } from '@/types/grading';
 
-const AVAILABLE_YEARS = [
-    '2010', '2011', '2012', '2013', '2014', '2015',
-    '2016', '2017', '2018', '2019', '2021', '2022',
-    '2023', '2024', '2025'
-];
-
 export default function Home() {
-    const [selectedYear, setSelectedYear] = useState<string>('');
     const [file, setFile] = useState<File | null>(null);
     const [isGrading, setIsGrading] = useState(false);
     const [gradingResult, setGradingResult] = useState<GradingResult | null>(null);
     const [error, setError] = useState<string | null>(null);
-
-    const handleYearSelect = useCallback((year: string) => {
-        setSelectedYear(year);
-        setError(null);
-    }, []);
+    const [detectedYear, setDetectedYear] = useState<string | null>(null);
 
     const handleFileSelect = useCallback((selectedFile: File) => {
         setFile(selectedFile);
         setError(null);
         setGradingResult(null);
+        setDetectedYear(null);
     }, []);
 
     const handleGrade = async () => {
-        if (!file || !selectedYear) return;
+        if (!file) return;
 
         setIsGrading(true);
         setError(null);
@@ -39,8 +28,7 @@ export default function Home() {
 
         try {
             const formData = new FormData();
-            formData.append('answers', file);
-            formData.append('year', selectedYear);
+            formData.append('pdf', file);
 
             const response = await fetch('/api/grade', {
                 method: 'POST',
@@ -81,8 +69,11 @@ export default function Home() {
                 if (jsonMatch) {
                     const result = JSON.parse(jsonMatch[0]) as GradingResult;
                     setGradingResult(result);
+                    if (result.exam_info?.year) {
+                        setDetectedYear(result.exam_info.year);
+                    }
                 } else {
-                    setError('Could not parse grading result. Raw output: ' + extractedText.substring(0, 500));
+                    setError('Could not parse grading result.');
                 }
             } else {
                 const jsonMatch = fullText.match(/\{[\s\S]*\}/);
@@ -102,12 +93,10 @@ export default function Home() {
 
     const handleReset = () => {
         setFile(null);
-        setSelectedYear('');
         setGradingResult(null);
         setError(null);
+        setDetectedYear(null);
     };
-
-    const canGrade = selectedYear && file && !isGrading;
 
     return (
         <main className="main-container">
@@ -140,45 +129,34 @@ export default function Home() {
                     <div className="upload-section">
                         <div className="glass-card">
                             <div className="card-header">
-                                <h2>📝 Grade Yvonna&apos;s Math Exam</h2>
-                                <p>Select exam year and upload answer sheet for instant AI grading</p>
+                                <h2>📝 Grade Math Exam</h2>
+                                <p>Upload answer sheet with year at top (e.g., &quot;2011&quot;) → AI grades automatically</p>
                             </div>
 
-                            {/* Step 1: Year Selection */}
-                            <div className="step-section">
-                                <div className="step-header">
-                                    <span className="step-number">1</span>
-                                    <span className="step-title">Select Exam Year</span>
-                                </div>
-                                <YearSelector
-                                    years={AVAILABLE_YEARS}
-                                    selectedYear={selectedYear}
-                                    onSelect={handleYearSelect}
-                                />
-                                {selectedYear && (
-                                    <div className="year-selected-info">
-                                        ✅ Loaded: Hvitfeldska Intagningstest {selectedYear}
-                                    </div>
-                                )}
+                            <div className="instruction-box">
+                                <h3>📋 How it works:</h3>
+                                <ol>
+                                    <li>Write the exam year at the top of your answer paper (e.g., <strong>2011</strong>)</li>
+                                    <li>Write your answers for each question below</li>
+                                    <li>Scan or convert to PDF</li>
+                                    <li>Upload here → Get instant AI grading!</li>
+                                </ol>
+                                <p className="available-years">
+                                    <strong>Available exams:</strong> 2010-2019, 2021-2025
+                                </p>
                             </div>
 
-                            {/* Step 2: Upload Answers */}
-                            <div className="step-section">
-                                <div className="step-header">
-                                    <span className="step-number">2</span>
-                                    <span className="step-title">Upload Answer Sheet</span>
-                                </div>
-                                <FileUpload onFileSelect={handleFileSelect} selectedFile={file} />
-                                {file && (
-                                    <div className="file-info">
-                                        <div className="file-icon">📎</div>
-                                        <div className="file-details">
-                                            <span className="file-name">{file.name}</span>
-                                            <span className="file-size">{(file.size / 1024).toFixed(1)} KB</span>
-                                        </div>
+                            <FileUpload onFileSelect={handleFileSelect} selectedFile={file} />
+
+                            {file && (
+                                <div className="file-info">
+                                    <div className="file-icon">📎</div>
+                                    <div className="file-details">
+                                        <span className="file-name">{file.name}</span>
+                                        <span className="file-size">{(file.size / 1024).toFixed(1)} KB</span>
                                     </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
 
                             {error && (
                                 <div className="error-message">
@@ -189,28 +167,21 @@ export default function Home() {
 
                             <button
                                 onClick={handleGrade}
-                                disabled={!canGrade}
+                                disabled={!file || isGrading}
                                 className={`grade-button ${isGrading ? 'grading' : ''}`}
                             >
                                 {isGrading ? (
                                     <>
                                         <span className="spinner"></span>
-                                        Grading with GPT-4o...
+                                        Detecting year & grading...
                                     </>
                                 ) : (
                                     <>
                                         <span className="button-icon">🎯</span>
-                                        Grade Answers
+                                        Grade My Answers
                                     </>
                                 )}
                             </button>
-
-                            {!canGrade && !isGrading && (
-                                <p className="hint-text">
-                                    {!selectedYear ? '👆 First, select an exam year above' :
-                                        !file ? '👆 Then, upload the answer sheet' : ''}
-                                </p>
-                            )}
 
                             {isGrading && (
                                 <div className="grading-progress">
@@ -218,7 +189,7 @@ export default function Home() {
                                         <div className="progress-fill"></div>
                                     </div>
                                     <p className="progress-text">
-                                        Comparing answers against {selectedYear} exam with GPT-4o...
+                                        Detecting exam year → Loading official exam → Grading with GPT-4o...
                                     </p>
                                 </div>
                             )}
@@ -227,24 +198,24 @@ export default function Home() {
                         {/* Features section */}
                         <div className="features-grid">
                             <div className="feature-card">
+                                <div className="feature-icon">🔍</div>
+                                <h3>Auto Year Detection</h3>
+                                <p>Just write &quot;2011&quot; at top - system loads the correct exam</p>
+                            </div>
+                            <div className="feature-card">
                                 <div className="feature-icon">📚</div>
                                 <h3>15 Years of Exams</h3>
-                                <p>All Hvitfeldska entrance exams from 2010-2025 pre-loaded</p>
+                                <p>All Hvitfeldska entrance exams from 2010-2025 included</p>
                             </div>
                             <div className="feature-card">
                                 <div className="feature-icon">🧠</div>
                                 <h3>AI-Powered Grading</h3>
-                                <p>GPT-4o understands math and grades like a teacher</p>
+                                <p>GPT-4o grades like a math teacher</p>
                             </div>
                             <div className="feature-card">
                                 <div className="feature-icon">📊</div>
                                 <h3>Detailed Feedback</h3>
-                                <p>Per-question scores with explanations in Swedish</p>
-                            </div>
-                            <div className="feature-card">
-                                <div className="feature-icon">📈</div>
-                                <h3>Study Tips</h3>
-                                <p>Get recommendations on what topics to practice</p>
+                                <p>Swedish feedback with study recommendations</p>
                             </div>
                         </div>
                     </div>

@@ -930,6 +930,71 @@ body {
     font-size: 0.8rem !important;
 }
 
+/* Instruction box */
+.instruction-box {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.instruction-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.instruction-box ol {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+}
+
+.instruction-box li {
+    counter-increment: step;
+    padding: 8px 0;
+    padding-left: 36px;
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.instruction-box li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruction-box strong {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.available-years {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.available-years strong {
+    color: var(--text-primary);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .main-container {
