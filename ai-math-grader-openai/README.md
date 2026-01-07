@@ -1,6 +1,6 @@
 # 🎯 AI Math Grader
 
-> **Automated Math Exam Grading System** — Powered by OpenAI GPT-4o, LangChain & Vercel AI SDK
+> **Automated Math Exam Grading System** — Powered by OpenAI GPT-4o, LangChain LCEL & Vercel AI SDK
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?logo=openai)](https://openai.com/)
@@ -10,93 +10,192 @@
 
 ---
 
-## 🚀 Technologies Used
+## 📖 Project Overview
 
-This project demonstrates proficiency in modern AI/LLM development technologies:
+An AI-powered exam grading system that automatically evaluates student answers against official Hvitfeldska spetsutbildning mathematics entrance exams (2010-2025).
 
-### 1. **OpenAI API** (`@ai-sdk/openai`, `@langchain/openai`)
-- GPT-4o model for mathematical reasoning and grading
-- Low temperature settings for consistent, accurate grading
-- Structured JSON output for reliable parsing
+### 🎯 Problem Statement
 
-### 2. **LangChain** (`langchain`, `@langchain/core`)
-- **LCEL (LangChain Expression Language)** for composable chains
-- **ChatPromptTemplate** for structured prompt management
-- **StructuredOutputParser** with Zod schema validation
-- **RunnableSequence** for modular workflow composition
+Students preparing for competitive math exams need:
+- **Immediate feedback** on practice tests
+- **Detailed explanations** of mistakes
+- **Consistent grading** according to exam standards
 
-### 3. **Vercel AI SDK** (`ai`)
-- **streamText()** for real-time streaming responses
-- **toTextStreamResponse()** for efficient HTTP streaming
-- Seamless Next.js API route integration
+Manual grading is time-consuming and inconsistent. This project solves it with AI.
 
 ---
 
-## 📖 The Story Behind This Project
+## 🛠️ Technologies & Tools
 
-This project was born from a real need: **helping Yvonna prepare for the Hvitfeldska spetsutbildning mathematics entrance exam**.
+### Core AI Stack
 
-### The Problem
+| Technology | Purpose | Package |
+|------------|---------|---------|
+| **OpenAI API** | LLM Provider (GPT-4o) | `@ai-sdk/openai`, `@langchain/openai` |
+| **Vercel AI SDK** | Streaming responses | `ai` |
+| **LangChain** | Chain composition & LCEL | `langchain`, `@langchain/core` |
+| **Zod** | Schema validation | `zod` |
 
-Every year, thousands of students in Sweden take demanding math entrance exams for specialized (spets) programs. Parents like us want to help, but:
+### Frontend & Backend
 
-- 📚 **Finding answers is time-consuming** — Past exams often lack official answer keys
-- ⏰ **Manual explanation is slow** — Going through each problem one-by-one takes hours
-- 🔄 **Feedback isn't immediate** — Students lose momentum waiting for corrections
-- 📝 **Tracking progress is hard** — It's difficult to identify patterns in mistakes
+| Technology | Purpose | Package |
+|------------|---------|---------|
+| **Next.js 16** | Full-stack React framework | `next` |
+| **TypeScript** | Type safety | `typescript` |
+| **Tailwind CSS** | Styling | `tailwindcss` |
+| **React 19** | UI library | `react`, `react-dom` |
 
-### The Solution
+### Utilities
 
-**AI Math Grader** automates the entire process:
+| Technology | Purpose | Package |
+|------------|---------|---------|
+| **pdfjs-dist** | PDF text extraction | `pdfjs-dist` |
+| **react-dropzone** | File upload UI | `react-dropzone` |
 
-1. **Write year** at top of answer sheet (e.g., "2011")
-2. **Upload PDF** of your answers
-3. **AI automatically:**
-   - Detects the exam year
-   - Loads the official exam questions
-   - Grades each answer
-   - Provides detailed feedback in Swedish
-
----
-
-## ✨ Features
-
-### 🔍 Auto Year Detection
-Just write "2011" at the top of your answer sheet — the system automatically loads the correct exam.
-
-### 📚 15 Years of Exams
-All Hvitfeldska entrance exams from 2010-2025 pre-loaded and ready for grading.
-
-### 🧠 AI-Powered Grading
-- GPT-4o understands complex mathematical reasoning
-- Provides partial credit for partially correct solutions
-- Grades according to Swedish mathematics standards
-
-### 📊 Detailed Feedback
-- Per-question scores with max points
-- Correct solutions for comparison
-- Personalized feedback in Swedish
-- Strengths & areas to improve
+### Total: **12+ npm packages** for a complete AI grading solution
 
 ---
 
-## 🏗️ Architecture
+## 🧠 LangChain Workflow Design
+
+The grading system uses **LCEL (LangChain Expression Language)** for modular, composable AI workflows.
+
+### Workflow Architecture
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Frontend      │────▶│   API Routes     │────▶│   AI Engine     │
-│   (Next.js)     │     │   (Next.js)      │     │                 │
-│                 │     │                  │     │  ┌───────────┐  │
-│  • File Upload  │     │  /api/grade      │     │  │  OpenAI   │  │
-│  • Results UI   │     │  (Vercel AI SDK) │     │  │  GPT-4o   │  │
-│  • Streaming    │     │                  │     │  └───────────┘  │
-│                 │     │  /api/grade-     │     │        │        │
-│                 │     │  langchain       │     │  ┌───────────┐  │
-│                 │     │  (LangChain)     │────▶│  │ LangChain │  │
-└─────────────────┘     └──────────────────┘     │  │   LCEL    │  │
-                                                 │  └───────────┘  │
-                                                 └─────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        GRADING WORKFLOW                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌──────────────┐                                                       │
+│  │   Student    │                                                       │
+│  │   Upload     │                                                       │
+│  │   PDF        │                                                       │
+│  └──────┬───────┘                                                       │
+│         │                                                               │
+│         ▼                                                               │
+│  ┌──────────────┐     ┌──────────────┐                                 │
+│  │   PDF Text   │────▶│  Year        │                                 │
+│  │   Extraction │     │  Detection   │                                 │
+│  │  (pdfjs)     │     │  (regex)     │                                 │
+│  └──────────────┘     └──────┬───────┘                                 │
+│                              │                                          │
+│                              ▼                                          │
+│                       ┌──────────────┐                                 │
+│                       │  Load Exam   │                                 │
+│                       │  from Archive│                                 │
+│                       │  (2010-2025) │                                 │
+│                       └──────┬───────┘                                 │
+│                              │                                          │
+│         ┌────────────────────┴────────────────────┐                    │
+│         │                                         │                    │
+│         ▼                                         ▼                    │
+│  ┌──────────────┐                         ┌──────────────┐            │
+│  │ Vercel AI    │                         │ LangChain    │            │
+│  │ SDK Route    │                         │ LCEL Route   │            │
+│  │ /api/grade   │                         │ /api/grade-  │            │
+│  │              │                         │ langchain    │            │
+│  └──────┬───────┘                         └──────┬───────┘            │
+│         │                                         │                    │
+│         ▼                                         ▼                    │
+│  ┌──────────────┐                         ┌──────────────┐            │
+│  │ streamText() │                         │ LCEL Chain   │            │
+│  │ OpenAI GPT4o │                         │ Prompt +     │            │
+│  │              │                         │ Model +      │            │
+│  │              │                         │ Parser       │            │
+│  └──────┬───────┘                         └──────┬───────┘            │
+│         │                                         │                    │
+│         └─────────────────┬───────────────────────┘                    │
+│                           │                                            │
+│                           ▼                                            │
+│                    ┌──────────────┐                                   │
+│                    │  Structured  │                                   │
+│                    │  JSON Output │                                   │
+│                    │  (Zod valid) │                                   │
+│                    └──────┬───────┘                                   │
+│                           │                                            │
+│                           ▼                                            │
+│                    ┌──────────────┐                                   │
+│                    │   Results    │                                   │
+│                    │   Display    │                                   │
+│                    │   Component  │                                   │
+│                    └──────────────┘                                   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
+
+### LangChain LCEL Chain
+
+```typescript
+// 1. Define Schema (Zod)
+const GradingResultSchema = z.object({
+  total_score: z.number(),
+  percentage: z.number(),
+  per_question: z.array(QuestionSchema),
+  overall_feedback: z.string(),
+  strengths: z.array(z.string()),
+  areas_to_improve: z.array(z.string()),
+});
+
+// 2. Create Prompt Template
+const chatPrompt = ChatPromptTemplate.fromMessages([
+  SystemMessagePromptTemplate.fromTemplate(GRADING_RUBRIC),
+  HumanMessagePromptTemplate.fromTemplate('{examText}\n{studentText}'),
+]);
+
+// 3. Build LCEL Chain
+const gradingChain = RunnableSequence.from([
+  chatPrompt,                    // Format input
+  new ChatOpenAI({ model: 'gpt-4o' }),  // LLM call
+  StructuredOutputParser.fromZodSchema(GradingResultSchema),  // Parse output
+]);
+
+// 4. Execute Chain
+const result = await gradingChain.invoke({
+  examText,
+  studentText,
+  year,
+});
+```
+
+---
+
+## 🎨 System Design
+
+### API Endpoints
+
+| Endpoint | Method | Technology | Description |
+|----------|--------|------------|-------------|
+| `/api/grade` | POST | Vercel AI SDK | Streaming grading with `streamText()` |
+| `/api/grade-langchain` | POST | LangChain LCEL | Structured output with chain |
+| `/api/exams` | GET | Next.js | List available exam years |
+
+### Two Grading Approaches
+
+#### 1. Vercel AI SDK (`/api/grade`)
+```typescript
+const result = streamText({
+  model: openai('gpt-4o'),
+  system: GRADING_PROMPT,
+  prompt: userPrompt,
+  temperature: 0.1,
+});
+return result.toTextStreamResponse();
+```
+- **Pros**: Real-time streaming, simpler code
+- **Use case**: Interactive UI with live feedback
+
+#### 2. LangChain LCEL (`/api/grade-langchain`)
+```typescript
+const result = await gradingChain.invoke({
+  examText,
+  studentText,
+  year,
+});
+return NextResponse.json(result);
+```
+- **Pros**: Structured output, schema validation, composable
+- **Use case**: Reliable JSON output, complex workflows
 
 ---
 
@@ -109,26 +208,36 @@ ai-math-grader-openai/
 │   │   ├── api/
 │   │   │   ├── grade/
 │   │   │   │   └── route.ts          # Vercel AI SDK endpoint
-│   │   │   └── grade-langchain/
-│   │   │       └── route.ts          # LangChain LCEL endpoint
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
+│   │   │   ├── grade-langchain/
+│   │   │   │   └── route.ts          # LangChain LCEL endpoint
+│   │   │   └── exams/
+│   │   │       └── route.ts          # Exam listing endpoint
+│   │   ├── globals.css               # Styling
+│   │   ├── layout.tsx                # Root layout
+│   │   └── page.tsx                  # Main UI
+│   │
 │   ├── components/
-│   │   ├── FileUpload.tsx
-│   │   ├── GradingResults.tsx
-│   │   └── StreamingOutput.tsx
+│   │   ├── FileUpload.tsx            # Drag-drop upload
+│   │   ├── GradingResults.tsx        # Results display
+│   │   └── StreamingOutput.tsx       # Real-time output
+│   │
 │   ├── lib/
 │   │   └── langchain/
-│   │       ├── grader.ts             # LangChain LCEL workflow
-│   │       ├── rubric.ts             # Grading rubric (prompt engineering)
-│   │       ├── schema.ts             # Zod schemas for validation
-│   │       └── index.ts
+│   │       ├── grader.ts             # LCEL workflow
+│   │       ├── rubric.ts             # Grading criteria (Swedish)
+│   │       ├── schema.ts             # Zod schemas
+│   │       └── index.ts              # Exports
+│   │
 │   └── types/
-│       └── grading.ts
-├── .env                               # OPENAI_API_KEY
-├── package.json
-└── README.md
+│       └── grading.ts                # TypeScript types
+│
+├── .env                              # OPENAI_API_KEY
+├── package.json                      # Dependencies
+├── tsconfig.json                     # TypeScript config
+└── README.md                         # This file
+
+../exams/intagningstest/              # 15 exam PDFs (2010-2025)
+../handbok/                           # Study materials
 ```
 
 ---
@@ -136,113 +245,66 @@ ai-math-grader-openai/
 ## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 18+
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- OpenAI API key
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/ai-math-grader-openai.git
-cd ai-math-grader-openai
+# Clone
+git clone https://github.com/bluehawana/AI-Math-Grader-OpenAI.git
+cd AI-Math-Grader-OpenAI/ai-math-grader-openai
 
-# Install dependencies
+# Install
 npm install
 
-# Set up environment variables
-echo "OPENAI_API_KEY=sk-your-key-here" > .env
+# Configure
+echo "OPENAI_API_KEY=sk-your-key" > .env
 
-# Run the development server
+# Run
 npm run dev -- -p 3005
 ```
 
-Open [http://localhost:3005](http://localhost:3005) in your browser.
-
----
-
-## 🔧 API Endpoints
-
-### `POST /api/grade` — Vercel AI SDK
-Uses `streamText()` for streaming responses.
-
-```bash
-curl -X POST http://localhost:3005/api/grade \
-  -F "pdf=@answers.pdf"
-```
-
-### `POST /api/grade-langchain` — LangChain LCEL
-Uses LangChain chains with structured output.
-
-```bash
-curl -X POST http://localhost:3005/api/grade-langchain \
-  -F "pdf=@answers.pdf"
-```
-
----
-
-## 🧠 LangChain Workflow (LCEL)
-
-The LangChain integration demonstrates:
-
-```typescript
-// 1. Define Zod Schema
-const GradingResultSchema = z.object({
-  total_score: z.number(),
-  per_question: z.array(...),
-  overall_feedback: z.string(),
-});
-
-// 2. Create Prompt Template
-const chatPrompt = ChatPromptTemplate.fromMessages([
-  SystemMessagePromptTemplate.fromTemplate(rubric),
-  HumanMessagePromptTemplate.fromTemplate('{examText}\n{studentText}'),
-]);
-
-// 3. Build LCEL Chain
-const gradingChain = RunnableSequence.from([
-  chatPrompt,
-  new ChatOpenAI({ model: 'gpt-4o' }),
-  StructuredOutputParser.fromZodSchema(GradingResultSchema),
-]);
-
-// 4. Invoke Chain
-const result = await gradingChain.invoke({
-  examText,
-  studentText,
-  year,
-});
-```
-
----
-
-## 🎯 Use Cases
-
-### 👨‍👩‍👧 For Parents
-- Help your children practice math exams
-- Get instant explanations without being a math expert
-- Track progress and identify weak areas
-
-### 📚 For Students
-- Self-study with immediate feedback
-- Understand mistakes with detailed explanations
-- Build confidence before the real exam
-
-### 🏫 For Teachers
-- Quick grading of practice tests
-- Consistent feedback quality
-- Save hours of manual work
+Open http://localhost:3005
 
 ---
 
 ## 📝 Prompt Engineering
 
-This project demonstrates "prompt engineering as software development":
+The grading system uses carefully crafted prompts in Swedish:
 
-1. **Grading Rubric** (`rubric.ts`) — Defines evaluation criteria in Swedish
-2. **System Prompt** — Instructs the AI on grading methodology
-3. **Output Schema** — Ensures consistent, parseable responses
-4. **Temperature Tuning** — Low temperature for consistent grading
+### Grading Rubric (`rubric.ts`)
+
+```typescript
+export const GRADING_RUBRIC = `
+Du är en expert-examinator för Hvitfeldska Spetsutbildning.
+
+## Bedömningskriterier:
+1. Korrekthet (40%) - Är svaret matematiskt korrekt?
+2. Resonemangskvalitet (30%) - Är lösningen logisk?
+3. Matematisk struktur (20%) - Korrekt notation?
+4. Tydlighet (10%) - Är svaret klart?
+
+## Poängfördelning:
+- Full poäng: Korrekt svar med giltig metod
+- Delpoäng (50-80%): Rätt metod men beräkningsfel
+- Minimal poäng (10-50%): Visar förståelse
+- Noll poäng: Fel metod eller inget svar
+`;
+```
+
+---
+
+## 🎯 Use Case: Yvonna's Exam Prep
+
+1. **Yvonna writes "2011"** at the top of her answer sheet
+2. **Solves the problems** from memory
+3. **Scans to PDF** and uploads
+4. **AI automatically**:
+   - Detects year → loads 2011 exam
+   - Grades each answer
+   - Provides Swedish feedback
+   - Suggests study topics
 
 ---
 
@@ -252,10 +314,12 @@ This project demonstrates "prompt engineering as software development":
 - [x] Vercel AI SDK streaming
 - [x] LangChain LCEL workflow
 - [x] Zod schema validation
-- [ ] Image-based PDF support (OCR)
-- [ ] Multiple exam templates
+- [x] 15 years of exams (2010-2025)
+- [x] Swedish grading rubric
+- [ ] OCR for handwritten answers
 - [ ] Progress tracking
-- [ ] Custom rubrics upload
+- [ ] Custom rubric upload
+- [ ] Multi-language support
 
 ---
 
@@ -268,12 +332,12 @@ MIT License — Open source and free to use.
 ## 🙏 Acknowledgments
 
 - **OpenAI** for GPT-4o
-- **LangChain** for the excellent LCEL framework
-- **Vercel** for the AI SDK and hosting platform
-- **Hvitfeldska gymnasiet** for the challenging math problems
+- **LangChain** for LCEL framework
+- **Vercel** for AI SDK
+- **Hvitfeldska gymnasiet** for the challenging exams
 
 ---
 
 <p align="center">
-  <strong>Good luck on your math exam! 📐✨</strong>
+  <strong>Built with ❤️ for Yvonna and all math students</strong>
 </p>
