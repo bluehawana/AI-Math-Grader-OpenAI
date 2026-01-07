@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data & exams
+/data/
+/exams/
+/temp/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.HEIC
+!/public/**/*
+
+# sensitive
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

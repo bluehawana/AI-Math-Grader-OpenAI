@@ -243,7 +243,7 @@ export default function Home() {
             {/* Footer */}
             <footer className="footer">
                 <p>Built with Next.js, OpenAI API & Vercel AI SDK</p>
-                <p className="footer-sub">Helping Yvonna prepare for Hvitfeldska Spetsutbildning 2026</p>
+                <p className="footer-sub">Helping students prepare for Hvitfeldska Spetsutbildning 2026</p>
             </footer>
         </main>
     );
