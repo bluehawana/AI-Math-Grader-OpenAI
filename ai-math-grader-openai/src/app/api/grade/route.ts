@@ -15,11 +15,10 @@ import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import * as pdfjs from 'pdfjs-dist';
 import { getModel, getProviderInfo } from '@/lib/providers';
 
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = '';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const pdfParse = require('pdf-parse');
 
 // Map of exam years to their PDF filenames
 // Exams are now stored in: ../exams/intagningstest/
@@ -44,22 +43,10 @@ const EXAM_FILES: Record<string, string> = {
 // Updated path: exams are now in ../exams/intagningstest/
 const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
-// Extract text from PDF buffer using pdfjs-dist
+// Extract text from PDF buffer using pdf-parse
 async function extractPdfText(buffer: Buffer): Promise<string> {
-    const data = new Uint8Array(buffer);
-    const doc = await pdfjs.getDocument({ data, useSystemFonts: true }).promise;
-
-    let fullText = '';
-    for (let i = 1; i <= doc.numPages; i++) {
-        const page = await doc.getPage(i);
-        const content = await page.getTextContent();
-        const pageText = content.items
-            .map((item: unknown) => (item as { str: string }).str)
-            .join(' ');
-        fullText += pageText + '\n';
-    }
-
-    return fullText;
+    const data = await pdfParse(buffer);
+    return data.text;
 }
 
 // Extract year from the answer sheet text
