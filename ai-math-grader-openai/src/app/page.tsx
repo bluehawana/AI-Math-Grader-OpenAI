@@ -28,9 +28,21 @@ export default function Home() {
 
         try {
             const formData = new FormData();
-            formData.append('pdf', file);
+            formData.append('file', file);
 
-            const response = await fetch('/api/grade', {
+            // Use grade-image endpoint for images, grade for PDFs
+            const isImage = file.type.startsWith('image/') ||
+                file.name.toLowerCase().endsWith('.heic') ||
+                file.name.toLowerCase().endsWith('.heif');
+
+            const endpoint = isImage ? '/api/grade-image' : '/api/grade';
+            if (!isImage) {
+                // For legacy PDF endpoint, use 'pdf' key
+                formData.delete('file');
+                formData.append('pdf', file);
+            }
+
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 body: formData,
             });

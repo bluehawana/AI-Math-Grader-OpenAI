@@ -19,9 +19,14 @@ export default function FileUpload({ onFileSelect, selectedFile }: FileUploadPro
         onDrop,
         accept: {
             'application/pdf': ['.pdf'],
+            'image/heic': ['.heic', '.HEIC'],
+            'image/heif': ['.heif', '.HEIF'],
+            'image/jpeg': ['.jpg', '.jpeg', '.JPG', '.JPEG'],
+            'image/png': ['.png', '.PNG'],
+            'image/webp': ['.webp', '.WEBP'],
         },
         maxFiles: 1,
-        maxSize: 10 * 1024 * 1024, // 10MB
+        maxSize: 20 * 1024 * 1024, // 20MB for images
     });
 
     return (
@@ -49,19 +54,19 @@ export default function FileUpload({ onFileSelect, selectedFile }: FileUploadPro
                 </div>
                 <div className="dropzone-text">
                     {isDragActive ? (
-                        <p className="dropzone-primary">Drop your PDF here...</p>
+                        <p className="dropzone-primary">Drop your file here...</p>
                     ) : isDragReject ? (
-                        <p className="dropzone-primary error">Only PDF files are accepted</p>
+                        <p className="dropzone-primary error">Unsupported file type</p>
                     ) : (
                         <>
                             <p className="dropzone-primary">
-                                Drag & drop your math exam PDF here
+                                📸 Drop your answer sheet here
                             </p>
                             <p className="dropzone-secondary">
-                                or click to browse files
+                                iPhone photos (HEIC), JPEG, PNG, or PDF
                             </p>
                             <p className="dropzone-hint">
-                                Maximum file size: 10MB
+                                Take a photo of your handwritten answers • Max 20MB
                             </p>
                         </>
                     )}
