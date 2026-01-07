@@ -6,41 +6,52 @@ import GradingResults from '@/components/GradingResults';
 import { GradingResult } from '@/types/grading';
 
 export default function Home() {
-    const [file, setFile] = useState<File | null>(null);
+    const [files, setFiles] = useState<File[]>([]);
     const [isGrading, setIsGrading] = useState(false);
     const [gradingResult, setGradingResult] = useState<GradingResult | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [detectedYear, setDetectedYear] = useState<string | null>(null);
+    const [progressMessage, setProgressMessage] = useState<string>('');
 
-    const handleFileSelect = useCallback((selectedFile: File) => {
-        setFile(selectedFile);
+    const handleFilesSelect = useCallback((selectedFiles: File[]) => {
+        setFiles(selectedFiles);
         setError(null);
         setGradingResult(null);
-        setDetectedYear(null);
     }, []);
 
     const handleGrade = async () => {
-        if (!file) return;
+        if (files.length === 0) return;
 
         setIsGrading(true);
         setError(null);
         setGradingResult(null);
+        setProgressMessage('Preparing files...');
 
         try {
             const formData = new FormData();
-            formData.append('file', file);
 
-            // Use grade-image endpoint for images, grade for PDFs
-            const isImage = file.type.startsWith('image/') ||
-                file.name.toLowerCase().endsWith('.heic') ||
-                file.name.toLowerCase().endsWith('.heif');
+            // Check if any file is an image
+            const hasImages = files.some(f =>
+                f.type.startsWith('image/') ||
+                f.name.toLowerCase().endsWith('.heic') ||
+                f.name.toLowerCase().endsWith('.heif')
+            );
 
-            const endpoint = isImage ? '/api/grade-image' : '/api/grade';
-            if (!isImage) {
-                // For legacy PDF endpoint, use 'pdf' key
-                formData.delete('file');
-                formData.append('pdf', file);
+            // Append all files
+            files.forEach((file, index) => {
+                formData.append(`file${index}`, file);
+            });
+            formData.append('fileCount', files.length.toString());
+
+            // Use grade-image endpoint for images
+            const endpoint = hasImages ? '/api/grade-image' : '/api/grade';
+
+            // For single PDF, use legacy endpoint
+            if (!hasImages && files.length === 1) {
+                formData.delete('file0');
+                formData.append('pdf', files[0]);
             }
+
+            setProgressMessage(`Uploading ${files.length} page(s)...`);
 
             const response = await fetch(endpoint, {
                 method: 'POST',
@@ -51,6 +62,8 @@ export default function Home() {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed to grade exam');
             }
+
+            setProgressMessage('AI is reading and grading your answers...');
 
             // Handle streaming response
             const reader = response.body?.getReader();
@@ -81,9 +94,6 @@ export default function Home() {
                 if (jsonMatch) {
                     const result = JSON.parse(jsonMatch[0]) as GradingResult;
                     setGradingResult(result);
-                    if (result.exam_info?.year) {
-                        setDetectedYear(result.exam_info.year);
-                    }
                 } else {
                     setError('Could not parse grading result.');
                 }
@@ -100,14 +110,14 @@ export default function Home() {
             setError(err instanceof Error ? err.message : 'An unexpected error occurred');
         } finally {
             setIsGrading(false);
+            setProgressMessage('');
         }
     };
 
     const handleReset = () => {
-        setFile(null);
+        setFiles([]);
         setGradingResult(null);
         setError(null);
-        setDetectedYear(null);
     };
 
     return (
@@ -142,33 +152,27 @@ export default function Home() {
                         <div className="glass-card">
                             <div className="card-header">
                                 <h2>📝 Grade Math Exam</h2>
-                                <p>Upload answer sheet with year at top (e.g., &quot;2011&quot;) → AI grades automatically</p>
+                                <p>Upload your answer sheets (up to 10 pages) → AI grades automatically</p>
                             </div>
 
                             <div className="instruction-box">
                                 <h3>📋 How it works:</h3>
                                 <ol>
-                                    <li>Write the exam year at the top of your answer paper (e.g., <strong>2011</strong>)</li>
-                                    <li>Write your answers for each question below</li>
-                                    <li>Scan or convert to PDF</li>
-                                    <li>Upload here → Get instant AI grading!</li>
+                                    <li>Take <strong>photos</strong> of your answer paper with iPhone</li>
+                                    <li>Or scan to <strong>PDF</strong></li>
+                                    <li>Upload <strong>up to 10 pages</strong> for one exam</li>
+                                    <li>AI reads your handwriting and grades!</li>
                                 </ol>
                                 <p className="available-years">
-                                    <strong>Available exams:</strong> 2010-2019, 2021-2025
+                                    <strong>Supported:</strong> iPhone photos (HEIC), JPEG, PNG, PDF
                                 </p>
                             </div>
 
-                            <FileUpload onFileSelect={handleFileSelect} selectedFile={file} />
-
-                            {file && (
-                                <div className="file-info">
-                                    <div className="file-icon">📎</div>
-                                    <div className="file-details">
-                                        <span className="file-name">{file.name}</span>
-                                        <span className="file-size">{(file.size / 1024).toFixed(1)} KB</span>
-                                    </div>
-                                </div>
-                            )}
+                            <FileUpload
+                                onFilesSelect={handleFilesSelect}
+                                selectedFiles={files}
+                                maxFiles={10}
+                            />
 
                             {error && (
                                 <div className="error-message">
@@ -179,18 +183,18 @@ export default function Home() {
 
                             <button
                                 onClick={handleGrade}
-                                disabled={!file || isGrading}
+                                disabled={files.length === 0 || isGrading}
                                 className={`grade-button ${isGrading ? 'grading' : ''}`}
                             >
                                 {isGrading ? (
                                     <>
                                         <span className="spinner"></span>
-                                        Detecting year & grading...
+                                        {progressMessage || 'Processing...'}
                                     </>
                                 ) : (
                                     <>
                                         <span className="button-icon">🎯</span>
-                                        Grade My Answers
+                                        Grade {files.length > 0 ? `${files.length} Page${files.length > 1 ? 's' : ''}` : 'My Answers'}
                                     </>
                                 )}
                             </button>
@@ -201,7 +205,7 @@ export default function Home() {
                                         <div className="progress-fill"></div>
                                     </div>
                                     <p className="progress-text">
-                                        Detecting exam year → Loading official exam → Grading with GPT-4o...
+                                        {progressMessage}
                                     </p>
                                 </div>
                             )}
@@ -210,19 +214,19 @@ export default function Home() {
                         {/* Features section */}
                         <div className="features-grid">
                             <div className="feature-card">
-                                <div className="feature-icon">🔍</div>
-                                <h3>Auto Year Detection</h3>
-                                <p>Just write &quot;2011&quot; at top - system loads the correct exam</p>
+                                <div className="feature-icon">📸</div>
+                                <h3>iPhone Photos</h3>
+                                <p>Take photos with iPhone - HEIC format supported</p>
                             </div>
                             <div className="feature-card">
-                                <div className="feature-icon">📚</div>
-                                <h3>15 Years of Exams</h3>
-                                <p>All Hvitfeldska entrance exams from 2010-2025 included</p>
+                                <div className="feature-icon">📄</div>
+                                <h3>Multi-Page Support</h3>
+                                <p>Upload up to 10 pages for one exam</p>
                             </div>
                             <div className="feature-card">
                                 <div className="feature-icon">🧠</div>
-                                <h3>AI-Powered Grading</h3>
-                                <p>GPT-4o grades like a math teacher</p>
+                                <h3>AI Vision</h3>
+                                <p>GPT-4o reads your handwritten answers</p>
                             </div>
                             <div className="feature-card">
                                 <div className="feature-icon">📊</div>

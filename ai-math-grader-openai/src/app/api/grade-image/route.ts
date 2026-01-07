@@ -1,7 +1,8 @@
 /**
- * Image Grading API Route - Supports iPhone Photos (HEIC)
+ * Image Grading API Route - Multi-Page Support
  * 
  * This endpoint handles:
+ * - Multiple images (up to 10 pages)
  * - HEIC (iPhone), JPEG, PNG, WebP images
  * - Converts HEIC to JPEG for processing
  * - Uses GPT-4o Vision to read handwritten answers
@@ -77,15 +78,13 @@ async function convertHeicToJpeg(buffer: Buffer): Promise<Buffer> {
 }
 
 // Process image to ensure it's in a compatible format and optimized size
-async function processImage(buffer: Buffer, mimeType: string): Promise<{ base64: string; mimeType: string }> {
+async function processImage(buffer: Buffer, mimeType: string): Promise<string> {
     let processedBuffer = buffer;
-    let finalMimeType = mimeType;
 
     // Convert HEIC to JPEG
     if (mimeType === 'image/heic' || mimeType === 'image/heif') {
         console.log('Converting HEIC to JPEG...');
         processedBuffer = await convertHeicToJpeg(buffer);
-        finalMimeType = 'image/jpeg';
     }
 
     // Optimize image size for API (max 2048px on longest side)
@@ -94,10 +93,7 @@ async function processImage(buffer: Buffer, mimeType: string): Promise<{ base64:
         .jpeg({ quality: 85 })
         .toBuffer();
 
-    return {
-        base64: optimized.toString('base64'),
-        mimeType: 'image/jpeg',
-    };
+    return optimized.toString('base64');
 }
 
 // Extract text from PDF for exam questions
@@ -123,12 +119,17 @@ const VISION_GRADING_PROMPT = `You are an expert mathematics exam grader for Swe
 
 You will receive:
 1. The OFFICIAL EXAM questions (as text)
-2. A PHOTO of the student's handwritten answers
+2. PHOTOS of the student's handwritten answers (may be multiple pages)
 
 Your task:
-1. Read and interpret the handwritten answers in the image
+1. Read and interpret the handwritten answers in ALL images
 2. Match each answer to the corresponding exam question
 3. Grade each answer based on correctness, method, and mathematical notation
+
+## Important:
+- The student's answers may span MULTIPLE PAGES
+- Look through ALL provided images to find answers
+- Some answers may continue on the next page
 
 ## Grading Criteria:
 - Full marks: Correct answer with valid method
@@ -150,7 +151,7 @@ Your task:
     {
       "question_number": "1",
       "question_text": "Brief summary",
-      "student_answer": "What the student wrote (transcribed from image)",
+      "student_answer": "What the student wrote (transcribed from images)",
       "correct_answer": "The correct answer",
       "score": number,
       "max_score": number,
@@ -167,45 +168,83 @@ Your task:
 export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
-        const file = formData.get('file') as File;
         const yearOverride = formData.get('year') as string | null;
 
-        if (!file) {
+        // Collect all files
+        const files: File[] = [];
+        const fileCount = parseInt(formData.get('fileCount') as string) || 1;
+
+        // Try to get files with numbered keys (file0, file1, etc.)
+        for (let i = 0; i < fileCount; i++) {
+            const file = formData.get(`file${i}`) as File;
+            if (file) {
+                files.push(file);
+            }
+        }
+
+        // Also try single 'file' key for backward compatibility
+        const singleFile = formData.get('file') as File;
+        if (singleFile && files.length === 0) {
+            files.push(singleFile);
+        }
+
+        if (files.length === 0) {
             return new Response(
-                JSON.stringify({ error: 'Please upload an image or PDF of your answer sheet' }),
+                JSON.stringify({ error: 'Please upload at least one image or PDF of your answer sheet' }),
                 { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
-        const mimeType = file.type.toLowerCase();
-        const isImage = SUPPORTED_IMAGE_TYPES.includes(mimeType);
-        const isPdf = mimeType === 'application/pdf';
-
-        if (!isImage && !isPdf) {
+        if (files.length > 10) {
             return new Response(
-                JSON.stringify({
-                    error: `Unsupported file type: ${mimeType}. Supported: HEIC, JPEG, PNG, WebP, PDF`
-                }),
+                JSON.stringify({ error: 'Maximum 10 files allowed per submission' }),
                 { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
+        console.log(`Processing ${files.length} file(s)...`);
 
-        // Determine exam year
+        // Process each file
+        const processedImages: string[] = [];
         let detectedYear = yearOverride;
 
-        // If no year specified, try to detect from filename or default to 2024
-        if (!detectedYear) {
-            const filename = file.name.toLowerCase();
-            const yearMatch = filename.match(/\b(201[0-9]|202[0-5])\b/);
-            if (yearMatch && EXAM_FILES[yearMatch[1]]) {
-                detectedYear = yearMatch[1];
-            } else {
-                // Default to latest exam
-                detectedYear = '2024';
+        for (const file of files) {
+            const mimeType = file.type.toLowerCase();
+            const isImage = SUPPORTED_IMAGE_TYPES.includes(mimeType) ||
+                file.name.toLowerCase().endsWith('.heic') ||
+                file.name.toLowerCase().endsWith('.heif');
+            const isPdf = mimeType === 'application/pdf';
+
+            if (!isImage && !isPdf) {
+                return new Response(
+                    JSON.stringify({
+                        error: `Unsupported file type: ${file.name}. Supported: HEIC, JPEG, PNG, WebP, PDF`
+                    }),
+                    { status: 400, headers: { 'Content-Type': 'application/json' } }
+                );
             }
+
+            const arrayBuffer = await file.arrayBuffer();
+            const buffer = Buffer.from(arrayBuffer);
+
+            if (isImage) {
+                const base64 = await processImage(buffer, mimeType);
+                processedImages.push(base64);
+            }
+
+            // Try to detect year from filename if not set
+            if (!detectedYear) {
+                const filename = file.name.toLowerCase();
+                const yearMatch = filename.match(/\b(201[0-9]|202[0-5])\b/);
+                if (yearMatch && EXAM_FILES[yearMatch[1]]) {
+                    detectedYear = yearMatch[1];
+                }
+            }
+        }
+
+        // Default to latest exam if no year detected
+        if (!detectedYear) {
+            detectedYear = '2024';
         }
 
         // Load the official exam
@@ -229,72 +268,55 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Process the image or PDF
-        if (isImage) {
-            // Process image for vision API
-            const { base64 } = await processImage(buffer, mimeType);
+        // Build message content with all images
+        if (processedImages.length > 0) {
+            console.log(`Grading ${processedImages.length} image(s) for year ${detectedYear} exam...`);
 
-            console.log(`Processing image for year ${detectedYear} exam...`);
+            // Build content array with text and all images
+            const contentParts: Array<{ type: 'text'; text: string } | { type: 'image'; image: string }> = [
+                {
+                    type: 'text',
+                    text: `## OFFICIAL EXAM (Year ${detectedYear}):\n${examText}\n\n---\n\nThe student has submitted ${processedImages.length} page(s) of answers. Please read ALL the handwritten answers in the images below and grade them against the exam questions. Answers may span multiple pages. Provide feedback in Swedish.`,
+                },
+            ];
+
+            // Add all images
+            for (let i = 0; i < processedImages.length; i++) {
+                contentParts.push({
+                    type: 'text',
+                    text: `\n--- Page ${i + 1} of ${processedImages.length} ---`,
+                });
+                contentParts.push({
+                    type: 'image',
+                    image: processedImages[i],
+                });
+            }
+
+            const messages = [
+                {
+                    role: 'system' as const,
+                    content: VISION_GRADING_PROMPT,
+                },
+                {
+                    role: 'user' as const,
+                    content: contentParts,
+                },
+            ];
 
             // Use GPT-4o Vision to grade
             const result = streamText({
                 model: openai('gpt-4o'),
-                messages: [
-                    {
-                        role: 'system',
-                        content: VISION_GRADING_PROMPT,
-                    },
-                    {
-                        role: 'user',
-                        content: [
-                            {
-                                type: 'text',
-                                text: `## OFFICIAL EXAM (Year ${detectedYear}):\n${examText}\n\n---\n\nPlease read the handwritten answers in the image below and grade them against the exam questions. Provide feedback in Swedish.`,
-                            },
-                            {
-                                type: 'image',
-                                image: base64,
-                            },
-                        ],
-                    },
-                ],
+                messages,
                 temperature: 0.1,
             });
 
             return result.toTextStreamResponse();
         } else {
-            // Handle PDF (existing logic)
-            let answersText: string;
-            try {
-                answersText = await extractPdfText(buffer);
-            } catch {
-                return new Response(
-                    JSON.stringify({ error: 'Failed to parse PDF.' }),
-                    { status: 400, headers: { 'Content-Type': 'application/json' } }
-                );
-            }
-
-            const userPrompt = `
-## OFFICIAL EXAM (Year ${detectedYear}):
-${examText}
-
----
-
-## STUDENT'S ANSWERS:
-${answersText}
-
----
-
-Grade the student's answers. Provide detailed feedback in Swedish.`;
-
-            const result = streamText({
-                model: openai('gpt-4o'),
-                system: VISION_GRADING_PROMPT,
-                prompt: userPrompt,
-                temperature: 0.1,
-            });
-
-            return result.toTextStreamResponse();
+            // Handle PDF-only submission
+            return new Response(
+                JSON.stringify({ error: 'No images found. Please upload photos of your answer sheets.' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
         }
     } catch (error) {
         console.error('Image grading error:', error);
