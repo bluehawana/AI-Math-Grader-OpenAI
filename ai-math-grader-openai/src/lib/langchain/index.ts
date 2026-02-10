@@ -10,7 +10,7 @@
  * - Zod: Schema validation for structured outputs
  */
 
-export { gradingChain, gradeExamWithLangChain, streamGradeExam } from './grader';
+export { createGradingChain, gradeExamWithLangChain, streamGradeExam } from './grader';
 export { GradingResultSchema, QuestionResultSchema, ExamInfoSchema } from './schema';
 export type { GradingResult, QuestionResult, ExamInfo } from './schema';
 export { GRADING_RUBRIC, SYSTEM_PROMPT_TEMPLATE } from './rubric';

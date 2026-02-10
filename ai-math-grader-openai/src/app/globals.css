@@ -1215,20 +1215,114 @@ body {
     margin: 4px 0;
 }
 
-/* Print styles */
+/* Print styles - Robust fixes for multi-page printing */
 @media print {
-    .results-actions {
-        display: none;
+    /* Hide navigational and background elements */
+    .results-actions,
+    .bg-gradient,
+    .bg-grid,
+    .header,
+    .footer,
+    .back-button,
+    .logo,
+    .header-badges {
+        display: none !important;
     }
 
+    /* Reset global height/overflow for printing */
+    html, 
+    body {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        background: white !important;
+        color: black !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure main containers allow natural page breaks */
+    .main-container,
+    .content,
+    .results-container,
     .printable-results {
-        background: white;
-        color: black;
+        display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
     }
 
+    /* Card styling for print */
     .glass-card {
-        background: white;
-        box-shadow: none;
-        border: 1px solid #ddd;
+        background: white !important;
+        backdrop-filter: none !important;
+        border: 1px solid #eee !important;
+        box-shadow: none !important;
+        margin-bottom: 20px !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        padding: 20px !important;
+        color: black !important;
+    }
+
+    .glass-card:hover {
+        border-color: #eee !important;
+        box-shadow: none !important;
+    }
+
+    /* Ensure text colors are legible on white background */
+    .text-secondary,
+    .logo-subtitle,
+    .exam-year,
+    .progress-text,
+    .question-text p,
+    .student-answer p,
+    .correct-answer p,
+    .question-feedback p,
+    .overall-feedback p {
+        color: #333 !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, strong {
+        color: black !important;
+    }
+
+    /* Specific score indicators */
+    .score-value, .percentage-value {
+        color: black !important;
+    }
+
+    /* Background fills for boxes */
+    .overall-feedback,
+    .strengths,
+    .improvements,
+    .study-recommendations,
+    .question-text,
+    .answer-section,
+    .question-feedback {
+        background: #f9f9f9 !important;
+        border: 1px solid #eee !important;
+        color: black !important;
+    }
+
+    /* Ensure page breaks don't cut through cards where possible */
+    .question-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-top: 20px !important;
+    }
+
+    /* Layout adjustments */
+    .feedback-columns {
+        display: block !important;
+    }
+
+    .strengths, .improvements {
+        width: 100% !important;
+        margin-bottom: 15px !important;
     }
 }

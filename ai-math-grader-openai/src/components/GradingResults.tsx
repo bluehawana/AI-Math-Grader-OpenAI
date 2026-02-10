@@ -54,11 +54,15 @@ export default function GradingResults({ result, onReset }: GradingResultsProps)
         const addWrappedText = (text: string, x: number, maxWidth: number, fontSize: number = 10) => {
             pdf.setFontSize(fontSize);
             pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(0, 0, 0);
             const lines = pdf.splitTextToSize(text, maxWidth);
             lines.forEach((line: string) => {
                 if (y > pageHeight - margin) {
                     pdf.addPage();
                     y = margin;
+                    pdf.setFontSize(fontSize);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setTextColor(0, 0, 0);
                 }
                 pdf.text(line, x, y);
                 y += lineHeight - 1;
@@ -71,6 +75,7 @@ export default function GradingResults({ result, onReset }: GradingResultsProps)
                 y = margin;
             }
             y += sectionGap;
+            const currentY = y;
             pdf.setFontSize(14);
             pdf.setFont('helvetica', 'bold');
             pdf.setTextColor(0, 0, 0);
@@ -228,6 +233,7 @@ export default function GradingResults({ result, onReset }: GradingResultsProps)
             pdf.setPage(i);
             pdf.setFontSize(8);
             pdf.setTextColor(150, 150, 150);
+            pdf.setFont('helvetica', 'normal');
             pdf.text(
                 `Sida ${i} av ${totalPages} | Genererad av AI Math Grader | Hvitfeldska Spetsutbildning`,
                 pageWidth / 2,
@@ -236,10 +242,18 @@ export default function GradingResults({ result, onReset }: GradingResultsProps)
             );
         }
 
-        // Save
-        const date = new Date().toISOString().split('T')[0];
-        const filename = `Student_Matteprov_${year}_${date}.pdf`;
-        pdf.save(filename);
+        try {
+            const date = new Date().toISOString().split('T')[0];
+            const safeYear = year ? String(year).replace(/[^a-zA-Z0-9]/g, '_') : 'Result';
+            const filename = `Student_Matteprov_${safeYear}_${date}.pdf`;
+
+            console.log('📄 Exporting PDF with new jsPDF save()...');
+            pdf.save(filename);
+            console.log('✅ PDF save() triggered');
+        } catch (error) {
+            console.error('❌ Error exporting PDF:', error);
+            alert('Det gick inte att exportera PDF. Se konsolen för detaljer.');
+        }
     };
 
     return (
@@ -260,7 +274,16 @@ export default function GradingResults({ result, onReset }: GradingResultsProps)
                         <line x1="12" y1="18" x2="12" y2="12" />
                         <polyline points="9 15 12 12 15 15" />
                     </svg>
-                    📄 Exportera som PDF
+                    📄 JS Export
+                </button>
+
+                <button onClick={() => window.print()} className="print-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 6 2 18 2 18 9" />
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                        <rect x="6" y="14" width="12" height="8" />
+                    </svg>
+                    🖨️ Skriv ut / Spara som PDF
                 </button>
             </div>
 

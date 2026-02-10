@@ -17,7 +17,7 @@ import { NextRequest } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
-import { spawn } from 'child_process';
+import PDFParser from 'pdf2json';
 
 // Dynamic import for heic-convert (ESM issue workaround)
 let heicConvert: ((options: { buffer: Buffer; format: 'JPEG' | 'PNG'; quality: number }) => Promise<Buffer>) | null = null;
@@ -94,34 +94,22 @@ async function processImage(buffer: Buffer, mimeType: string): Promise<string> {
     return optimized.toString('base64');
 }
 
-// Extract text from PDF using system pdftotext command (if available)
+// Extract text from PDF using pdf2json
 async function extractPdfText(pdfPath: string): Promise<string> {
     return new Promise((resolve) => {
-        const pdftotext = spawn('pdftotext', [pdfPath, '-']);
-        let text = '';
-        let error = '';
+        const pdfParser = new PDFParser(null, true);
 
-        pdftotext.stdout.on('data', (data) => {
-            text += data.toString();
+        pdfParser.on('pdfParser_dataError', (errData: any) => {
+            console.error('pdf2json error:', errData.parserError);
+            resolve('[Failed to extract PDF text from official exam]');
         });
 
-        pdftotext.stderr.on('data', (data) => {
-            error += data.toString();
+        pdfParser.on('pdfParser_dataReady', (pdfData: any) => {
+            const text = (pdfParser as any).getRawTextContent();
+            resolve(text || '[Empty PDF content in official exam]');
         });
 
-        pdftotext.on('close', (code) => {
-            if (code === 0 && text) {
-                resolve(text);
-            } else {
-                // If pdftotext fails, return a minimal description
-                console.warn('pdftotext failed, using fallback:', error);
-                resolve(`[PDF text extraction not available. Year detected from filename.]`);
-            }
-        });
-
-        pdftotext.on('error', () => {
-            resolve(`[PDF text extraction not available. Please install poppler-utils.]`);
-        });
+        pdfParser.loadPDF(pdfPath);
     });
 }
 
@@ -132,25 +120,23 @@ You will receive:
 1. The OFFICIAL EXAM questions (as text, in Swedish)
 2. PHOTOS of the student's handwritten answers (may be multiple pages, handwriting in Swedish)
 
-Your task:
-1. Read and interpret the SWEDISH handwritten answers in ALL images
-2. The student writes in Swedish - understand Swedish mathematical notation and terms
-3. Match each answer to the corresponding exam question
-4. Grade each answer based on correctness, method, and mathematical notation
+## Your Task:
+1. **Solve first internally**: Before looking at the student's work, solve each question in the official exam. This ensures you have the correct mathematical solution.
+2. **Interpret handwritten work**: Carefully read the student's handwritten Swedish. Be mindful of Swedish mathematical notation.
+3. **Compare and Grade**: Compare the student's method and final answer against your derived correct solution.
+4. **Provide feedback**: Write detailed feedback in Swedish.
 
-## Important:
-- The student writes in SWEDISH - recognize Swedish handwriting and mathematical terms
-- Swedish decimal comma (3,14) equals English decimal point (3.14)
-- Swedish mathematical terms: "summa" = sum, "differens" = difference, "kvot" = quotient, etc.
-- The student's answers may span MULTIPLE PAGES
-- Look through ALL provided images to find answers
-- Some answers may continue on the next page
+## Important Note on Accuracy:
+- Math is accurate and objective. Do not award points for effort if the calculation is fundamentally wrong.
+- Accurately identify if a calculation error occurred vs. a conceptual error.
+- Recognized Swedish decimal comma (3,14) equals English decimal point (3.14).
+- Look through ALL provided images to find answers before concluding they are missing.
 
 ## Grading Criteria:
-- Full marks: Correct answer with valid method
-- Partial credit (50-80%): Right approach but calculation errors
-- Minimal credit (10-50%): Shows understanding but significant errors
-- Zero: Wrong approach or no attempt
+- Full marks: Correct answer with valid method.
+- Partial credit (50-80%): Right approach but small calculation errors.
+- Minimal credit (10-50%): Shows understanding but significant errors.
+- Zero marks: Incorrect approach, wrong answer, or no attempt.
 
 ## Output Format (JSON):
 {
@@ -167,14 +153,14 @@ Your task:
       "question_number": "1",
       "question_text": "Brief summary (in Swedish)",
       "student_answer": "What the student wrote (transcribed from images, keep in Swedish)",
-      "correct_answer": "The correct answer (show calculation)",
+      "correct_answer": "The correct solution and final answer (show calculation)",
       "score": number,
       "max_score": number,
       "is_correct": boolean,
-      "feedback": "Detailed feedback in Swedish - explain what was right/wrong"
+      "feedback": "Detailed feedback in Swedish - explain exactly what was right/wrong"
     }
   ],
-  "overall_feedback": "Overall assessment in Swedish - be encouraging but honest",
+  "overall_feedback": "Overall assessment in Swedish - be encouraging but mathematically rigorous",
   "strengths": ["Areas where student performed well (in Swedish)"],
   "areas_to_improve": ["Topics needing more practice (in Swedish)"],
   "study_recommendations": ["Specific study tips in Swedish"]

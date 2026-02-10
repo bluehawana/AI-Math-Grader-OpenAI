@@ -12,42 +12,45 @@
  * modular, reusable AI workflows.
  */
 
-import { ChatOpenAI } from '@langchain/openai';
-import { ChatAnthropic } from '@langchain/anthropic';
-import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { SystemMessage } from '@langchain/core/messages';
 import { ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
-import { StructuredOutputParser } from 'langchain/output_parsers';
-import { BaseChatModel } from '@langchain/core/language_models/chat_models';
+import { StructuredOutputParser } from '@langchain/core/output_parsers';
+import type { BaseChatModel } from '@langchain/core/language_models/chat_models';
 import { GradingResultSchema, GradingResult } from './schema';
 import { SYSTEM_PROMPT_TEMPLATE } from './rubric';
 
 type LLMProvider = 'openai' | 'anthropic' | 'google' | 'groq';
 
-// Get the LangChain model based on provider
-function getLangChainModel(): BaseChatModel {
+// Get the LangChain model based on provider (dynamically imported)
+async function getLangChainModel(): Promise<BaseChatModel> {
     const provider = (process.env.LLM_PROVIDER || 'openai') as LLMProvider;
 
     switch (provider) {
-        case 'anthropic':
+        case 'anthropic': {
             console.log('LangChain using: Anthropic Claude');
+            const { ChatAnthropic } = await import('@langchain/anthropic');
             return new ChatAnthropic({
                 modelName: process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022',
                 temperature: 0.1,
                 anthropicApiKey: process.env.ANTHROPIC_API_KEY,
             });
+        }
 
-        case 'google':
+        case 'google': {
             console.log('LangChain using: Google Gemini');
+            const { ChatGoogleGenerativeAI } = await import('@langchain/google-genai');
             return new ChatGoogleGenerativeAI({
-                modelName: process.env.GOOGLE_MODEL || 'gemini-1.5-pro',
+                model: process.env.GOOGLE_MODEL || 'gemini-1.5-pro',
                 temperature: 0.1,
                 apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
             });
+        }
 
-        case 'groq':
+        case 'groq': {
             // Groq uses OpenAI-compatible API
             console.log('LangChain using: Groq (OpenAI-compatible)');
+            const { ChatOpenAI } = await import('@langchain/openai');
             return new ChatOpenAI({
                 modelName: process.env.GROQ_MODEL || 'llama-3.1-70b-versatile',
                 temperature: 0.1,
@@ -56,15 +59,18 @@ function getLangChainModel(): BaseChatModel {
                     baseURL: 'https://api.groq.com/openai/v1',
                 },
             });
+        }
 
         case 'openai':
-        default:
+        default: {
             console.log('LangChain using: OpenAI GPT-4o');
+            const { ChatOpenAI } = await import('@langchain/openai');
             return new ChatOpenAI({
                 modelName: process.env.OPENAI_MODEL || 'gpt-4o',
                 temperature: 0.1,
                 openAIApiKey: process.env.OPENAI_API_KEY,
             });
+        }
     }
 }
 
@@ -75,7 +81,7 @@ const outputParser = StructuredOutputParser.fromZodSchema(GradingResultSchema);
 const formatInstructions = outputParser.getFormatInstructions();
 
 // Build the prompt template using LCEL
-const systemTemplate = SystemMessagePromptTemplate.fromTemplate(
+const systemMessage = new SystemMessage(
     SYSTEM_PROMPT_TEMPLATE + '\n\n' + formatInstructions
 );
 
@@ -96,7 +102,7 @@ Returnera resultatet som JSON enligt schemat.
 `);
 
 const chatPrompt = ChatPromptTemplate.fromMessages([
-    systemTemplate,
+    systemMessage,
     humanTemplate,
 ]);
 
@@ -109,8 +115,8 @@ const chatPrompt = ChatPromptTemplate.fromMessages([
  * 3. Sends to the configured LLM provider
  * 4. Parses the structured JSON output
  */
-function createGradingChain() {
-    const model = getLangChainModel();
+async function createGradingChain() {
+    const model = await getLangChainModel();
     return RunnableSequence.from([
         chatPrompt,
         model,
@@ -136,7 +142,7 @@ export async function gradeExamWithLangChain({
     year: string;
 }): Promise<GradingResult> {
     try {
-        const gradingChain = createGradingChain();
+        const gradingChain = await createGradingChain();
         const result = await gradingChain.invoke({
             examText,
             studentText,
@@ -164,7 +170,7 @@ export async function* streamGradeExam({
     studentText: string;
     year: string;
 }) {
-    const model = getLangChainModel();
+    const model = await getLangChainModel();
     const prompt = await chatPrompt.format({
         examText,
         studentText,

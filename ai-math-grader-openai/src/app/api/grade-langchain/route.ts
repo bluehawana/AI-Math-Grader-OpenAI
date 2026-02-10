@@ -9,14 +9,13 @@
  * Endpoint: POST /api/grade-langchain
  */
 
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import * as pdfjs from 'pdfjs-dist';
+import PDFParser from 'pdf2json';
 import { gradeExamWithLangChain } from '@/lib/langchain';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = '';
 
 // Map of exam years to their PDF filenames
 const EXAM_FILES: Record<string, string> = {
@@ -40,22 +39,18 @@ const EXAM_FILES: Record<string, string> = {
 // Updated path: exams are now in ../exams/intagningstest/
 const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
-// Extract text from PDF buffer using pdfjs-dist
+// Extract text from PDF buffer using pdf2json
 async function extractPdfText(buffer: Buffer): Promise<string> {
-    const data = new Uint8Array(buffer);
-    const doc = await pdfjs.getDocument({ data, useSystemFonts: true }).promise;
+    const pdfParser = new PDFParser(null, true);
 
-    let fullText = '';
-    for (let i = 1; i <= doc.numPages; i++) {
-        const page = await doc.getPage(i);
-        const content = await page.getTextContent();
-        const pageText = content.items
-            .map((item: unknown) => (item as { str: string }).str)
-            .join(' ');
-        fullText += pageText + '\n';
-    }
+    return new Promise((resolve, reject) => {
+        pdfParser.on("pdfParser_dataError", (errData: any) => reject(errData.parserError));
+        pdfParser.on("pdfParser_dataReady", () => {
+            resolve(pdfParser.getRawTextContent());
+        });
 
-    return fullText;
+        pdfParser.parseBuffer(buffer);
+    });
 }
 
 // Extract year from the answer sheet text

@@ -211,6 +211,29 @@ export default function Home() {
                             )}
                         </div>
 
+                        {/* Resources Section - Downloadable Content */}
+                        <div className="resources-section">
+                            <h2 className="section-title" style={{ textAlign: 'center', margin: '2rem 0 1rem' }}>📚 Study Resources</h2>
+                            <div className="resources-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                                <a href="/handbook_2010_2025.pdf" download className="glass-card resource-card" style={{ display: 'flex', alignItems: 'center', padding: '1.5rem', textDecoration: 'none', color: 'inherit', transition: 'transform 0.2s', cursor: 'pointer' }}>
+                                    <div className="resource-icon" style={{ fontSize: '2rem', marginRight: '1rem' }}>📘</div>
+                                    <div className="resource-info" style={{ flex: 1 }}>
+                                        <h3 style={{ margin: 0, fontSize: '1.1rem' }}>Solving Handbook</h3>
+                                        <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', opacity: 0.8 }}>Complete solutions 2010-2025</p>
+                                    </div>
+                                    <div className="download-icon" style={{ fontSize: '1.5rem', opacity: 0.5 }}>↓</div>
+                                </a>
+                                <a href="/math_knowledge_outline.pdf" download className="glass-card resource-card" style={{ display: 'flex', alignItems: 'center', padding: '1.5rem', textDecoration: 'none', color: 'inherit', transition: 'transform 0.2s', cursor: 'pointer' }}>
+                                    <div className="resource-icon" style={{ fontSize: '2rem', marginRight: '1rem' }}>🧠</div>
+                                    <div className="resource-info" style={{ flex: 1 }}>
+                                        <h3 style={{ margin: 0, fontSize: '1.1rem' }}>Knowledge Outline</h3>
+                                        <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', opacity: 0.8 }}>Key concepts summary</p>
+                                    </div>
+                                    <div className="download-icon" style={{ fontSize: '1.5rem', opacity: 0.5 }}>↓</div>
+                                </a>
+                            </div>
+                        </div>
+
                         {/* Features section */}
                         <div className="features-grid">
                             <div className="feature-card">

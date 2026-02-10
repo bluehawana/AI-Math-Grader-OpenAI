@@ -1,0 +1,542 @@
+{
+    "2010": {
+        "year": 2010,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Samarbetsproblem (fyllning/tömning)",
+                "answer": "14.4 minuter (14 min 24 sek)",
+                "solution_summary": "Nettohastighet = 1/8 + 1/9 - 1/6 = 5/72 badkar/min. Tid = 72/5 = 14.4 min"
+            },
+            {
+                "number": 2,
+                "topic": "Specialoperator",
+                "answer": "77",
+                "solution_summary": "34⊿43 = max(34+43, 2×34) = max(77, 68) = 77"
+            },
+            {
+                "number": 3,
+                "topic": "Kombinatorik",
+                "answer": "702 partier",
+                "solution_summary": "39 spelare × 36 motståndare / 2 = 702"
+            },
+            {
+                "number": 4,
+                "topic": "Trigonometri/Geometri",
+                "answer": "~11 sjömil",
+                "solution_summary": "Sinussatsen med vinklarna 20°, 40°, 120° och sträcka 7.5 sjömil"
+            },
+            {
+                "number": 5,
+                "topic": "Ekvationssystem",
+                "answer": "Beror på tolkning",
+                "solution_summary": "b(a+1)=1, c(b+1)=1"
+            }
+        ]
+    },
+    "2011": {
+        "year": 2011,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Talteori/Kombinatorik",
+                "answer": "307 sidor",
+                "solution_summary": "1-9: 9 siffror. 10-99: 180 siffror. 100+: 624/3=208 sidor. Total: 307"
+            },
+            {
+                "number": 2,
+                "topic": "Geometri",
+                "answer": "6 cm²",
+                "solution_summary": "Tre kvadrater med sidor 2, 3, 5 cm"
+            },
+            {
+                "number": 3,
+                "topic": "Talteori",
+                "answer": "23",
+                "solution_summary": "Siffror 3, 5, 6, 9 ger produkt 810. Summa = 23"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri/Cirkel",
+                "answer": "5 cm",
+                "solution_summary": "Cirkel genom A, D tangerar BC i kvadrat med sida 8"
+            },
+            {
+                "number": 5,
+                "topic": "Talföljder",
+                "answer": "a) 55, b) n(n+1)/2",
+                "solution_summary": "Triangeltal"
+            }
+        ]
+    },
+    "2012": {
+        "year": 2012,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Talteori",
+                "answer": "(5,6), (20,3), (45,2), (180,1)",
+                "solution_summary": "x²y = 180, hitta alla positiva heltalspar"
+            },
+            {
+                "number": 2,
+                "topic": "Kombinatorik/Vägräkning",
+                "answer": "227",
+                "solution_summary": "Totalt 252 vägar, minus vägar via ★"
+            },
+            {
+                "number": 3,
+                "topic": "Geometri",
+                "answer": "r = 1.5 m",
+                "solution_summary": "Inskriven cirkel i likbent triangel (5, 5, 6)"
+            },
+            {
+                "number": 4,
+                "topic": "Bevis",
+                "answer": "Bevis",
+                "solution_summary": "Produkten av två udda tal är udda"
+            },
+            {
+                "number": 5,
+                "topic": "Rörelseproblem",
+                "answer": "20 km/h",
+                "solution_summary": "Bob springer på bro, tåg 60 km/h"
+            }
+        ]
+    },
+    "2013": {
+        "year": 2013,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Kombinatorik",
+                "answer": "500",
+                "solution_summary": "Fyrsiffriga udda tal med varannan jämn/udda"
+            },
+            {
+                "number": 2,
+                "topic": "Geometri",
+                "answer": "75°",
+                "solution_summary": "Kvadrat och liksidig triangel sammanfogade"
+            },
+            {
+                "number": 3,
+                "topic": "Procenträkning",
+                "answer": "≈0.62 kg",
+                "solution_summary": "Saltlösning, 22% salthalt"
+            },
+            {
+                "number": 4,
+                "topic": "Talföljder",
+                "answer": "X=-12, Y=-3, Z=6",
+                "solution_summary": "Differensekvationer"
+            },
+            {
+                "number": 5,
+                "topic": "Algebra",
+                "answer": "-2",
+                "solution_summary": "(a-b)/(b-c) givet a/b=3 och c/b=2"
+            }
+        ]
+    },
+    "2014": {
+        "year": 2014,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Algebra",
+                "answer": "42",
+                "solution_summary": "Summan oförändrad vid halvering/dubbling. Ena = 21"
+            },
+            {
+                "number": 2,
+                "topic": "Talteori",
+                "answer": "128",
+                "solution_summary": "Antal heltal 100/7 till 1000/7"
+            },
+            {
+                "number": 3,
+                "topic": "Mängdlära",
+                "answer": "87",
+                "solution_summary": "Tal som inte slutar på 5"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri",
+                "answer": "Bevis",
+                "solution_summary": "Bisektris, visa vinkel u = 90°"
+            },
+            {
+                "number": 5,
+                "topic": "Ekvationssystem",
+                "answer": "57",
+                "solution_summary": "a+b=48, b+c=38, c+a=28"
+            }
+        ]
+    },
+    "2015": {
+        "year": 2015,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Logik/Algebra",
+                "answer": "30 kr och 18 kr",
+                "solution_summary": "Schackspel, pengar dubbleras till vinnaren"
+            },
+            {
+                "number": 2,
+                "topic": "Bevis",
+                "answer": "Bevis",
+                "solution_summary": "Minst två av fem tal måste vara lika"
+            },
+            {
+                "number": 3,
+                "topic": "Talföljd",
+                "answer": "n = 201",
+                "solution_summary": "aₙ = 1001 - 4(n-1), aₙ = n"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri",
+                "answer": "u=150°, u+v=300°",
+                "solution_summary": "Trianglar inskrivna i rektangel"
+            },
+            {
+                "number": 5,
+                "topic": "Algebra",
+                "answer": "495",
+                "solution_summary": "ab - ac givet a+b-c=64, a-b+c=46"
+            }
+        ]
+    },
+    "2016": {
+        "year": 2016,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Åldersproblem",
+                "answer": "Ja, vid 38 år (Karin 19)",
+                "solution_summary": "Sven 55, Karin 36. Skillnad 19 år."
+            },
+            {
+                "number": 2,
+                "topic": "Kombinatorik",
+                "answer": "19",
+                "solution_summary": "Färgläggningar med minst en blå"
+            },
+            {
+                "number": 3,
+                "topic": "Bevis",
+                "answer": "Bevis",
+                "solution_summary": "Inget hörn kan ha talet noll"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri",
+                "answer": "80°",
+                "solution_summary": "Bisektriser i triangel"
+            },
+            {
+                "number": 5,
+                "topic": "Exponenter",
+                "answer": "a=100, b=50",
+                "solution_summary": "6ᵃ × 4ᵇ = 12¹⁰⁰"
+            }
+        ]
+    },
+    "2017": {
+        "year": 2017,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Algebra",
+                "answer": "501 och 222",
+                "solution_summary": "Summa 723, skillnad 279"
+            },
+            {
+                "number": 2,
+                "topic": "Kombinatorik",
+                "answer": "15",
+                "solution_summary": "Pojkar på disco, flickor svarar 7,8,9..."
+            },
+            {
+                "number": 3,
+                "topic": "Geometri",
+                "answer": "Om u=40°: v=35°. Om v=40°: u=20°",
+                "solution_summary": "u + 4v = 180°"
+            },
+            {
+                "number": 4,
+                "topic": "Kombinatorik",
+                "answer": "47 > 413, 77 < 413",
+                "solution_summary": "Tresiffriga tal med 1,2,3,4,5"
+            },
+            {
+                "number": 5,
+                "topic": "Talteori",
+                "answer": "92, 83, 74, 65",
+                "solution_summary": "Tvåsiffrigt tal, byta siffror, summa 121"
+            }
+        ]
+    },
+    "2018": {
+        "year": 2018,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Statistik",
+                "answer": "29",
+                "solution_summary": "Medelvärde 21 → 17 efter strykning"
+            },
+            {
+                "number": 2,
+                "topic": "Bevis",
+                "answer": "Bevis",
+                "solution_summary": "Summa före och efter n delbar med 6"
+            },
+            {
+                "number": 3,
+                "topic": "Geometri",
+                "answer": "A=45°, C=75°, B=60°",
+                "solution_summary": "Sexhörning och kvadrat"
+            },
+            {
+                "number": 4,
+                "topic": "Kombinatorik",
+                "answer": "Jämnt tal",
+                "solution_summary": "Lappspel med produkter"
+            },
+            {
+                "number": 5,
+                "topic": "Geometri/Likformighet",
+                "answer": "x/y = 2/3",
+                "solution_summary": "Likformiga trianglar"
+            }
+        ]
+    },
+    "2019": {
+        "year": 2019,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Algebra",
+                "answer": "16 och 32",
+                "solution_summary": "Medelvärde problem"
+            },
+            {
+                "number": 2,
+                "topic": "Rörelseproblem",
+                "answer": "16 km/h",
+                "solution_summary": "Cykling upp/ner, 12 och 24 km/h"
+            },
+            {
+                "number": 3,
+                "topic": "Kombinatorik/Delbarhet",
+                "answer": "64",
+                "solution_summary": "Fyrsiffriga delbara med 4"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri",
+                "answer": "T₃=3, T₄=6, T₅=6",
+                "solution_summary": "Trianglar i rektangel"
+            },
+            {
+                "number": 5,
+                "topic": "Talföljder",
+                "answer": "26/31",
+                "solution_summary": "2/7, 3/8, 4/9, ... = 5/6"
+            }
+        ]
+    },
+    "2021": {
+        "year": 2021,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Algebra",
+                "answer": "125",
+                "solution_summary": "9×abc = 1000 + abc → abc = 125"
+            },
+            {
+                "number": 2,
+                "topic": "Mängdlära",
+                "answer": "600",
+                "solution_summary": "Inklusion-exklusion med matte och fysik"
+            },
+            {
+                "number": 3,
+                "topic": "Geometri",
+                "answer": "80 le",
+                "solution_summary": "Likbent triangel, parallell sträcka"
+            },
+            {
+                "number": 4,
+                "topic": "Talteori",
+                "answer": "25",
+                "solution_summary": "Max summa 3 olika siffror = 24"
+            },
+            {
+                "number": 5,
+                "topic": "Specialoperator",
+                "answer": "15",
+                "solution_summary": "(3△4)△(4△3) = 7△8 = 15"
+            }
+        ]
+    },
+    "2022": {
+        "year": 2022,
+        "has_official_answers": true,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Talteori",
+                "answer": "14",
+                "solution_summary": "Max tal ej delbart med 6"
+            },
+            {
+                "number": 2,
+                "topic": "Geometri",
+                "answer": "74°",
+                "solution_summary": "Fyrhörning med delade vinklar"
+            },
+            {
+                "number": 3,
+                "topic": "Kombinatorik",
+                "answer": "79",
+                "solution_summary": "T-shirts, minst 2 vita och 2 svarta"
+            },
+            {
+                "number": 4,
+                "topic": "Talföljd",
+                "answer": "318",
+                "solution_summary": "Iterativ formel med c=80"
+            },
+            {
+                "number": 5,
+                "topic": "Geometri",
+                "answer": "8/√3 ≈ 4.6",
+                "solution_summary": "Liksidiga trianglar, skuggad area"
+            }
+        ]
+    },
+    "2023": {
+        "year": 2023,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Algebra",
+                "answer": "72",
+                "solution_summary": "Tre tal, summa 99, största = produkt av andra"
+            },
+            {
+                "number": 2,
+                "topic": "Talteori",
+                "answer": "{3,14,15,4} eller {2,12,15,7}",
+                "solution_summary": "Produkterna ska vara lika"
+            },
+            {
+                "number": 3,
+                "topic": "Geometri/Koordinater",
+                "answer": "50",
+                "solution_summary": "Triangelarea i koordinatsystem"
+            },
+            {
+                "number": 4,
+                "topic": "Sannolikhet",
+                "answer": "5/18",
+                "solution_summary": "Tärningar, precis en röd = blå"
+            },
+            {
+                "number": 5,
+                "topic": "Geometri",
+                "answer": "Bevis: sidan = 10",
+                "solution_summary": "Vinklar 75° och 30° i kvadrat"
+            }
+        ]
+    },
+    "2024": {
+        "year": 2024,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Statistik",
+                "answer": "Bevis: medelvärde > 7",
+                "solution_summary": "9 heltal, median 10"
+            },
+            {
+                "number": 2,
+                "topic": "Geometri/Algebra",
+                "answer": "5 m²",
+                "solution_summary": "Fyra rektanglar, områdesrelationer"
+            },
+            {
+                "number": 3,
+                "topic": "Talteori",
+                "answer": "70 eller 98",
+                "solution_summary": "A×B×C, parvis relativt prima"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri",
+                "answer": "15 le",
+                "solution_summary": "Kvadrat med sträckor"
+            },
+            {
+                "number": 5,
+                "topic": "Kombinatorik",
+                "answer": "30",
+                "solution_summary": "Sexsiffrigt tal, inga intilliggande lika"
+            }
+        ]
+    },
+    "2025": {
+        "year": 2025,
+        "has_official_answers": false,
+        "questions": [
+            {
+                "number": 1,
+                "topic": "Delbarhet",
+                "answer": "425",
+                "solution_summary": "Lottnummer delbara med 3"
+            },
+            {
+                "number": 2,
+                "topic": "Talteori",
+                "answer": "2520",
+                "solution_summary": "xy=350, yz=180, xz delbar med 8"
+            },
+            {
+                "number": 3,
+                "topic": "Geometri",
+                "answer": "Formel med v",
+                "solution_summary": "Bisektriser i likbent triangel"
+            },
+            {
+                "number": 4,
+                "topic": "Geometri/Algebraisk",
+                "answer": "CQ = 8",
+                "solution_summary": "Ariaförhållande 1:2"
+            },
+            {
+                "number": 5,
+                "topic": "Kombinatorik",
+                "answer": "{1,6,8}, {2,4,9}, {3,5,7}",
+                "solution_summary": "Tre grupper med summa 15"
+            }
+        ]
+    }
+}

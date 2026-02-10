@@ -15,9 +15,9 @@ import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { readFile, writeFile, unlink } from 'fs/promises';
 import path from 'path';
-import { spawn } from 'child_process';
 import { getModel, getProviderInfo } from '@/lib/providers';
 import { tmpdir } from 'os';
+import PDFParser from 'pdf2json';
 
 // Map of exam years to their PDF filenames
 const EXAM_FILES: Record<string, string> = {
@@ -40,27 +40,22 @@ const EXAM_FILES: Record<string, string> = {
 
 const EXAMS_BASE_PATH = path.join(process.cwd(), '..', 'exams', 'intagningstest');
 
-// Extract text from PDF using system pdftotext
+// Extract text from PDF using pdf2json
 async function extractPdfTextFromPath(pdfPath: string): Promise<string> {
     return new Promise((resolve) => {
-        const pdftotext = spawn('pdftotext', [pdfPath, '-']);
-        let text = '';
+        const pdfParser = new PDFParser(null, true);
 
-        pdftotext.stdout.on('data', (data) => {
-            text += data.toString();
+        pdfParser.on('pdfParser_dataError', (errData: any) => {
+            console.error('pdf2json error:', errData.parserError);
+            resolve('[Failed to extract PDF text]');
         });
 
-        pdftotext.on('close', (code) => {
-            if (code === 0 && text) {
-                resolve(text);
-            } else {
-                resolve('[PDF text extraction not available]');
-            }
+        pdfParser.on('pdfParser_dataReady', (pdfData: any) => {
+            const text = (pdfParser as any).getRawTextContent();
+            resolve(text || '[Empty PDF content]');
         });
 
-        pdftotext.on('error', () => {
-            resolve('[Please install poppler-utils for PDF text extraction]');
-        });
+        pdfParser.loadPDF(pdfPath);
     });
 }
 
@@ -98,19 +93,26 @@ You will receive:
 1. The OFFICIAL EXAM with all questions (from the school's archive)
 2. The STUDENT'S ANSWERS (what the student wrote)
 
-Your task is to grade the student's answers against the official exam questions.
+## Your Task:
+1. **Solve first internally**: Before grading, solve each question in the official exam yourself. This ensures you have the target solution firmly in mind.
+2. **Grade the student's answer**: Compare the student's answer against your derived correct solution.
+3. **Provide feedback**: Write detailed feedback in Swedish.
 
 ## Grading Criteria:
-1. **Correctness** (Primary): Is the final answer mathematically correct?
+1. **Correctness** (Primary): Is the final answer mathematically correct? (Accurate calculation is essential!)
 2. **Method** (Secondary): Is the solution approach valid and clearly shown?
 3. **Notation** (Tertiary): Is proper mathematical notation used?
 4. **Completeness** (Tertiary): Are all steps shown and all parts answered?
 
 ## Scoring Guidelines:
-- Full marks: Correct answer with valid method and clear notation
-- Partial credit (50-80%): Correct approach but calculation errors
-- Minimal credit (10-50%): Shows understanding but significant errors
-- Zero marks: Incorrect approach, wrong answer, or no attempt
+- Full marks: Correct answer with valid method and clear notation.
+- Partial credit (50-80%): Correct approach but small calculation errors.
+- Minimal credit (10-50%): Shows understanding but significant errors.
+- Zero marks: Incorrect approach, wrong answer, or no attempt.
+
+## Important:
+- Math is accurate and objective. Do not award points for "effort" if the mathematical logic is fundamentally flawed.
+- Be rigorous. This is for an elite math program.
 
 ## Output Format (JSON):
 {
@@ -127,11 +129,11 @@ Your task is to grade the student's answers against the official exam questions.
       "question_number": "1",
       "question_text": "Brief summary",
       "student_answer": "What student wrote",
-      "correct_answer": "Correct answer",
+      "correct_answer": "Correct solution and final answer",
       "score": number,
       "max_score": number,
       "is_correct": boolean,
-      "feedback": "Detailed feedback in Swedish"
+      "feedback": "Detailed feedback in Swedish explaining the accuracy of the method and result"
     }
   ],
   "overall_feedback": "Overall assessment in Swedish",
